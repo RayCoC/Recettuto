@@ -1,1 +1,1 @@
-<footer>Copyright 2021, HAMOUCHE Rayan - LUU David - AIT HAMMA Mehdi</footer> 
+<footer> © 2021 Mehdi Ait hamma - Rayan Hamouche - David Luu</footer> 
