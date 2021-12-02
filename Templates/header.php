@@ -4,7 +4,6 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="./CSS/header.css">
-        <title>Recettuto</title>
     </head>
 
     <body>
@@ -16,7 +15,7 @@
             <p> Inscription/Connexion</p>
         </header>
         <nav>
-            <a href="index.php?action=Accueil">Accueil</a> |
+            <a href="index.php?action=Accueil&module=mod_Accueil">Accueil</a> |
             <a href="index.php?action=liste&module=mod_Recette">Recettes</a> |
             <a href = "index.php?action=listeEquipe&module=mod_Nutrition">Nutrition</a>
         </nav>
