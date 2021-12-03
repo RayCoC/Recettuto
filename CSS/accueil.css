@@ -6,3 +6,37 @@
     height: 30px;
     border-color: black;
 }
+#recette1 {
+    margin-top: 20px;
+}
+#recette1 img {
+    width: 520px;
+    height: 350px;
+    border-radius: 20px;
+    margin-left: 60px;
+}
+.CatégorieRecette,#ThemeRecette {
+    border-top: solid 1px;
+    margin-top: 10px;
+}
+.TitreCatégorie {
+    font-size: 30px;
+    text-align: center;
+}
+.CatégorieRecette img {
+    display: inline-block;
+    width: 350px;
+    height: 320px;
+    margin-right: 20px;
+    margin-left: 20px;
+    border-radius: 20px;
+}
+div ul {
+    height: 150px;
+    background-color: #FD8787;
+    color: white;
+    margin-bottom: 80px;
+}
+div li {
+    padding-top: 15px;
+}
