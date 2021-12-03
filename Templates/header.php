@@ -12,7 +12,7 @@
                 <img src="./img/RecettutoIMG.png">
                 <h1>Recettuto</h1>
             </div>
-            <p> Inscription/Connexion</p>
+            <a href = "index.php?action=connexion&module=mod_Connexion">Inscription/Connexion</a>
         </header>
         <nav>
             <a href="index.php?action=Accueil&module=mod_Accueil">Accueil</a> |
