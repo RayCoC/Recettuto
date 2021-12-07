@@ -6,7 +6,14 @@ if (!isset($_GET['module'])) {
 else {
     $module = $_GET['module'];
 }
-        include_once 'module/mod_Accueil/'.$module.".php";
+switch ($module) {
+    case "mod_Accueil" :
+        include_once 'module/'."$module".'/'.$module.".php";
         new ModAccueil();
+        break;
+    default :
+        die ("interdiction d'acces à ce module");
+        break;
+}
 require_once "Templates/footer.php";
 ?>
