@@ -15,7 +15,7 @@
         <div class ="CatégorieRecette">
             <h1 class = "TitreCatégorie"> Dernières recettes </h1>
             <img src="./img/Crepe.png">
-            <img src ="./img/italiaDelRepas">
+            <img src ="./img/italiaDelRepas.png">
             <img src = "./img/Lasagne.png">
         </div>
         <div class= "CatégorieRecette">
