@@ -31,12 +31,12 @@
     margin-left: 20px;
     border-radius: 20px;
 }
-div ul {
+#listeChoix {
     height: 150px;
     background-color: #FD8787;
     color: white;
     margin-bottom: 80px;
 }
-div li {
+#listeChoix li {
     padding-top: 15px;
 }

@@ -10,9 +10,9 @@
         <header id="head">
             <div id="headTitle">
                 <img src="./img/RecettutoIMG.png">
-                <h1>Recettuto</h1>
+                <a href="index.php?action=Accueil&module=mod_Accueil" id="Titre">Recettuto</a>
             </div>
-            <a href = "index.php?action=connexion&module=mod_Connexion">Inscription/Connexion</a>
+            <a href = "index.php?action=connexion&module=mod_Connexion"><img src = "./img/user.png" id="userConnection" </img></a>
         </header>
         <nav>
             <a href="index.php?action=Accueil&module=mod_Accueil">Accueil</a> |

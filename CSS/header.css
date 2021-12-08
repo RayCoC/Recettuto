@@ -7,26 +7,29 @@ header {
     color: white;
     height: 80px;
 }
-header img {
+#headTitle img {
     width: 80px;
+}
+#userConnection {
+    width: 50px;
 }
 #headTitle {
     display: inline-block;
 }
-#headTitle h1 {
+#Titre {
     display: inline-block;
     float: right;
     margin-left: 420px;
-    font-family: 'Oleo Script';
+    font-family: 'Snell Roundhand';
+    font-size: 30px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
 }
 header a {
-    text-decoration: none;
-    color: white;
     display: inline-block;
     float: right;
-    text-decoration: underline;
-    font-weight: bold;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 nav a{
     text-decoration: none;

@@ -26,7 +26,7 @@
         </div>
         <div id = "ThemeRecette">
             <h1 class="TitreCatégorie">Thémes de Recettes </h1>
-            <ul>
+            <ul id="listeChoix">
                 <li>Gateaux</li>
                 <li>Patate</li>
                 <li>Italie</li>
