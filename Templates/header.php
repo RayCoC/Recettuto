@@ -12,7 +12,14 @@
                 <img src="./img/RecettutoIMG.png">
                 <a href="index.php?action=Accueil&module=mod_Accueil" id="Titre">Recettuto</a>
             </div>
-            <a href = "index.php?action=connexion&module=mod_Connexion"><img src = "./img/user.png" id="userConnection" </img></a>
+            <ul id="menu-demo2">
+                    <li><img src = "./img/user.png" id="userConnection" </img>
+                        <ul>
+                            <li class="sousListe"><a href="index.php?action=inscription&module=mod_Connexion">Inscription</a></li><br>
+                            <li class="sousListe"><a href="index.php?action=connexion&module=mod_Connexion">Connexion</a></li>
+                        </ul>
+                    </li>
+            </ul>
         </header>
         <nav>
             <a href="index.php?action=Accueil&module=mod_Accueil">Accueil</a> |

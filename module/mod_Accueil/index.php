@@ -7,7 +7,10 @@
     </head>
 
     <body>
-        <input type ="text" id="searchBox">
+        <div id="barreDeRecherche">
+            <input type="text">
+            <img src="./img/loupe.png">
+        </div>
         <div id ="recette1">
             <img src = "./img/gateau.png">
             <img src = "./img/italie.png">

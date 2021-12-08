@@ -41,3 +41,29 @@ nav {
     margin-top: 20px;
     text-align: center;
 }
+#menu-demo2 {
+    float: right;
+}
+header ul li {
+    list-style: none;
+    line-height:30px;
+    float:right;
+    background-color:#0EAF0B;
+}
+header ul li a {
+    color: white;
+    padding:10px;
+    font-size:20px;
+    text-decoration:none;
+}
+.sousListe {
+    width: 100px;
+}
+header ul li ul {
+    display:none;
+}
+header ul li:hover ul {
+    display:list-item;
+    position:absolute;
+    margin-left: -90px;
+}
