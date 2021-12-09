@@ -1,5 +1,6 @@
 <?php
 require_once "Templates/header.php";
+session_start();
 if (!isset($_GET['module'])) {
     $module = "mod_Accueil";
 }

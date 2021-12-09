@@ -17,7 +17,7 @@ class ModAuthentification {
 
         switch ($action) {
             case 'connexion' :
-                $this->controleurAuthentification->test_Authentification();
+                $this->controleurAuthentification->afficherConnexion();
                 break;
             case 'deconnexion':
                 $this->controleur->deconnexion();

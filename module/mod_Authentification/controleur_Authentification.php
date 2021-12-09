@@ -11,12 +11,16 @@ class ControleurAuthentification{
        // $this->modele = new ModeleConnexion();
     }
 
-    function test_Authentification() {
+    static function test_Connexion() {
         if(isset($_SESSION['nomUtilisateur'])) {
-            echo "Vous êtes connéctés en tant que <span>".$_SESSION['nomUtilisateur']."</span></br>";
-            $this->vue->form_deconnexion();
+            return true;
         }
         else {
+            return false;
+        }
+    }
+    function afficherConnexion() {
+        if (! ControleurAuthentification::test_Connexion()) {
             $this->vue->form_connexion();
         }
     }

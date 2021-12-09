@@ -13,10 +13,19 @@
                 <a href="index.php?action=Accueil&module=mod_Accueil" id="Titre">Recettuto</a>
             </div>
             <ul id="menu-demo2">
-                    <li><img src = "./img/user.png" id="userConnection" </img>
+                    <li><img src = "./img/user.png" id="userConnection"</img>
                         <ul>
-                            <li class="sousListe"><a href="index.php?action=inscription&module=mod_Authentification">Inscription</a></li><br>
-                            <li class="sousListe"><a href="index.php?action=connexion&module=mod_Authentification">Connexion</a></li>
+                            <?php
+                            require_once "module/mod_Authentification/controleur_Authentification.php";
+                                if (ControleurAuthentification::test_Connexion()) {
+                                    echo '<li class="sousListe"><a href="index.php?action=inscription&module=mod_Authentification">Mon Compte</a></li><br>';
+                                    echo '<li class="sousListe"><a href="index.php?action=connexion&module=mod_Authentification">Deconnexion</a></li>';
+                                }
+                                else {
+                                    echo '<li class="sousListe"><a href="index.php?action=inscription&module=mod_Authentification">Inscription</a></li><br>';
+                                    echo '<li class="sousListe"><a href="index.php?action=connexion&module=mod_Authentification">Connexion</a></li>';
+                                }
+                            ?>
                         </ul>
                     </li>
             </ul>
