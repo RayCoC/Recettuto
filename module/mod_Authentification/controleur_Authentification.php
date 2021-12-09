@@ -20,6 +20,10 @@ class ControleurAuthentification{
             $this->vue->form_connexion();
         }
     }
+
+    function test_Inscription(){
+        $this->vue->form_inscription();
+    }
 /*
     function Authentification() {
 

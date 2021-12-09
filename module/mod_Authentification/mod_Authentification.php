@@ -20,8 +20,10 @@ class ModAuthentification {
                 $this->controleurAuthentification->test_Authentification();
                 break;
             case 'deconnexion':
-                $this->controleur->deconnexion();
+                $this->controleurAuthentification->deconnexion();
                 break;
+            case 'inscription' ;
+                $this->controleurAuthentification->test_Inscription();
         }
     }
 

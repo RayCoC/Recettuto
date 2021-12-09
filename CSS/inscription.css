@@ -1,11 +1,9 @@
 
-
-
-
 aside{
     display: inline-block;
     width: 45%;
-    height: 60%;
+
+    
 }
 article{
     display: inline-block;
@@ -16,7 +14,8 @@ article{
     background-color: #C4C4C4;
     
     text-align: center;
-    height:360px;
+
+    
 }
 
 
@@ -43,18 +42,43 @@ form h1 {
 
 .input{
     display: block;
-    margin-left: 75px;
-    margin-top: 20px;
-    height: 35px;
-    font-family: "Oleo Script";
-    font-size: 25px
+    margin:auto;
+    margin-top: 40px;
+    font-size: larger;
 }
 p {
     color: black;
     font-size: 20px;
 }
 #valider{
-    width:100px;
-    margin-left: 190px;
+ 
+    margin:auto;
+    margin-top: 30px;
     background-color: #0EAF0B;
+    margin-bottom: 40px;
+    border-radius: 6px;
+
+    font-weight: bold;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor:pointer;
+
+
+}
+
+
+
+#valider:hover{
+    background:linear-gradient(to top, #0EAF0B 5%, #77d42a 100%);
+	background-color:#0EAF0B;
+    
+}
+
+#dateNaissance {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+#dateNaissance input {
+    margin: .4rem 0;
 }
