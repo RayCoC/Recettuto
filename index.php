@@ -11,9 +11,9 @@ switch ($module) {
         include_once 'module/'."$module".'/'.$module.".php";
             new ModAccueil();
             break;
-    case "mod_Connexion" :
+    case "mod_Authentification" :
         include_once 'module/'."$module".'/'.$module.".php";
-            new ModConnexion();
+            new ModAuthentification();
             break;
     default :
         die ("interdiction d'acces à ce module");

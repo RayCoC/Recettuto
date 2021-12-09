@@ -1,14 +1,14 @@
 <?php
 
-class VueConnexion {
+class VueAuthentification{
 
     function form_connexion() {
-        require_once "./module/mod_Connexion/connexion.php";
+        require_once "./module/mod_Authentification/connexion.php";
        
     }
 
     function form_deconnexion() {
-        echo "<a href=index.php?action=deconnexion&module=mod_Connexion>Deconnexion</a><br/>";
+        echo "<a href=index.php?action=deconnexion&module=mod_Authentification>Deconnexion</a><br/>";
 
     }
 }

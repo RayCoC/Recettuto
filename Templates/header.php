@@ -15,8 +15,8 @@
             <ul id="menu-demo2">
                     <li><img src = "./img/user.png" id="userConnection" </img>
                         <ul>
-                            <li class="sousListe"><a href="index.php?action=inscription&module=mod_Connexion">Inscription</a></li><br>
-                            <li class="sousListe"><a href="index.php?action=connexion&module=mod_Connexion">Connexion</a></li>
+                            <li class="sousListe"><a href="index.php?action=inscription&module=mod_Authentification">Inscription</a></li><br>
+                            <li class="sousListe"><a href="index.php?action=connexion&module=mod_Authentification">Connexion</a></li>
                         </ul>
                     </li>
             </ul>

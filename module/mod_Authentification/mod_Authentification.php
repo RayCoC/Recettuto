@@ -1,23 +1,23 @@
 <?php
-require_once "./module/mod_Connexion/controleurConnexion.php";
+require_once "./module/mod_Authentification/controleur_Authentification.php";
 
-class ModConnexion {
-    private $controleurConnexion;
+class ModAuthentification {
+    private $controleurAuthentification;
 
     function __construct()
     {
-        $this->controleurConnexion = new ControleurConnexion();
+        $this->controleurAuthentification = new ControleurAuthentification();
         $action = "";
         if (isset($_GET['action'])) {
             $action = $_GET['action'];
         }
         else{
-            $action="connexion";
+            $action="Authentification";
         }
 
         switch ($action) {
             case 'connexion' :
-                $this->controleurConnexion->test_connexion();
+                $this->controleurAuthentification->test_Authentification();
                 break;
             case 'deconnexion':
                 $this->controleur->deconnexion();
