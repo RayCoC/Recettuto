@@ -3,6 +3,6 @@
         function __construct() {}
 
         function pageAccueil() {
-            include_once "index.php";
+            require_once "module/mod_Accueil/index.php";
         }
     }

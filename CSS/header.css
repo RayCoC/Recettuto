@@ -52,12 +52,12 @@ header ul li {
 }
 header ul li a {
     color: white;
-    padding:10px;
+    padding:5px;
     font-size:20px;
     text-decoration:none;
 }
 .sousListe {
-    width: 100px;
+    width: 100%;
 }
 header ul li ul {
     display:none;
@@ -65,5 +65,5 @@ header ul li ul {
 header ul li:hover ul {
     display:list-item;
     position:absolute;
-    margin-left: -90px;
+    margin-left: -5.75%;
 }
