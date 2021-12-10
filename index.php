@@ -1,6 +1,9 @@
 <?php
+include_once "Connexion.php";
 require_once "Templates/header.php";
+
 session_start();
+Connexion::initConnexion();
 if (!isset($_GET['module'])) {
     $module = "mod_Accueil";
 }
@@ -16,6 +19,9 @@ switch ($module) {
         include_once 'module/'."$module".'/'.$module.".php";
             new ModAuthentification();
             break;
+    case "mod_Authentification" : 
+        include_once 'module/'."$module".'/'.$module.".php";
+        new ModAuthentification();
     default :
         die ("interdiction d'acces à ce module");
         break;

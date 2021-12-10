@@ -1,6 +1,7 @@
 <?php
 
 require_once "./module/mod_Authentification/vue_Authentification.php";
+require_once "modele_Authentification.php";
 
 class ControleurAuthentification{
     private $modele;
@@ -8,7 +9,7 @@ class ControleurAuthentification{
 
     function __construct () {
         $this->vue = new VueAuthentification();
-       // $this->modele = new ModeleConnexion();
+        $this->modele = new ModeleAuthentification();
     }
 
     static function test_Connexion() {
@@ -24,27 +25,20 @@ class ControleurAuthentification{
             $this->vue->form_connexion();
         }
     }
-/*
-    function Authentification() {
-
-        $login=$_POST['login'];
-        $password=$_POST['password'];
+    function login($login, $password) {
         $user=$this->modele->connexion($login);
-
         if(!empty($user)) {
-            $count=password_verify($password,$user['password']);
-
+            $count=password_verify($password, $user['password']);
+            
             if($count) {
                 $_SESSION['login']=$login;
-                $this->test_connexion();
+                header("Refresh=1, /home/etudiants/info/rhamouche/local_html/Php_Projet/index.php");
             }
             else {
-                echo "mdp pas bon";
                 $this->vue->form_connexion();
             }
         }
         else {
-            echo "login incorrecte";
             $this->vue->form_connexion();
         }
     }
@@ -52,5 +46,7 @@ class ControleurAuthentification{
         unset($_SESSION['login']);
         $this->vue->form_connexion();
     }
-*/
+    function affiche() {
+        $this->modele->afficheBD();
+    }
 }

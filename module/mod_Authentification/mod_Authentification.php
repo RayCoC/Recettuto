@@ -14,14 +14,15 @@ class ModAuthentification {
         else{
             $action="Authentification";
         }
-
         switch ($action) {
             case 'connexion' :
                 $this->controleurAuthentification->afficherConnexion();
                 break;
             case 'deconnexion':
-                $this->controleur->deconnexion();
+                $this->controleurAuthentification->deconnexion();
                 break;
+            case 'login' : 
+                $this->controleurAuthentification->login($_POST['nomUtilisateur'], $_POST['mdp']);
         }
     }
 
