@@ -1,8 +1,8 @@
 <?php
-    class VueAccueil {
+    class VueAccueil extends  Vue {
         function __construct() {}
 
         function pageAccueil() {
-            require_once "module/mod_Accueil/index.php";
+            $this->render("Accueil/index.php");
         }
     }

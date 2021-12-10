@@ -1,6 +1,6 @@
 <?php
 
-class VueAuthentification{
+class VueAuthentification extends Vue{
 
     function form_connexion() {
         require_once "./module/mod_Authentification/connexion.php";

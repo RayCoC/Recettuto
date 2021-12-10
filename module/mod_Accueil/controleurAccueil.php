@@ -1,5 +1,5 @@
 <?php
-include_once "vue_Accueil.php";
+include_once "../../vue/vue_Accueil.php";
 class ControleurAccueil {
     private $vue_Accueil;
     function __construct()
