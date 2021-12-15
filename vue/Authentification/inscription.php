@@ -9,7 +9,7 @@
 
         <div id= centerDiv> 
         <article>
-                <form action="index.php?action=inscription&module=mod_Inscription" method="post">
+                <form action="index.php?action=inscription&module=mod_Authentification" method="post">
                     <h1>S'inscrire</h1>
                     
                     <input type="radio" id="homme" name="sexe" value="homme">

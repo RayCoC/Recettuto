@@ -48,6 +48,7 @@ class ControleurAuthentification{
         unset($_SESSION['nomUtilisateur']);
         return vue::render("Authentification/connexion.php");
     }
+    
     function affiche() {
         $this->modele->afficheBD();
     }
