@@ -1,6 +1,5 @@
 <?php
 include_once "Connexion.php";
-require_once "Templates/header.php";
 
 session_start();
 Connexion::initConnexion();
@@ -26,5 +25,4 @@ switch ($module) {
         die ("interdiction d'acces à ce module");
         break;
 }
-require_once "Templates/footer.php";
 ?>

@@ -1,8 +1,7 @@
 <?php
 
-require_once "./module/mod_Authentification/vue_Authentification.php";
+require_once "./vue/vue_Authentification.php";
 require_once "modele_Authentification.php";
-
 class ControleurAuthentification{
     private $modele;
     private $vue;
@@ -31,8 +30,8 @@ class ControleurAuthentification{
             $count=password_verify($password, $user['password']);
             
             if($count) {
-                $_SESSION['login']=$login;
-                header("Refresh=1, /home/etudiants/info/rhamouche/local_html/Php_Projet/index.php");
+                $_SESSION['nomUtilisateur']=$login;
+                return vue::render("Accueil/index.php");
             }
             else {
                 $this->vue->form_connexion();
@@ -43,8 +42,8 @@ class ControleurAuthentification{
         }
     }
     function deconnexion() {
-        unset($_SESSION['login']);
-        $this->vue->form_connexion();
+        unset($_SESSION['nomUtilisateur']);
+        return vue::render("Authentification/connexion.php");
     }
     function affiche() {
         $this->modele->afficheBD();
