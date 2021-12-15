@@ -41,6 +41,9 @@ class ControleurAuthentification{
             $this->vue->form_connexion();
         }
     }
+    function test_Inscription(){
+        $this->vue->form_inscription();
+    }
     function deconnexion() {
         unset($_SESSION['nomUtilisateur']);
         return vue::render("Authentification/connexion.php");

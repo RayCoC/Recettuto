@@ -23,6 +23,9 @@ class ModAuthentification {
                 break;
             case 'login' : 
                 $this->controleurAuthentification->login($_POST['nomUtilisateur'], $_POST['mdp']);
+            case 'inscription' ;
+                $this->controleurAuthentification->test_Inscription();
+                
         }
     }
 
