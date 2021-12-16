@@ -21,9 +21,11 @@ switch ($module) {
     case "mod_Authentification" : 
         include_once 'module/'."$module".'/'.$module.".php";
         new ModAuthentification();
+        break;
     case "mod_Recette" : 
         include_once 'module/'."$module".'/'.$module.".php";
         new ModRecette();
+        break;
     default :
         die ("interdiction d'acces à ce module");
         break;

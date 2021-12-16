@@ -1,7 +1,7 @@
 <?php
 
 require_once "./vue/vue_Recette.php";
-require_once "modele_Recette.php";
+require_once "modeleRecette.php";
 class ControleurRecette{
     private $modele;
     private $vue;
@@ -9,5 +9,8 @@ class ControleurRecette{
     function __construct () {
         $this->vue = new VueRecette();
         $this->modele = new ModeleRecette();
+    }
+    function afficherPagePrincipalRecette() {
+        $this->vue->recettePrincipal();
     }
 }

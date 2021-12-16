@@ -1,4 +1,5 @@
 <?php 
+include_once './vue.php';
 class VueRecette extends vue {
 
     function recettePrincipal() {

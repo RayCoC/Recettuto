@@ -1,0 +1,35 @@
+#barreDeRecherche input {
+    width: 350px;
+    border-radius: 10px;
+    margin-left: 420px;
+    margin-top: 40px;
+    height: 30px;
+    border-color: black;
+}
+#barreDeRecherche img {
+    width: 30px;
+}
+#ajout {
+    background-color: #0EAF0B;
+    padding: 20px;
+    border-radius: 50px;
+    margin-top: 50px;
+}
+#ajout input{
+    width: 200px;
+    height: 50px;
+    background-color: #77d42a;
+    color: white;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: large;
+    border-radius: 10px;
+    display : inline-block;
+    float: right;
+}
+#ajout p {
+    color: white;
+    font-weight: bold;
+    display: inline-block;
+    padding-left: 50px;
+}
