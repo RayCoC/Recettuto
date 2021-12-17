@@ -44,11 +44,30 @@ class ControleurAuthentification{
     function test_Inscription(){
         $this->vue->form_inscription();
     }
+
+    function inscription(){
+        $this->vue->form_inscription();
+        if (!isset($_POST['nom']) or !isset($_POST['prenom']) or !isset($_POST['mdp']) or !isset($_POST['nomUtilisateur']) or empty($_POST['nom']) or empty($_POST['nom']) or empty($_POST['nomUtilisateur']) or empty($_POST['mdp'])) {
+            echo "Il faut remplir les champs";
+        }
+        else{
+            $mdp = $_POST['mdp'];
+            $nomutilisateur= $_POST['nomUtilisateur'];
+            $nom = $_POST['nom'];
+            $prenom = $_POST['prenom'];
+
+            $this->modele->ajoutUtilisateur($nomutilisateur, $mdp, $nom, $prenom); 
+        }
+    }
+
     function deconnexion() {
         unset($_SESSION['nomUtilisateur']);
         return vue::render("Authentification/connexion.php");
     }
     
+
+
+
     function affiche() {
         $this->modele->afficheBD();
     }

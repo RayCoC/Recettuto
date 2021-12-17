@@ -27,6 +27,8 @@ class ModAuthentification {
             case 'inscription' ;
                 $this->controleurAuthentification->test_Inscription();
                 break;
+            case 'inscriptionBD' ;
+                $this->controleurAuthentification->inscription();
             
                 
         }

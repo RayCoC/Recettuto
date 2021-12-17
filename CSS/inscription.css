@@ -74,13 +74,15 @@ p {
     
 }
 
+
 #dateNaissance {
     display: block;
-    font: 1rem 'Fira Sans', sans-serif;
+   
 }
 
 #dateNaissance input {
-    margin: .4rem 0;
+    margin: auto ;
+    
 }
 
 

@@ -9,11 +9,32 @@ class ModeleAuthentification extends Connexion {
         return $requete->fetch();
     }
 
-    function createUser($data){
-        $req = self::$conn->prepare("insert into InfoConfidentielles (login,password) values (:login,:password);");
-        $req->bindParam('login',$login);
-        $req->bindParam('password',$password);
+    public function ajoutUtilisateur($nomUtilisateur, $mdp,$nom,$prenom){
+
+        $req = self::$bdd->prepare("insert into Utilisateur (nom,prenom) values (:nom,:prenom);");
+        $req->bindParam('nom',$nom);
+        $req->bindParam('prenom',$prenom);
         $res = $req->execute();
-        if(!$res) throw new AuthExceptions("L'inscription a échoué!");
+
+        // $req = self::$bdd->prepare("insert into InfoConfidentielles (login,password) values (:login,:password);");
+        // $req->bindParam('login',$nomUtilisateur);
+        // $req->bindParam('password',$mdp);
+        // $res = $req->execute();
+
+
+        // $this->ajoutUtilisateurEtape2($nom,$prenom);
+
+        
     }
+
+    public function ajoutUtilisateurEtape2($nom, $prenom){
+        $req = self::$bdd->prepare("insert into Utilisateur (nom,prenom,dateInscription) values (:nom,:prenom,CURRENT_DATE);");
+        $req->bindParam('nom',$nom);
+        $req->bindParam('prenom',$prenom);
+        $res = $req->execute();
+
+        
+        
+    }
+
 }
