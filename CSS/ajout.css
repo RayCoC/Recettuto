@@ -1,0 +1,17 @@
+
+form input {
+    margin: auto;
+    margin-top: 20px;
+}
+form {
+    text-align: center;
+}
+form label {
+}
+p {
+    font-size: large;
+    text-decoration: underline;
+    font-weight: bold;
+    border-top: 2px solid black;
+    padding-top: 20px;
+}

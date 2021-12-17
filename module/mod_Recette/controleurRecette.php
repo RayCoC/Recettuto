@@ -13,4 +13,7 @@ class ControleurRecette{
     function afficherPagePrincipalRecette() {
         $this->vue->recettePrincipal();
     }
+    function afficherPageAjout() {
+        $this->vue->pageAjout();
+    }
 }
