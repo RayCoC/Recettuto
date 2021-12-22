@@ -1,17 +1,90 @@
-
-form input {
-    margin: auto;
+h1 {
+    margin-top: 60px;
+    margin-bottom: 50px;
+    font-size: 40px;
+    text-decoration: underline;
+}
+form input, textarea {
     margin-top: 20px;
-}
-form {
-    text-align: center;
-}
-form label {
+    border: 2px solid black;
+    border-radius: 5px;
 }
 p {
-    font-size: large;
-    text-decoration: underline;
+    color: #0EAF0B;
+    font-size: 30px;
     font-weight: bold;
-    border-top: 2px solid black;
     padding-top: 20px;
+}
+#image {
+    display: inline-block;
+    float: left;
+}
+#image label {
+    margin-bottom: 20px;
+}
+#image img {
+    display: block;
+    width: 150px;
+    height: 200px;
+}
+label {
+    display: block;
+    font-size: 25px;
+    font-weight: bold;
+}
+.hauteur {
+    height: 30px;
+}
+#titre {
+    width: 400px;
+    height: 40px;
+}
+.desc {
+    width: 350px;
+    height: 200px;
+}
+#info1 {
+    display: inline-block;
+    margin-left: 300px;
+}
+#infoSupp {
+    display: inline-block;
+    margin-right: 60px;
+}
+#ingredients {
+    display: inline-block;
+    float: right;
+}
+#section2 {
+    margin-top: 20px;
+    margin-right: 250px;
+}
+#cacherBouton {
+    display: none;
+}
+#choisirImage {
+    color: #0EAF0B;
+}
+#envoyer {
+    margin-left: 500px;
+}
+.submit {
+    width: 150px;
+    height: 50px;
+    background-color: #0EAF0B;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    border: #0EAF0B 2px solid;
+}
+.submit:hover {
+    background:linear-gradient(to top, #0EAF0B 5%, #77d42a 100%);
+    background-color:#0EAF0B;
+}
+footer {
+    margin-top: 100px;
+}
+#format {
+    color: black;
+    font-size: 15px;
 }
