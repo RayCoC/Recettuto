@@ -16,4 +16,12 @@ class ControleurRecette{
     function afficherPageAjout() {
         $this->vue->pageAjout();
     }
+    function ajouterRecette() {
+        if ($this->modele->uploadImage() != "true") {
+            vue::render("Recette/ajout.php");
+        }
+        else {
+            vue::render("Recette/successAjout.php");
+        }
+    }
 }

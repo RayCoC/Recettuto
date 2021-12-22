@@ -13,7 +13,7 @@
 
     <body>
         <h1> Créez votre recette: </h1>
-        <form method="post" action="index.php?action=ajout&module=mod_Recette">
+        <form method="post" action="index.php?action=ajout&module=mod_Recette" enctype="multipart/form-data">
             <div id="section1">
                 <div id="info1">
                     <p>Titre et description</p>
@@ -24,8 +24,15 @@
                 </div>
                 <div id="image">
                     <p> Image de la recette</p>
-                    <img src="./img/image-content.jpg">
-                    <input type ="file" name = "file" accept=".jpg, .jpeg, .png" id="cacherBouton" onchange="getvalue()"><br>
+                    <?php
+                        include_once "module/mod_Recette/modeleRecette.php";
+                        $message = ModeleRecette::uploadImage();
+                        if ($message != "true") {
+                            echo $message;
+                        }
+                    ?>
+                    <img src="./img/img.png">
+                    <input type="file" name="file" accept=".jpg, .jpeg, .png" id="cacherBouton" onchange="getvalue();"><br>
                     <input type="button" value="Choisir image" onclick="getfile();" class="submit"/>
                     <p id="format">Format : jpg, png, jpeg</p>
                 </div>
@@ -50,5 +57,5 @@
                     <input type="range" id="volume" name="volume" min="1" max="3">
                 </div>
             </div>
-            <input type="submit" name="send" value="Créer ma recette" class="submit" id="envoyer">
+            <input type="submit" name="submit" value="Créer ma recette" class="submit" id="envoyer">
         </form>

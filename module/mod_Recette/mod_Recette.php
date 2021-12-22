@@ -17,6 +17,8 @@ class ModRecette {
             case 'pageAjout' : 
                 $this->controleurRecette->afficherPageAjout();
                 break;
+            case 'ajout' :
+                $this->controleurRecette->ajouterRecette();
         }
     }
 }
