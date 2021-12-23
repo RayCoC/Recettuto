@@ -19,6 +19,10 @@ class ModRecette {
                 break;
             case 'ajout' :
                 $this->controleurRecette->ajouterRecette();
+                break;
+            case 'upload' :
+                $this->controleurRecette->ajouterRecette();
+                break;
         }
     }
 }

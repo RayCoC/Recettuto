@@ -8,6 +8,16 @@
             function getfile(){
                 document.getElementById('cacherBouton').click();
             }
+            function preview_image(event)
+            {
+                var reader = new FileReader();
+                reader.onload = function()
+                {
+                    var output = document.getElementById('output_image');
+                    output.src = reader.result;
+                }
+                reader.readAsDataURL(event.target.files[0]);
+            }
         </script>
     </head>
 
@@ -24,16 +34,9 @@
                 </div>
                 <div id="image">
                     <p> Image de la recette</p>
-                    <?php
-                        include_once "module/mod_Recette/modeleRecette.php";
-                        $message = ModeleRecette::uploadImage();
-                        if ($message != "true") {
-                            echo $message;
-                        }
-                    ?>
-                    <img src="./img/img.png">
-                    <input type="file" name="file" accept=".jpg, .jpeg, .png" id="cacherBouton" onchange="getvalue();"><br>
-                    <input type="button" value="Choisir image" onclick="getfile();" class="submit"/>
+                        <img src=/img/img.png id="output_image">
+                        <input type="file" name="file" accept=".jpg, .jpeg, .png" id="cacherBouton" onchange="preview_image(event)"><br>
+                        <input type="button" value="Choisir image" onclick="getfile();" class="submit">
                     <p id="format">Format : jpg, png, jpeg</p>
                 </div>
             </div>

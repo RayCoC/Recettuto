@@ -6,6 +6,11 @@ class ModeleRecette extends Connexion {
         $requete->execute();
         return $requete->fetch();
     }
+    public static function insertImage ($url) {
+        $det = self::$bdd->prepare("INSERT INTO image (img) VALUES (:url);");
+        $det->bindParam('url',$url);
+        $det->execute();
+    }
     public static function uploadImage () {
         if (isset($_POST['submit']) && isset($_FILES['file'])) {
             $file = $_FILES['file'];
@@ -24,6 +29,7 @@ class ModeleRecette extends Connexion {
                         $insertImg = uniqid('', true).".".$extension;
                         $insertDestination = 'img/img_upload/'.$insertImg;
                         move_uploaded_file($tmpName,$insertDestination);
+                        ModeleRecette::insertImage($insertDestination);
                         return "true";
                     }
                     else {

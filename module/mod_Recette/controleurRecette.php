@@ -18,7 +18,15 @@ class ControleurRecette{
     }
     function ajouterRecette() {
         if ($this->modele->uploadImage() != "true") {
-            vue::render("Recette/ajout.php");
+            $message = ModeleRecette::uploadImage();
+            if ($message != "true") {
+                echo $message;
+                echo "<img src=./img/img.png>";
+            }else {
+                echo "ok";
+                $filepath = "/img/img_upload/".$_FILES['file']['name'];
+                echo "<img src=".$filepath.">";
+            }
         }
         else {
             vue::render("Recette/successAjout.php");
