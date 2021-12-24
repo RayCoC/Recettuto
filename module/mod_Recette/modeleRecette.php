@@ -11,7 +11,19 @@ class ModeleRecette extends Connexion {
         $det->bindParam('url',$url);
         $det->execute();
     }
-    public static function uploadImage () {
+    function creerNouvelleRecette($data) {
+            $requete = self::$bdd->prepare("INSERT INTO recette VALUES (:titre,NULL,:temps,:url,:calories,:cuisson,:descritpion,NULL,NULL,:typePlat,:difficulte)");
+            $requete->bindParam('url',$data['img']);
+            $requete->bindParam('titre',$data['titre']);
+            $requete->bindParam('temps',$data['temps']);
+            $requete->bindParam('calories',$data['calories']);
+            $requete->bindParam('cuisson',$data['cuisson']);
+            $requete->bindParam('difficulte',$data['difficulte']);
+            $requete->bindParam('typePlat',$data['typePlat']);
+            $requete->bindParam('descritpion',$data['description']);
+            $requete->execute();
+    }
+     function uploadImage () {
         if (isset($_POST['submit']) && isset($_FILES['file'])) {
             $file = $_FILES['file'];
             $fileName = $_FILES['file']['name'];
@@ -29,8 +41,7 @@ class ModeleRecette extends Connexion {
                         $insertImg = uniqid('', true).".".$extension;
                         $insertDestination = 'img/img_upload/'.$insertImg;
                         move_uploaded_file($tmpName,$insertDestination);
-                        ModeleRecette::insertImage($insertDestination);
-                        return "true";
+                        return $insertDestination;
                     }
                     else {
                         return "Format inconnu";

@@ -50,14 +50,21 @@
                 </div>
                 <div id="infoSupp">
                     <p>Informations supplémentaires</p>
-                    <label>Durée de la recette </label>
-                    <input type = "date" name = "date" class = "hauteur"><br><br>
+                    <label>Type de plat</label>
+                    <select name="typePlat">
+                        <option value="0">Petit-Déjeuner</option>
+                        <option value="1">Repas</option>
+                        <option value="2">Diner</option>
+                        <option value="3">Dessert</option>
+                    </select><br><br>
+                    <label>Temps cuisson</label>
+                    <input type = "time" name = "tpsCuisson" class = "hauteur"><br><br>
                     <label> Calories </label>
                     <input type = "text" name = "calories" class = "hauteur"><br><br>
-                    <label> Temps prépa </label>
-                    <input type = "date" name = "cuisson" class="hauteur"><br><br>
+                    <label>Temps prépa</label>
+                    <input type = "time" name = "cuisson" class="hauteur"><br><br>
                     <label> Difficulté </label>
-                    <input type="range" id="volume" name="volume" min="1" max="3">
+                    <input type="range" id="volume" name="difficulte" min="1" max="3">
                 </div>
             </div>
             <input type="submit" name="submit" value="Créer ma recette" class="submit" id="envoyer">

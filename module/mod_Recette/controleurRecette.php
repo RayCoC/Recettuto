@@ -17,18 +17,13 @@ class ControleurRecette{
         $this->vue->pageAjout();
     }
     function ajouterRecette() {
-        if ($this->modele->uploadImage() != "true") {
-            $message = ModeleRecette::uploadImage();
-            if ($message != "true") {
-                echo $message;
-                echo "<img src=./img/img.png>";
-            }else {
-                echo "ok";
-                $filepath = "/img/img_upload/".$_FILES['file']['name'];
-                echo "<img src=".$filepath.">";
-            }
+        $message = $this->modele->uploadImage();
+        if(!isset($_POST['titre']) or !isset($_POST['desc']) or !isset($_POST['typePlat']) or !isset($_POST['calories']) or !isset($_POST['difficulte']) or !strlen($message)>20 or isset($_POST['cuisson'])) {
+            $this->vue->pageAjoutVide();
         }
         else {
+            $data = array('img' => $message, 'titre' => $_POST['titre'], 'description' => $_POST['desc'], 'difficulte' => $_POST['difficulte'], 'calories' => $_POST['calories'], 'typePlat'=>$_POST['typePlat'], 'cuisson' => $_POST['tpsCuisson'], 'temps' => $_POST['cuisson']);
+            $this->modele->creerNouvelleRecette($data);
             vue::render("Recette/successAjout.php");
         }
     }

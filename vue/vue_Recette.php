@@ -20,4 +20,7 @@ class VueRecette extends vue {
     function pageAjout() {
         vue::render("Recette/ajout.php");
     }
+    function pageAjoutVide() {
+        vue::render("Recette/Error/ajoutVide.php");
+    }
 }
