@@ -7,6 +7,6 @@
         </head>
         <body>
             <p>Tous les champs doivent etre remplis !</p>
-            <form action="index.php?action=ajout&module=mod_Recette">
+            <form action="index.php?action=pageAjout&module=mod_Recette" method="post">
                 <input type="submit" value="Revenir à la création de recette !">
             </form>

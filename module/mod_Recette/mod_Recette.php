@@ -17,9 +17,23 @@ class ModRecette {
             case 'pageAjout' : 
                 $this->controleurRecette->afficherPageAjout();
                 break;
-            case 'ajout' :
-                $this->controleurRecette->ajouterRecette();
-                break;
+            case 'form' :
+                if (isset($_POST['submit'])) {
+                    $this->controleurRecette->ajouterRecette();
+                }
+                else if (isset($_POST['add'])) {
+                    $this->controleurRecette->ajoutIngredient();
+                }
+                else if (isset($_POST['voirListe'])) {
+                    $this->controleurRecette->afficheListIngredient();
+                }
+                else if (isset($_POST['addHashtag'])) {
+                    $this->controleurRecette->ajoutHashtag();
+                }
+                else if (isset($_POST['voirHashtag'])) {
+                    $this->controleurRecette->afficheListeHashtag();
+                }
+                    break;
         }
     }
 }

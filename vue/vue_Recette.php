@@ -23,4 +23,40 @@ class VueRecette extends vue {
     function pageAjoutVide() {
         vue::render("Recette/Error/ajoutVide.php");
     }
+    function listHashtag() {
+        vue::render('Recette/listHashtag.php');
+    }
+    function listeIngredient() {
+        vue::render("Recette/listIngredient.php");
+    }
+    function  pageAjoutIngredient() {
+        vue::render("Recette/ajoutIngredient.php");
+    }
+    static function getIngredients() {
+        echo '<tr>';
+        foreach ($_SESSION['ingredient'] as $item => $v) {
+            echo '<th>'.$v["nomIngredient"].'</th>
+                    <th>'.$v["quantite"].'</th>
+                    <th>'.$v["unite"].'</th>
+                    </tr>';
+        }
+    }
+    static function getHashtag() {
+        echo '<tr>';
+        foreach ($_SESSION['hashtag'] as $item => $v) {
+            echo '<th>'.$v["nomHashtag"].'</th>
+                    </tr>';
+        }
+    }
+    static function messsageError()
+    {
+        if (isset($_POST['add'])) {
+            if (($_POST['nomIngredient']) == "" or ($_POST['quantite']) == "" or ($_POST['unite']) == "") {
+                return true;
+            }
+        }
+        else {
+            return false;
+        }
+    }
 }
