@@ -74,14 +74,15 @@ class ModeleRecette extends Connexion {
             }
     }
     static function verifieDoublon($nomIngredient) {
+        $i = 0;
         if (!empty($_SESSION['ingredient'])) {
             foreach($_SESSION['ingredient'] as $item=> $val) {
                 if ($val['nomIngredient'] == $nomIngredient) {
                     return false;
                 }
             }
+            return true;
         }
-        return true;
     }
         function uploadImage()
         {

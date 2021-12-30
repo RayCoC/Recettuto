@@ -115,14 +115,14 @@ else if (isset($_POST['add'])) {
     if (is_numeric($_POST['nomIngredient'])) {
         echo "<p class='error'> Le nom de l'ingrédient est invalide !</p>";
     }
-    else if (!ModeleRecette::verifieDoublon($_POST['nomIngredient'])) {
-        echo "<p class='error'> Duplication de l'ingredient !</p>";
-    }
     else if (!is_numeric($_POST['quantite'])) {
         echo "<p class='error'> Les quantites sont invalides !</p>";
     }
     else if (is_numeric($_POST['unite'])) {
         echo "<p class='error'>Les unitées sont invalides</p>";
+    }
+    else if (!ModeleRecette::verifieDoublon($_POST['nomIngredient'])) {
+        echo "<p class='error'> Duplication de l'ingredient !</p>";
     }
 }
 ?>

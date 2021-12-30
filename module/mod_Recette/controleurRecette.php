@@ -38,8 +38,8 @@ class ControleurRecette{
         $this->afficherPageAjout();
     }
     function ajoutIngredient() {
-        $this->modele->ajoutIngredientTableau($_POST['nomIngredient'], $_POST['quantite'], $_POST['unite']);
         $this->afficherPageAjout();
+        $this->modele->ajoutIngredientTableau($_POST['nomIngredient'], $_POST['quantite'], $_POST['unite']);
     }
     function ajouterRecette() {
         $message = $this->modele->uploadImage();
