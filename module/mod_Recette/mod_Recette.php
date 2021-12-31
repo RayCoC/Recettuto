@@ -40,6 +40,9 @@ class ModRecette {
             case 'formModifieIngredient' :
                 $this->controleurRecette->updateIng();
                 break;
+            case 'supprimerIngredient' :
+                $this->controleurRecette->deleteIng();
+                break;
         }
     }
 }

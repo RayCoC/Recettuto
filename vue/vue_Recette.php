@@ -42,6 +42,7 @@ class VueRecette extends vue {
                     <th>'.$v["quantite"].'</th>
                     <th>'.$v["unite"].'</th>
                     <th><a href="index.php?action=modifierIngredient&ingredient='.$v["nomIngredient"].'&module=mod_Recette".>Modifier</a></th>
+                    <th><a href="index?action=supprimerIngredient&ingredient='.$v["nomIngredient"].'&module=mod_Recette".>Supprimer</th>
                     </tr>';
         }
     }

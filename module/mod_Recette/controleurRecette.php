@@ -60,5 +60,10 @@ class ControleurRecette{
     function updateIng() {
         $this->modele->modifieIngredient($_POST['newNomIngredient'], $_POST['newQuantite'], $_POST['newUnite'], $_SESSION['ingredientURL']);
         $this->afficheListIngredient();
+        unset($_SESSION['ingredientURL']);
+    }
+    function deleteIng() {
+        $this->modele->supprimerIngredient($_GET['ingredient']);
+        $this->afficheListIngredient();
     }
 }
