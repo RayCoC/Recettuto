@@ -15,7 +15,7 @@ class VueRecette extends vue {
         }
     }
     function pageModifierIngredient() {
-        vue::render("Recette/Update/modifierIngredient");
+        vue::render("Recette/Update/modifierIngredient.php");
     }
     function recettePrincipal() {
         vue::render("Recette/index.php");

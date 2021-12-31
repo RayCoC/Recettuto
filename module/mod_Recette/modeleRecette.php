@@ -121,9 +121,11 @@ class ModeleRecette extends Connexion {
     }
     function modifieIngredient($nomIngredient, $quantite, $unite, $update) {
         foreach ($_SESSION['ingredient'] as $item => $value) {
-            echo $value['nomIngredient'];
-            echo $value['quantite'];
-            echo $value['unite'];
+            if ($value['nomIngredient'] == $update) {
+                $_SESSION['ingredient'][$item]['nomIngredient'] = $nomIngredient;
+                $_SESSION['ingredient'][$item]['quantite'] = $quantite;
+                $_SESSION['ingredient'][$item]['unite'] = $unite;
+            }
         }
     }
 }

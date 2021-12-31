@@ -20,6 +20,7 @@ class ControleurRecette{
     }
     function affichePageModifIngredient() {
         $this->vue->pageModifierIngredient();
+        $_SESSION['ingredientURL'] = $_GET['ingredient'];
     }
     function afficherPageAjout() {
         $this->vue->pageAjout();
@@ -55,5 +56,9 @@ class ControleurRecette{
             $this->modele->ajouterIngredient($lastID);
             vue::render("Recette/successAjout.php");
         }
+    }
+    function updateIng() {
+        $this->modele->modifieIngredient($_POST['newNomIngredient'], $_POST['newQuantite'], $_POST['newUnite'], $_SESSION['ingredientURL']);
+        $this->afficheListIngredient();
     }
 }

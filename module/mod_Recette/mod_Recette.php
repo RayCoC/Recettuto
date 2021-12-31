@@ -35,7 +35,10 @@ class ModRecette {
                 }
                 break;
             case 'modifierIngredient' :
-                $this->controleurRecette->pageModifierIngredient();
+                $this->controleurRecette->affichePageModifIngredient();
+                break;
+            case 'formModifieIngredient' :
+                $this->controleurRecette->updateIng();
                 break;
         }
     }
