@@ -45,9 +45,9 @@
                 <div id="info1">
                     <p>Titre et description</p>
                     <label>Titre de la recette </label>
-                    <input type = "text" name = "titre" class="hauteur" id="titre"><br><br>
+                    <input type = "text" name = "titre" class="hauteur" id="titre" value="<?php if(isset($_POST['titre'])){ echo  $_POST['titre'];}?>"><br><br>
                     <label> Description recette </label>
-                    <textarea name="desc" cols="50" rows="10" placeholder="Description de votre recette ..."></textarea>
+                    <textarea name="desc" cols="50" rows="10" placeholder="Description de votre recette ..."><?php if(isset($_POST['desc'])){ echo  $_POST['desc'];}?></textarea>
                 </div>
             </div>
             <div id="section2">
@@ -58,16 +58,16 @@
                     <label>Ingrédients</label>
                     <input type="button" value="Ajouter ingrédient !" onclick="cacher(document.getElementById('add'))" class="submit"><br>
                     <div id="add" class="hidden">
-                        <input type="text" name="nomIngredient" class="info" placeholder="Ingredient">
-                        <input type="text" name="quantite" id="quantite" class="info" placeholder="quantite">
-                        <input type="text" name="unite" id="unite" class="info" placeholder="unite">
+                        <input type="text" name="nomIngredient" class="info" placeholder="Ingredient" value="<?php if(isset($_POST['nomIngredient'])){ echo  $_POST['nomIngredient'];}?>">
+                        <input type="text" name="quantite" id="quantite" class="info" placeholder="quantite" value="<?php if(isset($_POST['quantite'])){ echo  $_POST['quantite'];}?>">
+                        <input type="text" name="unite" id="unite" class="info" placeholder="unite" value="<?php if(isset($_POST['unite'])){ echo  $_POST['unite'];}?>">
                         <input type="submit" value="ajouter" class="submit" name="add"><br><br>
                     </div>
                     <input type="submit" class="submit" name="voirListe" value="liste ingredients"><br><br>
                     <label>Hashtag</label>
                     <input type="button" value="ajouter Hashtag !" class="submit" onclick="cacher(document.getElementById('hashtag'))"><br>
                     <div id="hashtag" class="hidden">
-                        <input type="text" name="hashtag" class="info" placeholder="Hashtag">
+                        <input type="text" name="hashtag" class="info" placeholder="Hashtag" value="<?php if(isset($_POST['titre'])){ echo  $_POST['titre'];}?>">
                         <input type="submit" value="ajouter" class="submit" name="addHashtag">
                     </div>
                     <input type="submit" value="Voir mes hashtags" class="submit" name="voirHashtag">
