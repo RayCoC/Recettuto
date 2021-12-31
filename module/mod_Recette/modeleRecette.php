@@ -36,17 +36,17 @@ class ModeleRecette extends Connexion {
         unset($_SESSION['hashtag']);
     }
     function creerNouvelleRecette($data) {
-            $requete = self::$bdd->prepare("INSERT INTO recette (titre,tpsPrepa, image, calories,tpsCuisson,textRecette,idType,nbFlammes) VALUES (:titre,:temps,:url,:calories,:cuisson,:descritpion,:typePlat,:difficulte)");
-            $requete->bindParam('url',$data['img']);
-            $requete->bindParam('titre',$data['titre']);
-            $requete->bindParam('temps',$data['temps']);
-            $requete->bindParam('calories',$data['calories']);
-            $requete->bindParam('cuisson',$data['cuisson']);
-            $requete->bindParam('difficulte',$data['difficulte']);
-            $requete->bindParam('typePlat',$data['typePlat']);
-            $requete->bindParam('descritpion',$data['description']);
-            $requete->execute();
-            return self::$bdd->lastInsertId();
+        $requete = self::$bdd->prepare("INSERT INTO recette (titre,tpsPrepa, image, calories,tpsCuisson,textRecette,idType,nbFlammes) VALUES (:titre,:temps,:url,:calories,:cuisson,:descritpion,:typePlat,:difficulte)");
+        $requete->bindParam('url',$data['img']);
+        $requete->bindParam('titre',$data['titre']);
+        $requete->bindParam('temps',$data['temps']);
+        $requete->bindParam('calories',$data['calories']);
+        $requete->bindParam('cuisson',$data['cuisson']);
+        $requete->bindParam('difficulte',$data['difficulte']);
+        $requete->bindParam('typePlat',$data['typePlat']);
+        $requete->bindParam('descritpion',$data['description']);
+        $requete->execute();
+        return self::$bdd->lastInsertId();
     }
     function ajouterIngredient($lastIDRecette) {
         if (! empty($_SESSION['ingredient'])) {
@@ -68,50 +68,49 @@ class ModeleRecette extends Connexion {
     public function ajoutIngredientTableau($nomIngredient, $quantite, $unite)
     {
         if (($nomIngredient != "" or $quantite != "" or $unite != "") and self::verifieDoublon($nomIngredient)) {
-                $i = $_SESSION['id'];
-                $_SESSION['ingredient'][$i] = array('nomIngredient' => $nomIngredient, 'quantite' => $quantite, 'unite' =>$unite);
-                $_SESSION['id']++;
-            }
+            $_SESSION['id']++;
+            $i = $_SESSION['id'];
+            $_SESSION['ingredient'][$i] = array('nomIngredient' => $nomIngredient, 'quantite' => $quantite, 'unite' =>$unite);
+        }
     }
     static function verifieDoublon($nomIngredient) {
-        $i = 0;
         if (!empty($_SESSION['ingredient'])) {
             foreach($_SESSION['ingredient'] as $item=> $val) {
                 if ($val['nomIngredient'] == $nomIngredient) {
                     return false;
                 }
             }
-            return true;
         }
+        return true;
     }
-        function uploadImage()
-        {
-            if (isset($_POST['submit']) && isset($_FILES['file'])) {
-                $file = $_FILES['file'];
-                $fileName = $_FILES['file']['name'];
-                $fileSize = $_FILES['file']['size'];
-                $tmpName = $_FILES['file']['tmp_name'];
-                $error = $_FILES['file']['error'];
-                if ($error == 0) {
-                    if ($fileSize > 12500000) {
-                        return "la taille est trop élevée";
+    function uploadImage()
+    {
+        if (isset($_POST['submit']) && isset($_FILES['file'])) {
+            $file = $_FILES['file'];
+            $fileName = $_FILES['file']['name'];
+            $fileSize = $_FILES['file']['size'];
+            $tmpName = $_FILES['file']['tmp_name'];
+            $error = $_FILES['file']['error'];
+            if ($error == 0) {
+                if ($fileSize > 12500000) {
+                    return "la taille est trop élevée";
+                } else {
+                    $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+                    $allExt = array("jpg", "png", "jpeg");
+                    if (in_array($extension, $allExt)) {
+                        $insertImg = uniqid('', true) . "." . $extension;
+                        $insertDestination = 'img/img_upload/' . $insertImg;
+                        move_uploaded_file($tmpName, $insertDestination);
+                        return $insertDestination;
                     } else {
-                        $extension = pathinfo($fileName, PATHINFO_EXTENSION);
-                        $allExt = array("jpg", "png", "jpeg");
-                        if (in_array($extension, $allExt)) {
-                            $insertImg = uniqid('', true) . "." . $extension;
-                            $insertDestination = 'img/img_upload/' . $insertImg;
-                            move_uploaded_file($tmpName, $insertDestination);
-                            return $insertDestination;
-                        } else {
-                            return "Format inconnu";
-                        }
+                        return "Format inconnu";
                     }
                 }
-            } else {
-                return "Veuilez entrer une image";
             }
+        } else {
+            return "Veuilez entrer une image";
         }
+    }
     public function ajoutHashtagTableau($hashtag)
     {
         if ($hashtag !="") {
@@ -120,4 +119,11 @@ class ModeleRecette extends Connexion {
             $_SESSION['hashtag'][$i] = array('nomHashtag' => $hashtag);
         }
     }
+    function modifieIngredient($nomIngredient, $quantite, $unite, $update) {
+        foreach ($_SESSION['ingredient'] as $item => $value) {
+            echo $value['nomIngredient'];
+            echo $value['quantite'];
+            echo $value['unite'];
+        }
     }
+}

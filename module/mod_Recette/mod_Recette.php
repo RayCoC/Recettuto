@@ -1,5 +1,5 @@
 <?php
-    require_once "controleurRecette.php";
+require_once "controleurRecette.php";
 class ModRecette {
     private $controleurRecette;
 
@@ -11,10 +11,10 @@ class ModRecette {
             $action = $_GET['action'];
         }
         switch ($action) {
-            case 'Recette' : 
+            case 'Recette' :
                 $this->controleurRecette->afficherPagePrincipalRecette();
                 break;
-            case 'pageAjout' : 
+            case 'pageAjout' :
                 $this->controleurRecette->afficherPageAjout();
                 break;
             case 'form' :
@@ -33,7 +33,10 @@ class ModRecette {
                 else if (isset($_POST['voirHashtag'])) {
                     $this->controleurRecette->afficheListeHashtag();
                 }
-                    break;
+                break;
+            case 'modifierIngredient' :
+                $this->controleurRecette->pageModifierIngredient();
+                break;
         }
     }
 }

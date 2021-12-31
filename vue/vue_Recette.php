@@ -14,6 +14,9 @@ class VueRecette extends vue {
             }
         }
     }
+    function pageModifierIngredient() {
+        vue::render("Recette/Update/modifierIngredient");
+    }
     function recettePrincipal() {
         vue::render("Recette/index.php");
     }
@@ -38,6 +41,7 @@ class VueRecette extends vue {
             echo '<th>'.$v["nomIngredient"].'</th>
                     <th>'.$v["quantite"].'</th>
                     <th>'.$v["unite"].'</th>
+                    <th><a href="index.php?action=modifierIngredient&ingredient='.$v["nomIngredient"].'&module=mod_Recette".>Modifier</a></th>
                     </tr>';
         }
     }

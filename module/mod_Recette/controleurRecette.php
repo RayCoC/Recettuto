@@ -18,6 +18,9 @@ class ControleurRecette{
     function afficheListeHashtag() {
         $this->vue->listHashtag();
     }
+    function affichePageModifIngredient() {
+        $this->vue->pageModifierIngredient();
+    }
     function afficherPageAjout() {
         $this->vue->pageAjout();
     }
