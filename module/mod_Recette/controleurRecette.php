@@ -47,7 +47,7 @@ class ControleurRecette{
     }
     function ajouterRecette() {
         $message = $this->modele->uploadImage();
-        if(ControleurRecette::FormVide() or empty($_SESSION['ingredient']) or is_numeric($_POST['titre']) or is_numeric($_POST['nomIngredient'])) {
+        if(ControleurRecette::FormVide() or empty($_SESSION['ingredient']) or is_numeric($_POST['titre']) or is_numeric($_POST['nomIngredient']) or $message == "false") {
             $this->vue->pageAjout();
         }
         else {

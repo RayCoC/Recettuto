@@ -109,7 +109,8 @@ class ModeleRecette extends Connexion
             $error = $_FILES['file']['error'];
             if ($error == 0) {
                 if ($fileSize > 12500000) {
-                    return "la taille est trop élevée";
+                    //"la taille est trop élevée";
+                    return "false";
                 } else {
                     $extension = pathinfo($fileName, PATHINFO_EXTENSION);
                     $allExt = array("jpg", "png", "jpeg");
@@ -119,12 +120,14 @@ class ModeleRecette extends Connexion
                         move_uploaded_file($tmpName, $insertDestination);
                         return $insertDestination;
                     } else {
-                        return "Format inconnu";
+                        //"Format inconnu";
+                        return "false";
                     }
                 }
             }
         } else {
-            return "Veuilez entrer une image";
+            //"Veuilez entrer une image";
+            return "false";
         }
     }
 
