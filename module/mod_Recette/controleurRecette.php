@@ -5,15 +5,22 @@ require_once "modeleRecette.php";
 class ControleurRecette{
     private $modele;
     private $vue;
-    private $i;
 
     function __construct () {
         $this->vue = new VueRecette();
         $this->modele = new ModeleRecette();
-        $this->i = 0;
     }
-    function afficherPagePrincipalRecette() {
-        $this->vue->recettePrincipal();
+    function afficherPagePrincipalRecette($v) {
+        $data = [];
+        if ($v != null) {
+            foreach ($v as $item => $value) {
+                $data['Recette'][$item] = array('id' => $value[0], 'img' => $value[4]);
+            }
+        }
+        $this->vue->recettePrincipal($data);
+    }
+    function afficherToutesRecettes() {
+        return $this->modele->allRecette();
     }
     function afficheListeHashtag() {
         $this->vue->listHashtag();
@@ -65,5 +72,11 @@ class ControleurRecette{
     function deleteIng() {
         $this->modele->supprimerIngredient($_GET['ingredient']);
         $this->afficheListIngredient();
+    }
+    function filtrer() {
+        $filtre = $_POST['filtre'];
+        $value = $_POST['recherche'];
+        $rec = $this->modele->filterBy($filtre, $value);
+        $this->afficherPagePrincipalRecette($rec);
     }
 }

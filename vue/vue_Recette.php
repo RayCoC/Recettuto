@@ -17,8 +17,8 @@ class VueRecette extends vue {
     function pageModifierIngredient() {
         vue::render("Recette/Update/modifierIngredient.php");
     }
-    function recettePrincipal() {
-        vue::render("Recette/index.php");
+    function recettePrincipal($data) {
+        vue::render("Recette/index.php", array("Recette"=>$data));
     }
     function pageAjout() {
         vue::render("Recette/ajout.php");
@@ -53,15 +53,14 @@ class VueRecette extends vue {
                     </tr>';
         }
     }
-    static function messsageError()
-    {
-        if (isset($_POST['add'])) {
-            if (($_POST['nomIngredient']) == "" or ($_POST['quantite']) == "" or ($_POST['unite']) == "") {
-                return true;
+    static function afficheRecettes($data = []) {
+        if ($data !=null) {
+            foreach ($data['Recette'] as $item => $value) {
+                echo '<a href=index.php?action=voirRecette&id=' . $value['id'] . '&module=mod_Recette><img class=imgRecette src=' . $value['img'] . '></a>';
             }
         }
         else {
-            return false;
+            echo '<p> Not found </p>';
         }
     }
 }

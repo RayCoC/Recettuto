@@ -97,7 +97,7 @@
             </div>
         </form>
 <?php
-if (VueRecette::messsageError()) {
+if (ModeleRecette::messsageError()) {
     echo "<p class='error'>Tous les champs des ingrédients doivent etre entrés !</p>";
 }
 else if (isset($_POST['submit']))  {

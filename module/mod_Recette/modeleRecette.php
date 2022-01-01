@@ -159,4 +159,34 @@ class ModeleRecette extends Connexion
             }
         }
     }
+    function filterBy($filtre, $value) {
+        if ($filtre == 'titre') {
+            $requete = self::$bdd->prepare("SELECT * FROM recette where titre = :value");
+        }
+        else if ($filtre == 'hashtag'){
+            $requete = self::$bdd->prepare("SELECT * FROM recette natural join lier where nomHashtag = :value ");
+        }
+        else if ($filtre == 'ingredient') {
+            $requete = self::$bdd->prepare("SELECT * FROM recette natural join composer natural join ingredient where nom = :value");
+        }
+        $requete->bindParam(':value', $value);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+    function allRecette() {
+        $requete = self::$bdd->prepare("SELECT * FROM recette");
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+    static function messsageError()
+    {
+        if (isset($_POST['add'])) {
+            if (($_POST['nomIngredient']) == "" or ($_POST['quantite']) == "" or ($_POST['unite']) == "") {
+                return true;
+            }
+        }
+        else {
+            return false;
+        }
+    }
 }

@@ -12,7 +12,8 @@ class ModRecette {
         }
         switch ($action) {
             case 'Recette' :
-                $this->controleurRecette->afficherPagePrincipalRecette();
+
+                $this->controleurRecette->afficherPagePrincipalRecette($this->controleurRecette->afficherToutesRecettes());
                 break;
             case 'pageAjout' :
                 $this->controleurRecette->afficherPageAjout();
@@ -42,6 +43,9 @@ class ModRecette {
                 break;
             case 'supprimerIngredient' :
                 $this->controleurRecette->deleteIng();
+                break;
+            case 'rechercher' :
+                $this->controleurRecette->filtrer();
                 break;
         }
     }

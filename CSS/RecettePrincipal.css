@@ -6,6 +6,20 @@
     height: 30px;
     border-color: black;
 }
+.submit {
+    color: white;
+    width: 150px;
+    height: 50px;
+    background-color: #0EAF0B;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    border: #0EAF0B 2px solid;
+}
+.submit:hover {
+    background:linear-gradient(to top, #0EAF0B 5%, #77d42a 100%);
+    background-color:#0EAF0B;
+}
 #barreDeRecherche img {
     width: 30px;
 }
@@ -52,4 +66,11 @@
 #myBtnContainer {
   margin-top: 50px;
   text-align: center;
+}
+.imgRecette {
+    margin-top: 50px;
+    margin-right: 50px;
+    width: 350px;
+    height: 250px;
+    border-radius: 10px;
 }
