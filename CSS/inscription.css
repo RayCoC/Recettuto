@@ -1,21 +1,22 @@
 
+
 aside{
     display: inline-block;
     width: 45%;
 
-    
+
 }
 article{
     display: inline-block;
     float:right;
-    
-   
+
+
     width: 55%;
     background-color: #C4C4C4;
-    
+
     text-align: center;
 
-    
+
 }
 
 
@@ -51,7 +52,7 @@ p {
     font-size: 20px;
 }
 #valider{
- 
+
     margin:auto;
     margin-top: 30px;
     background-color: #0EAF0B;
@@ -70,18 +71,19 @@ p {
 
 #valider:hover{
     background:linear-gradient(to top, #0EAF0B 5%, #77d42a 100%);
-	background-color:#0EAF0B;
-    
+    background-color:#0EAF0B;
+
 }
+
 
 #dateNaissance {
     display: block;
-    font: 1rem 'Fira Sans', sans-serif;
+
 }
 
 #dateNaissance input {
-    margin: .4rem 0;
-}
+    margin: auto ;
 
+}
 
 
