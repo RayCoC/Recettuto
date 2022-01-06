@@ -1,0 +1,35 @@
+.center {
+    text-align: center;
+}
+#en-tete {
+    background-color: beige;
+}
+#en-tete h1{
+    text-decoration: underline;
+}
+
+#imgRecette {
+    width: 350px;
+    height: 250px;
+    border-radius: 5px;
+}#partie2 p{
+    display: inline-block;
+ }
+ #partie2 img {
+     display: inline-block;
+     width: 50px;
+ }
+ #difficulte {
+    border-top: 3px solid black;
+ }
+#ingredient {
+    border-top: 3px solid black;
+}
+#ingredient h1 {
+    text-align: center;
+}
+#ingredient p{
+     border-bottom: 2px solid grey;
+     font-size: 20px;
+     display: inline-block;
+ }

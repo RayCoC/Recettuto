@@ -42,6 +42,32 @@ class ControleurRecette{
         $this->vue->pageModifierHashtag();
         $_SESSION['hashtagURL'] = $_GET['hashtag'];
     }
+    function afficheRecette() {
+        $id = $_GET['id'];
+        $rec = $this->modele->detailsRecette($id);
+        $ing = $this->modele->detailsIngreientRecette($id);
+        $avis = $this->modele->avis($id);
+        foreach ($rec  as $item => $value) {
+            $data['nomRecette'] = $value[1];
+            $data ['tpsPrepa'] = $value[3];
+            $data["img"] = $value[4];
+            $data['calories'] = $value[5];
+            $data['tpsCuisson'] = $value[6];
+            $data['desc'] = $value[7];
+            $data['dateCrea'] = $value[8];
+            $data['typePlat'] = $value[9];
+            $data['difficulte'] =  $value[10];
+        }
+        foreach ($ing as $item => $value) {
+            $data['ingredient'][$item]['nomIngredient'] = $value[1];
+            $data['ingredient'][$item]['quantite'] = $value[2];
+            $data['ingredient'][$item]['unite'] = $value[3];
+        }
+        foreach ($avis as $item => $value) {
+            $data['avis'][$item]['user'] = $value[1];
+        }
+        $this->vue->pageVoirRecette($data);
+    }
     static function FormVide() {
         if ($_POST['titre']== "" or $_POST['desc'] == "" or $_POST['typePlat'] == "" or $_POST['calories'] == "" or $_POST['difficulte'] =="" or $_POST['cuisson'] == "") {
             return true;
@@ -89,7 +115,9 @@ class ControleurRecette{
     function filtre() {
         $data = $this->modele->filter($_GET['value']);
         $this->afficherPagePrincipalRecette($data);
-
+    }
+    function afficheDetails($id) {
+        return $this->modele->detailsRecette($id);
     }
     function research() {
         $filtre = $_POST['filtre'];

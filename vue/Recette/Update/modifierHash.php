@@ -13,4 +13,3 @@
         <input type="submit" value="valider" class="submit" name="confirmIngredient"><br><br>
     </div>
 </form>
-</body>

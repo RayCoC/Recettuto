@@ -215,4 +215,30 @@ class ModeleRecette extends Connexion
             return false;
         }
     }
+     function detailsRecette($id) {
+        $requete = self::$bdd->prepare("SELECT * FROM recette where idRec = :id");
+        $requete->bindParam('id', $id);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+    function detailsIngreientRecette($id) {
+        $requete = self::$bdd->prepare("SELECT * FROM ingredient natural join composer where idRec = :id");
+        $requete->bindParam('id', $id);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+    function ajoutAvis ($idRec, $avis, $etoiles) {
+        $requete = self::$bdd->prepare("INSERT INTO (textAvis,nbEtoiles, nbPouceBleu, idRec) values (avis, etoiles, 0, idRec)");
+        $requete->bindParam('avis',$avis);
+        $requete->bindParam('etoiles', $etoiles);
+        $requete->bindParam('idRec', $idRec);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+    function avis ($id) {
+        $requete = self::$bdd->prepare("SELECT * FROM avis where idRec = id");
+        $requete->bindParam('id', $id);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
 }

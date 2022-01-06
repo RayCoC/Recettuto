@@ -59,6 +59,9 @@ class ModRecette {
             case 'filtre' :
                 $this->controleurRecette->filtre();
                 break;
+            case 'voirRecette' :
+                $this->controleurRecette->afficheRecette();
+                break;
         }
     }
 }

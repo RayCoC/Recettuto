@@ -38,6 +38,9 @@ class VueRecette extends vue {
     function  pageAjoutIngredient() {
         vue::render("Recette/ajoutIngredient.php");
     }
+    function pageVoirRecette($data) {
+        vue::render("Recette/voirRecette.php",$data);
+    }
     static function getIngredients() {
         echo '<tr>';
         foreach ($_SESSION['ingredient'] as $item => $v) {
