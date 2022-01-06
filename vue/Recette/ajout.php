@@ -121,7 +121,7 @@ else if (isset($_POST['add'])) {
     else if (is_numeric($_POST['unite'])) {
         echo "<p class='error'>Les unitées sont invalides</p>";
     }
-    else if (!ModeleRecette::verifieDoublon($_POST['nomIngredient'])) {
+    else if (!ModeleRecette::verifieDoublon($_POST['nomIngredient'], 'ingredient', 'nomIngredient')) {
         echo "<p class='error'> Duplication de l'ingredient !</p>";
     }
 }

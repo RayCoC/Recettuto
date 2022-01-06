@@ -38,6 +38,10 @@ class ControleurRecette{
     function affichePageAjoutIngredient() {
         $this->vue->pageAjoutIngredient();
     }
+    function affichePageModifHashtag() {
+        $this->vue->pageModifierHashtag();
+        $_SESSION['hashtagURL'] = $_GET['hashtag'];
+    }
     static function FormVide() {
         if ($_POST['titre']== "" or $_POST['desc'] == "" or $_POST['typePlat'] == "" or $_POST['calories'] == "" or $_POST['difficulte'] =="" or $_POST['cuisson'] == "") {
             return true;
@@ -69,14 +73,28 @@ class ControleurRecette{
         $this->afficheListIngredient();
         unset($_SESSION['ingredientURL']);
     }
+    function updateHash() {
+        $this->modele->modifieHashtag($_POST['newHashtag'], $_SESSION['hashtagURL']);
+        $this->afficheListeHashtag();
+        unset($_SESSION['hashtagURL']);
+    }
+    function deleteHash() {
+        $this->modele->supprimerHashtag($_GET['hashtag']);
+        $this->afficheListeHashtag();
+    }
     function deleteIng() {
         $this->modele->supprimerIngredient($_GET['ingredient']);
         $this->afficheListIngredient();
     }
-    function filtrer() {
+    function filtre() {
+        $data = $this->modele->filter($_GET['value']);
+        $this->afficherPagePrincipalRecette($data);
+
+    }
+    function research() {
         $filtre = $_POST['filtre'];
         $value = $_POST['recherche'];
-        $rec = $this->modele->filterBy($filtre, $value);
+        $rec = $this->modele->rechercheBy($filtre, $value);
         $this->afficherPagePrincipalRecette($rec);
     }
 }

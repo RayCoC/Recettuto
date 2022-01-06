@@ -44,8 +44,20 @@ class ModRecette {
             case 'supprimerIngredient' :
                 $this->controleurRecette->deleteIng();
                 break;
+            case 'modifierHashtag' :
+                $this->controleurRecette->affichePageModifHashtag();
+                break;
+            case 'formModifieHashtag' :
+                $this->controleurRecette->updateHash();
+                break;
+            case 'supprimerHashtag' :
+                $this->controleurRecette->deleteHash();
+                break;
             case 'rechercher' :
-                $this->controleurRecette->filtrer();
+                $this->controleurRecette->research();
+                break;
+            case 'filtre' :
+                $this->controleurRecette->filtre();
                 break;
         }
     }

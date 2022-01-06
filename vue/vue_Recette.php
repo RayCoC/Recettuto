@@ -23,6 +23,9 @@ class VueRecette extends vue {
     function pageAjout() {
         vue::render("Recette/ajout.php");
     }
+    function  pageModifierHashtag() {
+        vue::render("Recette/Update/modifierHash.php");
+    }
     function pageAjoutVide() {
         vue::render("Recette/Error/ajoutVide.php");
     }
@@ -50,6 +53,8 @@ class VueRecette extends vue {
         echo '<tr>';
         foreach ($_SESSION['hashtag'] as $item => $v) {
             echo '<th>'.$v["nomHashtag"].'</th>
+                  <th><a href="index.php?action=modifierHashtag&hashtag='.$v["nomHashtag"].'&module=mod_Recette".>Modifier</a></th>
+                  <th><a href="index?action=supprimerHashtag&hashtag='.$v["nomHashtag"].'&module=mod_Recette".>Supprimer</th>
                     </tr>';
         }
     }

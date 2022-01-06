@@ -31,11 +31,11 @@
                 <option class="btn active"><a class="btn active" href="index.php?action=Repas&module=mod_Recette">Récent</a></option>
                 <option><a class="btn" href="index.php?action=Dessert&module=mod_Recette">Dessert</a></option>
             </select>
-            <a class="btn active" href="index.php?filtre=Recent&mod_Recette">Récent</a>
-            <a class="btn" href="index.php?filtre=Dessert&module=mod_Recette">Dessert</a>
-            <a class="btn" href="index.php?filtre=Repas&module=mod_Recette">Repas</a>
-            <a class="btn" href="index.php?filtre=Dej&module=mod_Recette">Petit déjeuner</a>
-            <a class="btn" href="index.php?filtre=Diner&module=mod_Recette">Diner</a>
-            <a class="btn" href="index.php?filtre=Populaire&module=mod_Recette">Populaires</a>
+            <a class="btn active" href="index.php?action=filtre&value=recentmod_Recette">Récent</a>
+            <a class="btn" href="index.php?action=filtre&value=1&module=mod_Recette">Dessert</a>
+            <a class="btn" href="index.php?action=filtre&value=3&module=mod_Recette">Repas</a>
+            <a class="btn" href="index.php?action=filtre&value=2&module=mod_Recette">Petit déjeuner</a>
+            <a class="btn" href="index.php?action=filtre&value=4&module=mod_Recette">Diner</a>
+            <a class="btn" href="index.php?action=filtre&value=populaire&module=mod_Recette">Populaires</a>
         </div>
         <?php VueRecette::afficheRecettes($data['Recette']);?>

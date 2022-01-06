@@ -80,18 +80,18 @@ class ModeleRecette extends Connexion
 
     public function ajoutIngredientTableau($nomIngredient, $quantite, $unite)
     {
-        if (($nomIngredient != "" or $quantite != "" or $unite != "") and self::verifieDoublon($nomIngredient)) {
+        if (($nomIngredient != "" or $quantite != "" or $unite != "") and self::verifieDoublon($nomIngredient, 'ingredient', 'nomIngredient')) {
             $_SESSION['id']++;
             $i = $_SESSION['id'];
             $_SESSION['ingredient'][$i] = array('nomIngredient' => $nomIngredient, 'quantite' => $quantite, 'unite' => $unite);
         }
     }
 
-    static function verifieDoublon($nomIngredient)
+    static function verifieDoublon($value, $dataValue, $column)
     {
-        if (!empty($_SESSION['ingredient'])) {
-            foreach ($_SESSION['ingredient'] as $item => $val) {
-                if ($val['nomIngredient'] == $nomIngredient) {
+        if (!empty($_SESSION[$dataValue])) {
+            foreach ($_SESSION[$dataValue] as $item => $val) {
+                if ($val[$column] == $value) {
                     return false;
                 }
             }
@@ -112,7 +112,7 @@ class ModeleRecette extends Connexion
                     //"la taille est trop élevée";
                     return "false";
                 } else {
-                    $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+                    $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
                     $allExt = array("jpg", "png", "jpeg");
                     if (in_array($extension, $allExt)) {
                         $insertImg = uniqid('', true) . "." . $extension;
@@ -133,10 +133,9 @@ class ModeleRecette extends Connexion
 
     public function ajoutHashtagTableau($hashtag)
     {
-        if ($hashtag != "") {
-            $_SESSION['idHashtag']++;
-            $i = $_SESSION['idHashtag'];
-            $_SESSION['hashtag'][$i] = array('nomHashtag' => $hashtag);
+        if ($hashtag != "" and self::verifieDoublon($hashtag, 'Hashtag', 'nomHashtag')) {
+            array_push($_SESSION['hashtag'], array('nomHashtag' => $hashtag));
+            /*$_SESSION['hashtag'][$i] = array('nomHashtag' => $hashtag);*/
         }
     }
 
@@ -150,7 +149,20 @@ class ModeleRecette extends Connexion
             }
         }
     }
-
+    function modifieHashtag($nomHashtag, $update) {
+        foreach ($_SESSION['hashtag'] as $item => $value) {
+            if ($value['nomHashtag'] == $update) {
+                $_SESSION['hashtag'][$item]['nomHashtag'] = $nomHashtag;
+            }
+        }
+    }
+    function  supprimerHashtag ($delete) {
+        foreach ($_SESSION['hashtag'] as $item => $value) {
+            if ($value['nomHashtag'] == $delete) {
+                unset($_SESSION['hashtag'][$item]);
+            }
+        }
+    }
     function supprimerIngredient($delete)
     {
         foreach ($_SESSION['ingredient'] as $item => $value) {
@@ -159,7 +171,21 @@ class ModeleRecette extends Connexion
             }
         }
     }
-    function filterBy($filtre, $value) {
+    function filter ($value) {
+        if ($value == "1" or $value == "2" or $value =="3" or $value == "4") {
+            $requete = self::$bdd->prepare("SELECT * FROM recette where idType = :value");
+            $requete->bindParam('value', $value);
+        }
+        /*else if ($value = "Populaire") {
+            $requete = self::$bdd->prepare("SELECT * FROM recette wh")
+        }*/
+        else if ($value == "recent") {
+            $requete = self::$bdd->prepapre("SELECT * FROM recette order by dateCreation desc");
+        }
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+    function rechercheBy($filtre, $value) {
         if ($filtre == 'titre') {
             $requete = self::$bdd->prepare("SELECT * FROM recette where titre = :value");
         }
