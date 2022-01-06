@@ -48,8 +48,8 @@ class ControleurAuthentification{
     function inscription(){
         $this->vue->form_inscription();
 
-        if (!isset($_POST['sexe']) or !isset($_POST['age']) or !isset($_POST['nom']) or !isset($_POST['prenom']) or !isset($_POST['mdp']) or !isset($_POST['nomUtilisateur']) or empty($_POST['nom'])or empty($_POST['prenom']) or empty($_POST['age'])  or empty($_POST['nomUtilisateur']) or empty($_POST['mdp'])) {
-            echo "Il faut remplir tous les champs";
+        if ($this->formVide()) {
+
         }
         else{
             if($_POST['sexe']=="homme"){
@@ -58,17 +58,22 @@ class ControleurAuthentification{
             else
                 $sexe=1;
 
-            $mdp = $_POST['mdp'];
-            $nomutilisateur= $_POST['nomUtilisateur'];
-            $nom = $_POST['nom'];
-            $prenom = $_POST['prenom'];
-            $age= $_POST['age'];
+            $data =array('mdp' => $_POST['mdp'], 'nomUtilisateur'=>$_POST['nomUtilisateur'],'nom'=>$_POST['nom'],'prenom'=>$_POST['prenom'],'age'=>$_POST['age'], 'sexe'=>$sexe);
 
 
-            $this->modele->ajoutUtilisateur($nomutilisateur, $mdp, $nom, $prenom,$age,$sexe);
+
+            $this->modele->ajoutUtilisateur($data);
 
 
         }
+    }
+
+    function formVide(){
+        if (!isset($_POST['sexe']) or !isset($_POST['age']) or !isset($_POST['nom']) or !isset($_POST['prenom']) or !isset($_POST['mdp']) or !isset($_POST['nomUtilisateur']) or empty($_POST['nom'])or empty($_POST['prenom']) or empty($_POST['age'])  or empty($_POST['nomUtilisateur']) or empty($_POST['mdp'])) {
+           return true;
+        }
+        else
+            return false;
     }
 
     function deconnexion() {
