@@ -45,14 +45,4 @@ class ModeleAuthentification extends Connexion {
 
     }
 
-    static function champVide($champ){
-
-        if(isset($_POST["valider"])){
-            if($champ=="")
-                return true;
-        }
-
-        return false;
-    }
-
 }
