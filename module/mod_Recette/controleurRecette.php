@@ -67,6 +67,7 @@ class ControleurRecette{
             $data['avis'][$item]['user'] = $value[1];
         }
         $this->vue->pageVoirRecette($data);
+        $_SESSION['idUser'] = $_GET['id'];
     }
     static function FormVide() {
         if ($_POST['titre']== "" or $_POST['desc'] == "" or $_POST['typePlat'] == "" or $_POST['calories'] == "" or $_POST['difficulte'] =="" or $_POST['cuisson'] == "") {
@@ -124,5 +125,10 @@ class ControleurRecette{
         $value = $_POST['recherche'];
         $rec = $this->modele->rechercheBy($filtre, $value);
         $this->afficherPagePrincipalRecette($rec);
+    }
+    function ajouterAvis() {
+        /*$idUser = $this->modele->getIdUser();
+        $this->afficheRecette();*/
+        $this->modele->ajoutAvis($_GET['id'], $_POST['avis'], $_POST['etoiles'], $_SESSION['idUser']);
     }
 }

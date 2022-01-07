@@ -12,7 +12,6 @@ class ModRecette {
         }
         switch ($action) {
             case 'Recette' :
-
                 $this->controleurRecette->afficherPagePrincipalRecette($this->controleurRecette->afficherToutesRecettes());
                 break;
             case 'pageAjout' :
@@ -61,6 +60,9 @@ class ModRecette {
                 break;
             case 'voirRecette' :
                 $this->controleurRecette->afficheRecette();
+                break;
+            case 'ajoutCommentaire' : 
+                $this->controleurRecette->ajouterAvis();
                 break;
         }
     }

@@ -57,7 +57,7 @@ class VueRecette extends vue {
         foreach ($_SESSION['hashtag'] as $item => $v) {
             echo '<th>'.$v["nomHashtag"].'</th>
                   <th><a href="index.php?action=modifierHashtag&hashtag='.$v["nomHashtag"].'&module=mod_Recette".>Modifier</a></th>
-                  <th><a href="index?action=supprimerHashtag&hashtag='.$v["nomHashtag"].'&module=mod_Recette".>Supprimer</th>
+                  <th><a href="index.php?action=supprimerHashtag&hashtag='.$v["nomHashtag"].'&module=mod_Recette".>Supprimer</th>
                     </tr>';
         }
     }

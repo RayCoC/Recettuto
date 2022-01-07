@@ -37,7 +37,7 @@
             <div id="section1">
                 <div id="image">
                     <p> Image de la recette</p>
-                    <img src=/img/img.png id="output_image">
+                    <img src=./img/img.png id="output_image">
                     <input type="file" name="file" accept=".jpg, .jpeg, .png" id="cacherBouton" onchange="preview_image(event)"><br>
                     <input type="button" value="Choisir image" onclick="getfile();" class="submit">
                     <p id="format">Format : jpg, png, jpeg</p>
@@ -67,7 +67,7 @@
                     <label>Hashtag</label>
                     <input type="button" value="ajouter Hashtag !" class="submit" onclick="cacher(document.getElementById('hashtag'))"><br>
                     <div id="hashtag" class="hidden">
-                        <input type="text" name="hashtag" class="info" placeholder="Hashtag" value="<?php if(isset($_POST['titre'])){ echo  $_POST['titre'];}?>">
+                        <input type="text" name="hashtag" class="info" placeholder="Hashtag" value="<?php if(isset($_POST['hashtag'])){ echo  $_POST['hashtag'];}?>">
                         <input type="submit" value="ajouter" class="submit" name="addHashtag">
                     </div>
                     <input type="submit" value="Voir mes hashtags" class="submit" name="voirHashtag">

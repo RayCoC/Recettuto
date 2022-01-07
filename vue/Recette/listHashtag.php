@@ -6,7 +6,7 @@
     <title>Liste des ingrédients</title>
 </head>
 <body>
-<h1>Liste des ingrédient de votre recette</h1>
+<h1>Les hashtag de votre recette</h1>
 <div id="listeIng">
     <table>
         <thead>

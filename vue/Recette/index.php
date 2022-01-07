@@ -6,7 +6,7 @@
     </head>
     <body>
         <div id="barreDeRecherche">
-            <form action="index?action=rechercher&module=mod_Recette" method="post">
+            <form action="index.php?action=rechercher&module=mod_Recette" method="post">
                 <div id="searchBar">
                     <input type="text" name="recherche" placeholder="Recherchez un tag, recette ..." id="barreDeRecherche" class="inp">
                     <select name="filtre">

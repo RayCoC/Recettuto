@@ -1,6 +1,6 @@
 <?php
 include_once "Connexion.php";
-
+$_SESSION['hashtag'] = array();
 session_start();
 Connexion::initConnexion();
 if (!isset($_GET['module'])) {

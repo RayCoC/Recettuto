@@ -17,8 +17,8 @@
             <p>Temps de preparation : <?= $data['tpsPrepa'] ?></p>
             <img src="./img/chapeau.png">
             <p class="float"> Difficulte : <?=$data['difficulte']?> </p>
-            <img src="./img/time.png"
-            <p class="float"> Cuisson : <?=$data['tpsCuisson']?> </p>
+            <img src="./img/time.png">
+            <p> class="float"> Cuisson : <?=$data['tpsCuisson']?> </p>
         </div>
         <div id="difficulte" class="center">
             <h1> Description : </h1>
@@ -37,9 +37,9 @@
                     <p><?=$value['user']?>></p>
                 <?php endforeach; ?>
                 <?php endif; ?>
-            <form href="index.php?action=ajoutCommentaire&module=mod_Recette" method="post">
+            <form action="index.php?action=ajoutCommentaire&module=mod_Recette" method="post">
                 <p>Ecrire un commentaire  : </p>
                 <textarea name="addCommentaire"></textarea>
-                <input type="submit" value="ajouter">
+                <input type="submit" value="ajouter" name="ajouter">
             </form>
         </div>
