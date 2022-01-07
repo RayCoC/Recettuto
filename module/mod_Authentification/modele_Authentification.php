@@ -11,7 +11,7 @@ class ModeleAuthentification extends Connexion {
 
     public function ajoutUtilisateur($data){
 
-        $chercheLogin =self::$bdd->prepare("SELECT * from utilisateur where login = :login ");
+        $chercheLogin =self::$bdd->prepare("SELECT * from Utilisateur where login = :login ");
         $chercheLogin ->bindParam('login',$data['nomUtilisateur']);
         $chercheLogin->execute();
         $user=$chercheLogin->rowCount();

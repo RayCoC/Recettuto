@@ -26,6 +26,10 @@ switch ($module) {
         include_once 'module/'."$module".'/'.$module.".php";
         new ModRecette();
         break;
+    case "mod_Profil":
+        include_once 'module/'."$module".'/'.$module.".php";
+        new ModProfil();
+        break;
     default :
         die ("interdiction d'acces à ce module");
         break;

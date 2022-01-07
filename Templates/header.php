@@ -18,7 +18,7 @@
                             <?php
                             require_once "module/mod_Authentification/controleur_Authentification.php";
                                 if (ControleurAuthentification::test_Connexion()) {
-                                    echo '<li class="sousListe"><a href="index.php?action=inscription&module=mod_Authentification">Mon Compte</a></li><br>';
+                                    echo '<li class="sousListe"><a href="index.php?action=profil&module=mod_Profil">Mon Compte</a></li><br>';
                                     echo '<li class="sousListe"><a href="index.php?action=deconnexion&module=mod_Authentification">Deconnexion</a></li>';
                                 }
                                 else {
