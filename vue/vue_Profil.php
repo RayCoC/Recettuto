@@ -2,7 +2,7 @@
 include_once "./vue.php";
 class VueProfil extends vue{
 
-    function Profil() {
-        vue::render("Profil/profil.php");
+    function Profil($data) {
+        vue::render("Profil/profil.php", $data);
     }
 }

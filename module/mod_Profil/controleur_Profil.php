@@ -12,7 +12,7 @@ class ControleurProfil{
     }
 
     function afficherProfil(){
-
+        $data = [];
         $info = $this->modele->infoUtilisateur($_SESSION['nomUtilisateur']);
         foreach ($info as $item=>$value){
 
@@ -25,9 +25,7 @@ class ControleurProfil{
             $data['utilisateur']['login']=$value[6];
 
         }
-        foreach($data['utilisateur'] as $item=>$value){
-            echo $value;
-        }
+        echo $data['utilisateur']['prenom'];
         $this->vue->Profil($data);
 
     }
