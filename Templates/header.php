@@ -26,7 +26,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src = "./img/user.png" class="userConnection"></a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="min-width: 0;">
                             <?php
-                            require_once "module/mod_Authentification/controleur_Authentification.php";
+                            require_once "./Controleur/controleur_Authentification.php";
                             if(ControleurAuthentification::test_Connexion()) {
                                 echo '<li><a class="dropdown-item" href="index.php?action=inscription&module=mod_Authentification" style="color: black;">Mon Compte</a></li>
                                    <li><a class="dropdown-item" href="index.php?action=deconnexion&module=mod_Authentification" style="color: black;">Deconnexion</a></li>';

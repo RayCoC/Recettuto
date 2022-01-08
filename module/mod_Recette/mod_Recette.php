@@ -1,5 +1,5 @@
 <?php
-require_once "controleurRecette.php";
+require_once "./Controleur/controleurRecette.php";
 class ModRecette {
     private $controleurRecette;
 

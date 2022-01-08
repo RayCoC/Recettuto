@@ -1,6 +1,7 @@
 <?php
 include_once "./vue/vue_Accueil.php";
-class ControleurAccueil {
+include_once "controleur.php";
+class ControleurAccueil extends Controleur{
     private $vue_Accueil;
     function __construct()
     {

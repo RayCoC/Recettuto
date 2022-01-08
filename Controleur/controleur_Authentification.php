@@ -1,8 +1,9 @@
 <?php
 
 require_once "./vue/vue_Authentification.php";
-require_once "modele_Authentification.php";
-class ControleurAuthentification{
+require_once "./module/mod_Authentification/modele_Authentification.php";
+require_once 'controleur.php';
+class ControleurAuthentification extends Controleur{
     private $modele;
     private $vue;
 
@@ -24,21 +25,26 @@ class ControleurAuthentification{
             $this->vue->form_connexion();
         }
     }
-    function login($login, $password) {
-        $user=$this->modele->connexion($login);
-        if(!empty($user)) {
-            $count=password_verify($password, $user['password']);
-
-            if($count) {
-                $_SESSION['nomUtilisateur']=$login;
-                return vue::render("Accueil/index.php");
-            }
-            else {
-                $this->vue->form_connexion();
-            }
-        }
-        else {
+    function login($login, $password)
+    {
+        $user = $this->modele->connexion($login);
+        if (!isset($_SESSION['token']) or empty($_SESSION['token'])) {
             $this->vue->form_connexion();
+        } else {
+            if ($_POST['token'] == $_SESSION['token']) {
+                if (!empty($user)) {
+                    $count = password_verify($password, $user['password']);
+
+                    if ($count) {
+                        $_SESSION['nomUtilisateur'] = $login;
+                        return vue::render("Accueil/index.php");
+                    } else {
+                        $this->vue->form_connexion();
+                    }
+                } else {
+                    $this->vue->form_connexion();
+                }
+            }
         }
     }
     function test_Inscription(){

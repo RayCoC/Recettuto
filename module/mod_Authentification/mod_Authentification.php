@@ -1,5 +1,5 @@
 <?php
-require_once "./module/mod_Authentification/controleur_Authentification.php";
+require_once "./Controleur/controleur_Authentification.php";
 
 class ModAuthentification {
     private $controleurAuthentification;

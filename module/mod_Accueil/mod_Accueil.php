@@ -1,5 +1,5 @@
 <?php
-include_once "controleurAccueil.php";
+include_once "./Controleur/controleurAccueil.php";
     class ModAccueil {
         private $controleurAcceuil;
         function __construct()
