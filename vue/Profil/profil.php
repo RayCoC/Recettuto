@@ -1,7 +1,7 @@
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="profil.css">
+    <link rel="stylesheet" href="CSS/profil.css">
 </head>
 <body>
 <div class="container">
@@ -16,7 +16,7 @@
         <div class="col-md-4 mt-1">
             <div class="card text-center sidebar">
                 <div class="card-body">
-                    <img src="profil.png" class="rounded-circle" width="150">
+                    <img src="img/profil.png" class="rounded-circle" width="150">
                     <div class="mt-3">
                         <h3>Burk Macklin</h3>
                         <a href="">logout</a>
@@ -37,7 +37,7 @@
                             <h5>Full Name</h5>
                         </div>
                         <div class="col-md-9 text-secondary">
-                            Burt Macklin
+                            <p><?=$data['utilisateur']['prenom']?></p>
                         </div>
                     </div>
                     <hr>
