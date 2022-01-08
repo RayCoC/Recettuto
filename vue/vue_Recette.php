@@ -41,34 +41,25 @@ class VueRecette extends vue {
     function pageVoirRecette($data) {
         vue::render("Recette/voirRecette.php",$data);
     }
-    static function getIngredients() {
-        echo '<tr>';
-        foreach ($_SESSION['ingredient'] as $item => $v) {
-            echo '<th>'.$v["nomIngredient"].'</th>
-                    <th>'.$v["quantite"].'</th>
-                    <th>'.$v["unite"].'</th>
-                    <th><a href="index.php?action=modifierIngredient&ingredient='.$v["nomIngredient"].'&module=mod_Recette".>Modifier</a></th>
-                    <th><a href="index?action=supprimerIngredient&ingredient='.$v["nomIngredient"].'&module=mod_Recette".>Supprimer</th>
-                    </tr>';
-        }
-    }
-    static function getHashtag() {
-        echo '<tr>';
-        foreach ($_SESSION['hashtag'] as $item => $v) {
-            echo '<th>'.$v["nomHashtag"].'</th>
-                  <th><a href="index.php?action=modifierHashtag&hashtag='.$v["nomHashtag"].'&module=mod_Recette".>Modifier</a></th>
-                  <th><a href="index.php?action=supprimerHashtag&hashtag='.$v["nomHashtag"].'&module=mod_Recette".>Supprimer</th>
-                    </tr>';
-        }
-    }
     static function afficheRecettes($data = []) {
         if ($data !=null) {
             foreach ($data['Recette'] as $item => $value) {
-                echo '<a href=index.php?action=voirRecette&id=' . $value['id'] . '&module=mod_Recette><img class=imgRecette src=' . $value['img'] . '></a>';
+                echo '<div class="col-md-4">
+                       <a href=index.php?action=voirRecette&id=' . $value['id'] . '&module=mod_Recette><img class="imgRecette card-img-top" src=' . $value['img'] . '></a>
+                        <div class="card-body">
+                            <h3 class="card-title">'.$value['titre'].'</h3>
+                        </div class="card-body">
+                    </div>';
             }
         }
         else {
-            echo '<p> Not found </p>';
+            echo '<div class="alert alert-danger alert-dismissible fade show">
+    <h4 class="alert-heading">Oops! Something went wrong.</h4>
+    <p>Please enter a valid value in all the required fields before proceeding. If you need any help just place the mouse pointer above info icon next to the form field.</p>
+    <hr>
+    <p class="mb-0">Once you have filled all the details, click on the button to continue.</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>';
         }
     }
 }

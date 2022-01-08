@@ -1,4 +1,4 @@
-/*#barreDeRecherche input {
+#barreDeRecherche input {
     width: 350px;
     border-radius: 10px;
     margin-left: 420px;
@@ -42,4 +42,14 @@
 }
 #listeChoix li {
     padding-top: 15px;
-}*/
+}
+.firstIMG {
+    width: 400px;
+    height: 350px;
+    margin-top: 50px;
+    margin-left: 300px;
+    border-radius: 20px;
+}
+.block {
+    position: relative;
+}

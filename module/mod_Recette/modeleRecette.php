@@ -161,6 +161,7 @@ class ModeleRecette extends Connexion
         foreach ($_SESSION['hashtag'] as $item => $value) {
             if ($value['nomHashtag'] == $delete) {
                 unset($_SESSION['hashtag'][$item]);
+                echo "ok";
             }
         }
     }
@@ -228,15 +229,22 @@ class ModeleRecette extends Connexion
         $requete->execute();
         return $requete->fetchAll();
     }
-    function getIdUser() {
-        $requete = self::$bdd->prepare("SELECT idUtilisateur where nom =: nom");
-        $requete->bindParam('nom', $_SESSION['nomUtilisateur']);
+    function getIdUserAvis($name) {
+        $requete = self::$bdd->prepare("SELECT *  from Utilisateur where login = :nom");
+        $requete->bindParam('nom', $name);
         $requete->execute();
         return $requete->fetchAll();
     }
-    function ajoutAvis ($idRec, $avis, $etoiles, $idUser) {
-        $requete = self::$bdd->prepare("INSERT INTO Avis (textAvis,nbEtoiles, nbPouceBleu, idUtilisateur, idRec) values (avis, etoiles, 0, idUser, idRec)");
+    function getUserNameRecette($idRec) {
+        $requete = self::$bdd->prepare("SELECT login from Utilisateur natural join Recette where idRec = :idRec");
+        $requete->bindParam('idRec', $idRec);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+    function ajoutAvis ($idRec, $avis, $etoiles, $idUser, $pouce) {
+        $requete = self::$bdd->prepare("INSERT INTO Avis (textAvis,nbEtoiles, nbPouceBleu, idUtilisateur, idRec) values (:avis, :etoiles, :pouce, :idUser, :idRec)");
         $requete->bindParam('avis',$avis);
+        $requete->bindParam('pouce', $pouce);
         $requete->bindParam('etoiles', $etoiles);
         $requete->bindParam('idUser', $idUser);
         $requete->bindParam('idRec', $idRec);
@@ -244,7 +252,7 @@ class ModeleRecette extends Connexion
         return $requete->fetchAll();
     }
     function avis ($id) {
-        $requete = self::$bdd->prepare("SELECT * FROM Avis where idRec = id");
+        $requete = self::$bdd->prepare("SELECT textAvis, login, idAvis FROM Avis natural join Utilisateur where idRec = :id");
         $requete->bindParam('id', $id);
         $requete->execute();
         return $requete->fetchAll();

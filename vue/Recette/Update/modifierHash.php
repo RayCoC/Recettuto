@@ -9,7 +9,7 @@
 <body>
 <form action="index.php?action=formModifieHashtag&module=mod_Recette" method="post">
     <div>
-        <input type="text" name="newHashtag" class="info" placeholder="Ingredient">><br><br>
+        <input type="text" name="newHashtag" class="info" placeholder="nouveau hashtag"><br><br>
         <input type="submit" value="valider" class="submit" name="confirmIngredient"><br><br>
     </div>
 </form>

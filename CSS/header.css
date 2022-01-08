@@ -1,6 +1,7 @@
 
 body {
     width: 100%;
+  margin: auto;
 }
 /*
 header {
@@ -128,6 +129,6 @@ ul.nav li.active a {
       font-weight: bold;
     }
   }
-  #userConnection {
+  .userConnection {
     width: 70px !important;
   }

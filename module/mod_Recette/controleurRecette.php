@@ -14,7 +14,7 @@ class ControleurRecette{
         $data = [];
         if ($v != null) {
             foreach ($v as $item => $value) {
-                $data['Recette'][$item] = array('id' => $value[0], 'img' => $value[4]);
+                $data['Recette'][$item] = array('id' => $value[0], 'titre' => $value[1],'img' => $value[4]);
             }
         }
         $this->vue->recettePrincipal($data);
@@ -43,10 +43,12 @@ class ControleurRecette{
         $_SESSION['hashtagURL'] = $_GET['hashtag'];
     }
     function afficheRecette() {
+        $_SESSION['idRecette'] = $_GET['id'];
         $id = $_GET['id'];
         $rec = $this->modele->detailsRecette($id);
         $ing = $this->modele->detailsIngreientRecette($id);
         $avis = $this->modele->avis($id);
+        $user = $this->modele->getUserNameRecette($_GET['id']);
         foreach ($rec  as $item => $value) {
             $data['nomRecette'] = $value[1];
             $data ['tpsPrepa'] = $value[3];
@@ -65,9 +67,11 @@ class ControleurRecette{
         }
         foreach ($avis as $item => $value) {
             $data['avis'][$item]['user'] = $value[1];
+            $data['avis'][$item]['message'] = $value[0];
+            $data['avis'][$item]['idAvis'] = $value[2];
         }
+        $data['user'] = $user[0][0];
         $this->vue->pageVoirRecette($data);
-        $_SESSION['idUser'] = $_GET['id'];
     }
     static function FormVide() {
         if ($_POST['titre']== "" or $_POST['desc'] == "" or $_POST['typePlat'] == "" or $_POST['calories'] == "" or $_POST['difficulte'] =="" or $_POST['cuisson'] == "") {
@@ -127,8 +131,8 @@ class ControleurRecette{
         $this->afficherPagePrincipalRecette($rec);
     }
     function ajouterAvis() {
-        /*$idUser = $this->modele->getIdUser();
-        $this->afficheRecette();*/
-        $this->modele->ajoutAvis($_GET['id'], $_POST['avis'], $_POST['etoiles'], $_SESSION['idUser']);
+        $this->afficheRecette();
+        $idUser = $this->modele->getIdUserAvis($_SESSION['nomUtilisateur']);
+        $this->modele->ajoutAvis($_SESSION['idRecette'], $_POST['avis'], 0, $idUser[0][0], 0);
     }
 }

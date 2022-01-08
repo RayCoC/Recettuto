@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="./CSS/ajout.css">
-    <title>Success</title>
-</head>
 
-<body>
-    <p>Votre recette a bien été crée !</p>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
+    <body>
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <br><br><h2 style="color:#0fad00">Success</h2>
+                    <img src="./img/succes.png">
+                    <p style="font-size:20px;color:#5C5C5C;">Merci, votre recette a bien été ajouté sur le site !</p>
+                    <a href="" class="btn btn-success">Revenir à la page d'accueil</a>
+                    <br><br>
+                </div>
+
+            </div>
+        </div>

@@ -74,3 +74,23 @@
     height: 250px;
     border-radius: 10px;
 }
+.green {
+    color: white;
+    background-color: #77d42a;
+}
+.green1 {
+    background-color: #0EAF0B;
+}
+#addRec p {
+    font-weight: bold;
+}
+@media (max-width: 991px) {
+    .center {
+        text-align: center;
+    }
+}
+@media (min-width: 992px) {
+    .center{
+        margin-left: 500px;
+    }
+}
