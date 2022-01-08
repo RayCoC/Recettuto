@@ -2,7 +2,7 @@
 class Vue
 {
 
-public static function render($path, $data=[]){
+public static function render($path, $data=[], $token=null){
         ob_start();
         include_once "./vue/$path";
         $contenu = ob_get_clean();

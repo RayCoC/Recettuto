@@ -48,7 +48,7 @@ class ControleurAuthentification extends Controleur{
         }
     }
     function test_Inscription(){
-        $this->vue->form_inscription();
+        $this->vue->form_inscription($this->getToken());
     }
 
     function inscription(){
