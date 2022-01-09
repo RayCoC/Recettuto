@@ -132,8 +132,8 @@ class ControleurRecette extends Controleur{
         $this->afficherPagePrincipalRecette($rec);
     }
     function ajouterAvis() {
-        $this->afficheRecette();
         $idUser = $this->modele->getIdUserAvis($_SESSION['nomUtilisateur']);
         $this->modele->ajoutAvis($_SESSION['idRecette'], $_POST['avis'], 0, $idUser[0][0], 0);
+        $this->afficheRecette();
     }
 }

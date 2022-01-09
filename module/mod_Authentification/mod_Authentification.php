@@ -22,7 +22,7 @@ class ModAuthentification {
                 $this->controleurAuthentification->deconnexion();
                 break;
             case 'login' :
-                $this->controleurAuthentification->login($_POST['nomUtilisateur'], $_POST['mdp']);
+                $this->controleurAuthentification->login(htmlspecialchars($_POST['nomUtilisateur']), htmlspecialchars($_POST['mdp']));
                 break;
             case 'inscription' ;
                 $this->controleurAuthentification->test_Inscription();

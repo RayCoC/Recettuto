@@ -1,6 +1,13 @@
 <?php
 include_once "Connexion.php";
+include_once "./check/check_auth.php";
 session_start();
+
+if (!isset($_SESSION['nomUtilisateur'])) {
+    if (!checkAuth::can($_GET['action'])) {
+        checkAuth::redirect();
+    }
+}
 Connexion::initConnexion();
 if (!isset($_GET['module'])) {
     $module = "mod_Accueil";

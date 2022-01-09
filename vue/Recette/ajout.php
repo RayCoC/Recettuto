@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html>  
     <head>
@@ -124,5 +125,4 @@ else if (isset($_POST['add'])) {
     else if (!ModeleRecette::verifieDoublon($_POST['nomIngredient'], 'ingredient', 'nomIngredient')) {
         echo "<p class='error'> Duplication de l'ingredient !</p>";
     }
-}
-?>
+}?>

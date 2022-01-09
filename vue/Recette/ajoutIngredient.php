@@ -1,3 +1,5 @@
+<?php
+include_once "./check/check_auth.php" ?>
 <!DOCTYPE html>
 <html>
     <head>

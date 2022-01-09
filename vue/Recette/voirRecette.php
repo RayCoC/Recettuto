@@ -50,12 +50,21 @@
                 <div class="col-md-0">
                     <div class="post-content">
                         <div class="post-container">
+                            <?php if (isset($_SESSION['nomUtilisateur'])) : ?>
                             <div class="post-comment">
                                 <input type="text" class="form-control" placeholder="Post a comment" name="avis">
-                            </div><br>
+                            </div><br> <?php endif; ?>
                             <div class="post-detail">
-                                <?php if (!empty($data['avis'])) :  ?>
+                               <?php if (!empty($data['avis'])) :  ?>
                                     <?php foreach ($data['avis'] as $item => $value) : ?>
+                                        <ul class="list-inline m-0" style="float: right">
+                                            <li class="list-inline-item">
+                                                <a id="updateComm" href="index.php?action=modifierCommentaire&id=<?=$value['idAvis']?>t&module=mod_Recette"><i class="fa fa-edit"></i></a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a id="deleteComm" class= "btn text-red"href="index.php?action=supprimerCommentaire&id=<?=$value['idAvis']?>&module=mod_Recette"><i class="fa fa-trash"></i></a>
+                                            </li>
+                                        </ul>
                                         <h5><a href="timeline.html" class="profile-link"><?=$value['user']?></a></h5>
                                         <p><?=$value['message']?></p>
                                         <a class="btn text-green"><i class="fa fa-thumbs-up"></i> 13</a>

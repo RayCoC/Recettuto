@@ -1,3 +1,5 @@
+<?php
+    if (!ControleurAuthentification::test_Connexion()) :  ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -105,4 +107,10 @@
             </div>
         </div>
     </form>
-</section>
+</section><?php else:?>
+<div class="alert alert-danger alert-dismissible fade show mt-5">
+    <h4 class="alert-heading">Quelques choses s'est mal passée.....</h4>
+    <p>Il semble que vous soyez déjà connecté sur le site. Vous devez d'abord vouis deconnecter pour creer un compte.</p>
+    <hr>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div><?php endif;?>

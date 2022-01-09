@@ -47,6 +47,7 @@
         </div>
     </div>
 </form>
+<?php if (!empty($data['message'])) :?>
 <div classs="container p-5">
     <div class="row no-gutters">
         <div class="col-lg-6 col-md-4 m-auto">
@@ -57,3 +58,4 @@
         </div>
     </div>
 </div>
+<?php endif;?>
