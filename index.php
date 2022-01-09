@@ -3,7 +3,7 @@ include_once "Connexion.php";
 include_once "./check/check_auth.php";
 session_start();
 
-if (!isset($_SESSION['nomUtilisateur'])) {
+if (!isset($_SESSION['nomUtilisateur']) && isset($_GET['action'])) {
     if (!checkAuth::can($_GET['action'])) {
         checkAuth::redirect();
     }
@@ -31,6 +31,10 @@ switch ($module) {
     case "mod_Profil":
         include_once 'module/'."$module".'/'.$module.".php";
         new ModProfil();
+        break;
+    case "mod_Utilisateur" :
+        include_once 'module/'."$module".'/'.$module.".php";
+        new ModUtilisateur();
         break;
     default :
         die ("interdiction d'acces à ce module");

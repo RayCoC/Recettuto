@@ -7,14 +7,7 @@ class ModAuthentification {
     function __construct()
     {
         $this->controleurAuthentification = new ControleurAuthentification();
-        $action = "";
-        if (isset($_GET['action'])) {
-            $action = $_GET['action'];
-        }
-        else{
-            $action="Authentification";
-        }
-        switch ($action) {
+        switch ($this->getAction()) {
             case 'connexion' :
                 $this->controleurAuthentification->afficherConnexion();
                 break;
@@ -32,6 +25,12 @@ class ModAuthentification {
 
 
         }
+    }
+    function getAction() {
+        if (!isset($_GET['action'])) {
+            return "Authentification";
+        }
+        return $_GET['action'];
     }
 
 }

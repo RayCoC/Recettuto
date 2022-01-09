@@ -5,14 +5,18 @@ include_once "./Controleur/controleurAccueil.php";
         function __construct()
         {
             $this->controleurAcceuil = new ControleurAccueil();
-            $action = "";
-            if (isset($_GET['action'])) {
-                $action = $_GET['action'];
-            }
-            switch ($action) {
+            switch ($this->getAction()) {
                 default :
                     $this->controleurAcceuil->AfficherAccueil();
                     break;
+            }
+        }
+        function getAction() {
+            if (!isset($_GET['action'])) {
+                $action = "";
+            }
+            else {
+                return $_GET['action'];
             }
         }
 
