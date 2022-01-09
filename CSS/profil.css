@@ -1,7 +1,4 @@
-body{
-    margin-top: 20px;
-    background-color: lightgray;
-}
+
 .main{
     padding: 15px;
     font-family: Arial, Helvetica, sans-serif;
@@ -23,7 +20,7 @@ body{
     color: white;
     height: 100%;
 }
-.sidebar a{
+.sidebar p{
     margin-left: 10px;
     display: block;
     color: white;
@@ -35,14 +32,17 @@ body{
 .card{
     position:relative;
     display:flex;
-    flex-direction: colunm;
+    flex-direction: column;
 }
 .content{
     background-color: whitesmoke;
 }
 
 
-
+#bouton{
+   text-decoration: none;
+   color: white;
+}
 
 
 

@@ -18,7 +18,12 @@ class ModProfil {
             case 'profil' :
                 $this->controleurProfil->afficherProfil();
                 break;
-
+            case 'modifProfil':
+                $this->controleurProfil->afficherModifProfil();
+                break;
+            case 'infoModifier':
+                $this->controleurProfil->modifProfil();
+                break;
 
 
         }
