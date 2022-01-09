@@ -20,30 +20,35 @@ class ControleurAuthentification extends Controleur{
             return false;
         }
     }
-    function afficherConnexion() {
+    function afficherConnexion($message=null) {
         if (! ControleurAuthentification::test_Connexion()) {
-            $this->vue->form_connexion();
+            $this->vue->form_connexion($this->getToken(), $message);
         }
     }
     function login($login, $password)
     {
         $user = $this->modele->connexion($login);
         if (!isset($_SESSION['token']) or empty($_SESSION['token'])) {
-            $this->vue->form_connexion();
-        } else {
+            $this->afficherConnexion("Une erreur est survenue");
+        }
+        else if (!isset($_POST['token']) or empty($_POST['token'])) {
+            $this->afficherConnexion("Une erreur est survenue");
+        }else {
             if ($_POST['token'] == $_SESSION['token']) {
                 if (!empty($user)) {
                     $count = password_verify($password, $user['password']);
-
                     if ($count) {
                         $_SESSION['nomUtilisateur'] = $login;
                         return vue::render("Accueil/index.php");
                     } else {
-                        $this->vue->form_connexion();
+                        $this->afficherConnexion("Mot de passe incorrect");
                     }
                 } else {
-                    $this->vue->form_connexion();
+                    $this->afficherConnexion("Login incorrect");
                 }
+            }
+            else {
+                $this->afficherConnexion("Une erreur est survenue");
             }
         }
     }
@@ -84,7 +89,7 @@ class ControleurAuthentification extends Controleur{
 
     function deconnexion() {
         unset($_SESSION['nomUtilisateur']);
-        return vue::render("Authentification/connexion.php");
+        $this->afficherConnexion();
     }
 
 

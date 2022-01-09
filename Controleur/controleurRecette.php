@@ -2,6 +2,7 @@
 
 require_once "./vue/vue_Recette.php";
 require_once "./module/mod_Recette/modeleRecette.php";
+require_once "controleur.php";
 class ControleurRecette extends Controleur{
     private $modele;
     private $vue;

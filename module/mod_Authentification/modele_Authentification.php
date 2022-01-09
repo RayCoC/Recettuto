@@ -55,5 +55,11 @@ class ModeleAuthentification extends Connexion {
         }
         return true;
     }
-
+    function getRole($login) {
+        $requete = self::$bdd->prepare("SELECT idRole from Role natural join Utilisateur where login = :login");
+        $requete->bindParam('login', $login);
+        $requete->execute();
+        $role = $requete->fetch();
+        return $role[0][0];
+    }
 }

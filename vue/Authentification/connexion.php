@@ -30,7 +30,7 @@
                             <h3 class="mb-5 text-center heading">Connectez-vous ! </h3>
                             <div class="form-group"> <label class="form-control-label text-muted">Username</label> <input type="text" id="email" name="nomUtilisateur" class="form-control"> </div>
                             <div class="form-group"> <label class="form-control-label text-muted">Password</label> <input type="password" id="psw" name="mdp" class="form-control"> </div>
-                            <input type="hidden" value="<?= $_data['token']?>" name="token">
+                            <input type="hidden" value="<?= $token?>" name="token">
                             <div class="row justify-content-center my-3 px-3"> <button id="valider">Login</button> </div>
                         </div>
                     </div>
@@ -47,3 +47,13 @@
         </div>
     </div>
 </form>
+<div classs="container p-5">
+    <div class="row no-gutters">
+        <div class="col-lg-6 col-md-4 m-auto">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading">Alerte : </h4>
+                <p><?= $data['message']?></p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,8 @@
 <?php
 include_once "./vue.php";
 class VueAuthentification extends vue{
-    function form_connexion($token) {
-        vue::render("Authentification/connexion.php");
+    function form_connexion($token, $message = null) {
+        vue::render("Authentification/connexion.php",['message' => $message],$token);
        
     }
     function form_inscription(){
