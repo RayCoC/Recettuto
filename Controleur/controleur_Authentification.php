@@ -38,8 +38,12 @@ class ControleurAuthentification extends Controleur{
                 if (!empty($user)) {
                     $count = password_verify($password, $user['password']);
                     if ($count) {
+                        if ($this->modele->getRole($login) == 1) {
+                            $this->afficherConnexion("Vous avez été banni du site.");
+                            return;
+                        }
                         $_SESSION['nomUtilisateur'] = $login;
-                        return vue::render("Accueil/index.php");
+                        vue::render("Accueil/index.php");
                     } else {
                         $this->afficherConnexion("Mot de passe incorrect");
                     }
@@ -58,9 +62,7 @@ class ControleurAuthentification extends Controleur{
 
     function inscription(){
         $this->vue->form_inscription();
-
         if ($this->formVide()) {
-
         }
         else{
             if($_POST['sexe']=="homme"){
@@ -68,14 +70,8 @@ class ControleurAuthentification extends Controleur{
             }
             else
                 $sexe=1;
-
             $data =array('mdp' => $_POST['mdp'], 'nomUtilisateur'=>$_POST['nomUtilisateur'],'nom'=>$_POST['nom'],'prenom'=>$_POST['prenom'],'age'=>$_POST['age'], 'sexe'=>$sexe);
-
-
-
             $this->modele->ajoutUtilisateur($data);
-
-
         }
     }
 
@@ -91,7 +87,4 @@ class ControleurAuthentification extends Controleur{
         unset($_SESSION['nomUtilisateur']);
         $this->afficherConnexion();
     }
-
-
-
 }
