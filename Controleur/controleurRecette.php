@@ -31,16 +31,16 @@ class ControleurRecette extends Controleur{
         $_SESSION['ingredientURL'] = $_GET['ingredient'];
     }
     function afficherPageAjout() {
-        $this->vue->pageAjout();
+        $this->vue->pageAjout($this->getToken());
     }
     function afficheListIngredient() {
         $this->vue->listeIngredient();
     }
     function affichePageAjoutIngredient() {
-        $this->vue->pageAjoutIngredient();
+        $this->vue->pageAjoutIngredient($this->getToken());
     }
     function affichePageModifHashtag() {
-        $this->vue->pageModifierHashtag();
+        $this->vue->pageModifierHashtag($this->getToken());
         $_SESSION['hashtagURL'] = $_GET['hashtag'];
     }
     function afficheRecette() {
@@ -81,17 +81,21 @@ class ControleurRecette extends Controleur{
         return false;
     }
     function ajoutHashtag() {
-        $this->modele->ajoutHashtagTableau($_POST['hashtag']);
+        if($this->checkToken()) {
+            $this->modele->ajoutHashtagTableau($_POST['hashtag']);
+        }    
         $this->afficherPageAjout();
     }
     function ajoutIngredient() {
         $this->afficherPageAjout();
-        $this->modele->ajoutIngredientTableau($_POST['nomIngredient'], $_POST['quantite'], $_POST['unite']);
+        if ($this->checkToken()) {
+            $this->modele->ajoutIngredientTableau($_POST['nomIngredient'], $_POST['quantite'], $_POST['unite']);
+        }    
     }
     function ajouterRecette() {
         $message = $this->modele->uploadImage();
-        if(ControleurRecette::FormVide() or empty($_SESSION['ingredient']) or is_numeric($_POST['titre']) or is_numeric($_POST['nomIngredient']) or $message == "false") {
-            $this->vue->pageAjout();
+        if(ControleurRecette::FormVide() or empty($_SESSION['ingredient']) or is_numeric($_POST['titre']) or is_numeric($_POST['nomIngredient']) or $message == "false" or $this->checkToken==false) {
+            $this->afficherPageAjout();
         }
         else {
             $data = array('img' => $message, 'titre' => $_POST['titre'], 'description' => $_POST['desc'], 'difficulte' => $_POST['difficulte'], 'calories' => $_POST['calories'], 'typePlat'=>$_POST['typePlat'], 'cuisson' => $_POST['tpsCuisson'], 'temps' => $_POST['cuisson']);
@@ -101,14 +105,18 @@ class ControleurRecette extends Controleur{
         }
     }
     function updateIng() {
-        $this->modele->modifieIngredient($_POST['newNomIngredient'], $_POST['newQuantite'], $_POST['newUnite'], $_SESSION['ingredientURL']);
+        if($this->checkToken()) {
+            $this->modele->modifieIngredient($_POST['newNomIngredient'], $_POST['newQuantite'], $_POST['newUnite'], $_SESSION['ingredientURL']);
+        }    
         $this->afficheListIngredient();
         unset($_SESSION['ingredientURL']);
     }
     function updateHash() {
-        $this->modele->modifieHashtag($_POST['newHashtag'], $_SESSION['hashtagURL']);
+        if($this->checkToken()) {
+            $this->modele->modifieHashtag($_POST['newHashtag'], $_SESSION['hashtagURL']);
+            unset($_SESSION['hashtagURL']);
+        }    
         $this->afficheListeHashtag();
-        unset($_SESSION['hashtagURL']);
     }
     function deleteHash() {
         $this->modele->supprimerHashtag($_GET['hashtag']);

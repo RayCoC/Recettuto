@@ -17,5 +17,6 @@ include_once "./check/check_auth.php" ?>
             <label>Unité</label>
             <input type="text" name="unite">
         </div>
+        <input type="hidden" name="token" value=<?=$token?>>
         <input type="submit" name="Valider" value="ajouter">
         </form>

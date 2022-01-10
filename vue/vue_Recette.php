@@ -14,17 +14,17 @@ class VueRecette extends vue {
             }
         }
     }
-    function pageModifierIngredient() {
-        vue::render("Recette/Update/modifierIngredient.php");
+    function pageModifierIngredient($token) {
+        vue::render("Recette/Update/modifierIngredient.php", null, $token);
     }
     function recettePrincipal($data) {
         vue::render("Recette/index.php", array("Recette"=>$data));
     }
-    function pageAjout() {
-        vue::render("Recette/ajout.php");
+    function pageAjout($token) {
+        vue::render("Recette/ajout.php", null, $token);
     }
-    function  pageModifierHashtag() {
-        vue::render("Recette/Update/modifierHash.php");
+    function  pageModifierHashtag($token) {
+        vue::render("Recette/Update/modifierHash.php", null, $token);
     }
     function pageAjoutVide() {
         vue::render("Recette/Error/ajoutVide.php");
@@ -35,8 +35,8 @@ class VueRecette extends vue {
     function listeIngredient() {
         vue::render("Recette/listIngredient.php");
     }
-    function  pageAjoutIngredient() {
-        vue::render("Recette/ajoutIngredient.php");
+    function  pageAjoutIngredient($token) {
+        vue::render("Recette/ajoutIngredient.php", null, $token);
     }
     function pageVoirRecette($data) {
         vue::render("Recette/voirRecette.php",$data);

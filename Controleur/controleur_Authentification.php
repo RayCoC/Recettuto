@@ -28,13 +28,11 @@ class ControleurAuthentification extends Controleur{
     function login($login, $password)
     {
         $user = $this->modele->connexion($login);
-        if (!isset($_SESSION['token']) or empty($_SESSION['token'])) {
-            $this->afficherConnexion("Une erreur est survenue");
-        }
-        else if (!isset($_POST['token']) or empty($_POST['token'])) {
-            $this->afficherConnexion("Une erreur est survenue");
+        $check = $this->checkToken();
+        if (! $check) {
+                $this->afficherConnexion("Une erreur est survenu ...");
         }else {
-            if ($_POST['token'] == $_SESSION['token']) {
+            if ($check == true) {
                 if (!empty($user)) {
                     $count = password_verify($password, $user['password']);
                     if ($count) {
@@ -56,13 +54,16 @@ class ControleurAuthentification extends Controleur{
             }
         }
     }
-    function test_Inscription(){
-        $this->vue->form_inscription($this->getToken());
+    function test_Inscription($message = null){
+        $this->vue->form_inscription($message, $this->getToken());
     }
 
     function inscription(){
-        $this->vue->form_inscription();
         if ($this->formVide()) {
+            $this->test_Inscription();
+        }
+        else if (! $this->checkToken()) {
+            $this->test_Inscription("Token invalide !");
         }
         else{
             if($_POST['sexe']=="homme"){

@@ -98,6 +98,7 @@
                                         </div>
                                 </div>
                                     <div class="d-flex justify-content-end pt-3">
+                                        <input type="text" value="<?= $token?>" name="token">
                                         <input type="submit" class="btn btn-lg ms-2" id="valider" value="Submit" name="valider">
                                     </div>
                             </div>

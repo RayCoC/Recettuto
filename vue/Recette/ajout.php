@@ -94,6 +94,7 @@
                     </div>
                 </div>
             <div id="envoyer">
+                <input type ="hidden" value=<?=$token?> name="token">
                 <input type="submit" name="submit" value="Créer ma recette" class="submit">
             </div>
         </form>

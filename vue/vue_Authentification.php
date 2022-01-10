@@ -5,7 +5,7 @@ class VueAuthentification extends vue{
         vue::render("Authentification/connexion.php",['message' => $message],$token);
        
     }
-    function form_inscription(){
-        vue::render("Authentification/inscription.php");
+    function form_inscription($message, $token){
+        vue::render("Authentification/inscription.php", $message,$token);
     }    
 }
