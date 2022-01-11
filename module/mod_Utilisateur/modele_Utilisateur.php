@@ -5,4 +5,8 @@
             $requete->execute(array($login.'%'));
             return $requete->fetchAll();
         }
+        function bannir($id)  {
+            $requete = self::$bdd->prepare("UPDATE Utilisateur set idRole = 1 where idUtilisateur = ?");
+            $requete->execute(array($id));
+        }
     }

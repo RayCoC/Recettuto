@@ -62,6 +62,9 @@ class ModRecette {
             case 'ajoutCommentaire' : 
                 $this->controleurRecette->ajouterAvis();
                 break;
+            case 'like' :
+                echo "ok";
+                break;
         }
     }
 }

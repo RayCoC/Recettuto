@@ -18,6 +18,7 @@
                     <div class="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all text-center">
                         <p>Informations sur la recette </p>
                         <p class="sm-width-95 sm-margin-auto">recette ajouté le <?=$data['dateCrea']?> par <a href="#"><?=$data['user']?></a></p>
+                        <a class="btn btn-primary" style="background-color: #0EAF0B;" href="#!" role="button" id="like" data-name="<?=$_SESSION['idRecette']?>"><i class="fa fa-thumbs-up"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-7">
@@ -78,3 +79,14 @@
             </div>
         </div>
     </form>
+
+    <script>
+        $(document).ready(function(){
+            $("#like").click(function(){
+                $.ajax({
+                    url: "https://localhost/index.php?action=like&module=mod_Recette",
+                    /*more code*/
+                });
+            });
+        });
+    </script>

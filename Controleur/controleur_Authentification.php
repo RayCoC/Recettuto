@@ -36,11 +36,14 @@ class ControleurAuthentification extends Controleur{
                 if (!empty($user)) {
                     $count = password_verify($password, $user['password']);
                     if ($count) {
-                        if ($this->modele->getRole($login) == 1) {
+                        $role = $this->modele->getRole($login);
+                        if ($role == 1) {
                             $this->afficherConnexion("Vous avez été banni du site.");
                             return;
                         }
                         $_SESSION['nomUtilisateur'] = $login;
+                        $_SESSION['role'] = $role;
+                        echo $_SESSION['role'];
                         vue::render("Accueil/index.php");
                     } else {
                         $this->afficherConnexion("Mot de passe incorrect");

@@ -2,7 +2,6 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     </head>
     <script>
@@ -25,6 +24,20 @@
             });
         });
     </script>
+    <!-- A cause d'une erreur de certificat mais la methode de bannissement avec ajax ressemblerai à ca
+    <script>
+        function ban() {
+            var idUser = $("#ban").val();
+            $.ajax ({
+                url: "https://localhost/index.php?action=bannir&idUser="+idUser+"&module=mod_Utilisateur",
+                type: "GET",
+                data: "idUser=" + idUser,
+                success : function () {
+                    alert("Utilisateur banni");
+                }
+            });
+        }
+    </script>-->
     <body>
         <div class="container">
             <br/>

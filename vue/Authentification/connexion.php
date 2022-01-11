@@ -30,7 +30,7 @@
                             <h3 class="mb-5 text-center heading">Connectez-vous ! </h3>
                             <div class="form-group"> <label class="form-control-label text-muted">Username</label> <input type="text" id="email" name="nomUtilisateur" class="form-control"> </div>
                             <div class="form-group"> <label class="form-control-label text-muted">Password</label> <input type="password" id="psw" name="mdp" class="form-control"> </div>
-                            <input type="hidden" value="<?= $token?>" name="token">
+                            <input type="hidden" value="<?=$token['token']?>" name="token">
                             <div class="row justify-content-center my-3 px-3"> <button id="valider">Login</button> </div>
                         </div>
                     </div>

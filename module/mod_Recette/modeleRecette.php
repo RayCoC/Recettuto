@@ -182,7 +182,7 @@ class ModeleRecette extends Connexion
             $requete = self::$bdd->prepare("SELECT * FROM Recette wh")
         }*/
         else if ($value == "recent") {
-            $requete = self::$bdd->prepapre("SELECT * FROM Recette order by dateCreation desc");
+            $requete= self::$bdd->prepare("SELECT * FROM Recette order by dateCreation desc");
         }
         $requete->execute();
         return $requete->fetchAll();
@@ -256,5 +256,17 @@ class ModeleRecette extends Connexion
         $requete->bindParam('id', $id);
         $requete->execute();
         return $requete->fetchAll();
+    }
+    function likeRecette($id) {
+        $requete = self::$bdd->prepare("UPDATE Recette set note = note+1 where idRec =: id");
+        $requete->execute(array($id));
+        $requete->execute();
+    }
+    function verifieNbPouce($login, $idRec) {
+        $requete = self::$bdd->prepare("SELECT nbPouceBleu from avis natural join Utilisateur where idRec := id and login := login");
+        $requete->bindParam("id", $idRec);
+        $requete->bindParam("login", $login);
+        $data = $requete->execute();
+        echo ($data[0][0]);
     }
 }

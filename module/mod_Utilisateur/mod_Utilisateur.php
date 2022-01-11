@@ -17,6 +17,9 @@
                 case 'search' :
                     $this->controleurUtilisateur->searchUser();
                     break;
+                case 'bannir' :
+                    $this->controleurUtilisateur->banUser();
+                    break;
             }
         }
 }?>

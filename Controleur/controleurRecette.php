@@ -94,7 +94,7 @@ class ControleurRecette extends Controleur{
     }
     function ajouterRecette() {
         $message = $this->modele->uploadImage();
-        if(ControleurRecette::FormVide() or empty($_SESSION['ingredient']) or is_numeric($_POST['titre']) or is_numeric($_POST['nomIngredient']) or $message == "false" or $this->checkToken==false) {
+        if(ControleurRecette::FormVide() or empty($_SESSION['ingredient']) or is_numeric($_POST['titre']) or is_numeric($_POST['nomIngredient']) or $message == "false" or $this->checkToken()==false) {
             $this->afficherPageAjout();
         }
         else {
@@ -143,5 +143,11 @@ class ControleurRecette extends Controleur{
         $idUser = $this->modele->getIdUserAvis($_SESSION['nomUtilisateur']);
         $this->modele->ajoutAvis($_SESSION['idRecette'], $_POST['avis'], 0, $idUser[0][0], 0);
         $this->afficheRecette();
+    }
+    function nbPouce($login) {
+        $this->modele->verifieNbPouce($login, $_GET['idRec']);
+    }
+     function like() {
+        if (isset($_SESSION['nomUtilisateur']));
     }
 }

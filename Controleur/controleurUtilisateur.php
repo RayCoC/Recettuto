@@ -23,5 +23,13 @@
                 }
             }
         }
+        function banUser() {
+            if (isset($_GET['idUser'])) {
+                if ($_SESSION['role'] == 3) {
+                    $this->modele->bannir($_GET['idUser']);
+                    $this->affichePageRecherche();
+                }
+            }
+        }
 
 }?>

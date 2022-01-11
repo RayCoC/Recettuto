@@ -12,7 +12,7 @@
                     <input type="text" name="newNomIngredient" class="info" placeholder="Ingredient">
                     <input type="text" name="newQuantite" id="quantite" class="info" placeholder="quantite">
                     <input type="text" name="newUnite" id="unite" class="info" placeholder="unite">
-                    <input type="hidden" name="token" value=<?=$token?>>
+                    <input type="hidden" value="<?=$token['token']?>" name="token">
                     <input type="submit" value="valider" class="submit" name="confirmIngredient"><br><br>
                 </div>
             </form>
