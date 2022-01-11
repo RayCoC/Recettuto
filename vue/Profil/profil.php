@@ -7,9 +7,9 @@
         <div class="col-lg-4 pb-5">
             <!-- Account Sidebar-->
             <div class="author-card pb-3">
-                <div class="author-card-cover" style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);"><a class="btn btn-style-1 btn-white btn-sm" href="#" data-toggle="tooltip" title="" data-original-title="You currently have 290 Reward points to spend"><i class="fa fa-award text-md"></i>&nbsp;290 points</a></div>
+                <div class="author-card-cover" style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);"><i class="fa fa-award text-md"></i></a></div>
                 <div class="author-card-profile">
-                    <div class="author-card-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams">
+                    <div class="author-card-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png">
                     </div>
                     <div class="author-card-details">
                         <h5 class="author-card-name text-lg"><?=$data['utilisateur']['login']?></h5><span class="author-card-position">Joined <?=$data['utilisateur']['date']?></span>
@@ -33,14 +33,14 @@
                             </div><span class="badge badge-secondary">3</span>
                         </div>
                     </a>
-                    <a class="list-group-item" href="https://www.bootdey.com/snippets/view/bs4-wishlist-profile-page" ">
+                    <a class="list-group-item" href="index.php?action=abonnementsmesRecettes&module=mod_Profil" ">
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-heart mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Abonnements</div>
                             </div><span class="badge badge-secondary">3</span>
                         </div>
                     </a>
-                    <a class="list-group-item" href="https://www.bootdey.com/snippets/view/bs4-account-tickets" >
+                    <a class="list-group-item" href="index.php?action=commentairesmesRecettes&module=mod_Profil" >
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-tag mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Commentaires</div>

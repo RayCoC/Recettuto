@@ -54,4 +54,22 @@ class ModeleProfil extends Connexion {
         $requete->execute();
         return $requete->fetchAll();
     }
+
+    function abonnementUtilisateur(){
+        $requete = self::$bdd->prepare("SELECT login from utilisateur where idUtilisateur IN (SELECT idUtilisateur_1 from suivre where idUtilisateur = :idUser);");
+        $idUser = $this->getIdUser();
+        $requete->bindParam('idUser', $idUser[0][0]);
+        $requete->execute();
+        $listeAbonnement=$requete->fetchAll();
+
+        return $listeAbonnement;
+    }
+
+    function getIdUser()
+    {
+        $requete = self::$bdd->prepare("SELECT *  from Utilisateur where login = :login");
+        $requete->bindParam('login', $_SESSION['nomUtilisateur']);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
 }

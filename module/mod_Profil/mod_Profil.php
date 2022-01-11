@@ -27,6 +27,12 @@ class ModProfil {
             case 'mesRecettes':
                 $this->controleurProfil->afficherMesRecettes();
                 break;
+            case 'abonnements':
+                $this->controleurProfil->afficherAbonnements();
+                break;
+            case'commentaires':
+                $this->controleurProfil->afficherCommentaires();
+                break;
 
 
         }

@@ -22,9 +22,9 @@
                 <nav class="list-group list-group-flush">
                     <a class="list-group-item " href="index.php?action=profil&module=mod_Profil" >
                         <i class="fa fa-user text-muted"></i>Profile Settings</a>
-                    <a class="list-group-item active " href="index.php?action=mesRecettes&module=mod_Profil" >
+                    <a class="list-group-item  " href="index.php?action=mesRecettes&module=mod_Profil" >
                         <i class="fa fa-user text-muted"></i>Mes Recettes</a>
-                    <a class="list-group-item " href="index.php?action=abonnements&module=mod_Profil" >
+                    <a class="list-group-item active" href="index.php?action=abonnements&module=mod_Profil" >
                         <i class="fa fa-user text-muted"></i>Abonnements</a>
                     <a class="list-group-item " href="index.php?action=commentairesprofil&module=mod_Profil" >
                         <i class="fa fa-user text-muted"></i>Commentaires</a>
@@ -35,7 +35,7 @@
         <div class="col-lg-8 pb-5">
             <!-- Item-->
 
-            <?php VueProfil::afficheRecettes($data['Recette']);?>
+            <?php VueProfil::afficheAbonnements($data['abonnements']);?>
         </div>
     </div>
 </div>

@@ -60,14 +60,37 @@ class ControleurProfil{
         if (!empty($rec)){
 
             foreach ($rec as $item=>$value){
-               $data['Recette'][$item]= array("img"=>$value[5], "titre" => $value[2],"date"=>$value[9]);
+               $data['Recette'][$item]= array("img"=>$value[5], "titre" => $value[2],"date"=>$value[9],"difficulte"=>$value[11]);
 
             }
+
+        }
+        $info = $this->modele->infoUtilisateur($_SESSION['nomUtilisateur']);
+
+        foreach ($info as $value) {
+            $data['utilisateur']['date'] = $value[3];
 
         }
         $this->vue->mesRecettes($data);
     }
 
+    function afficherAbonnements(){
+        $abo=$this->modele->abonnementUtilisateur();
 
+        $data=array();
+
+        $info = $this->modele->infoUtilisateur($_SESSION['nomUtilisateur']);
+
+        foreach ($info as $value) {
+            $data['utilisateur']['date'] = $value[3];
+
+        }
+        if (!empty($abo)) {
+            foreach ($abo as $item => $value) {
+                $data['abonnements'][$item] = array("abo" => $value[0]);
+            }
+            $this->vue->abonnements($data);
+        }
+    }
 
 }
