@@ -65,9 +65,24 @@ class ModeleProfil extends Connexion {
         return $listeAbonnement;
     }
 
+    function commentaireUtilisateur(){
+        $requete = self::$bdd->prepare("SELECT * from avis where idUtilisateur = :idUser;");
+        $idUser = $this->getIdUser();
+        $requete->bindParam('idUser', $idUser[0][0]);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+
+    function getNomRecette($idRec){
+        $requete = self::$bdd->prepare("SELECT titre from recette where idRec = :idRec;");
+        $requete->bindParam('idRec', $idRec);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+
     function getIdUser()
     {
-        $requete = self::$bdd->prepare("SELECT *  from Utilisateur where login = :login");
+        $requete = self::$bdd->prepare("SELECT * from Utilisateur where login = :login");
         $requete->bindParam('login', $_SESSION['nomUtilisateur']);
         $requete->execute();
         return $requete->fetchAll();

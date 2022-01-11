@@ -18,6 +18,14 @@ class VueProfil extends vue{
         vue::render("Profil/abonnements.php", $data);
     }
 
+    function commentaires($data){
+        vue::render("Profil/commentaires.php", $data);
+    }
+
+    function profilVide($data){
+        vue::render("Profil/profilVide.php", $data);
+    }
+
    static function afficheRecettes($data){
         foreach ($data as $item => $value) {
           echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
@@ -44,6 +52,24 @@ class VueProfil extends vue{
                         <div class="cart-item-product-info">
                             <h4 class="cart-item-product-title"> '.$value['abo'].'</h4>
                             
+                        </div>
+                    </a>
+                </div>
+            </div>';
+
+        }
+    }
+
+    static function afficheCommentaires($data){
+        foreach ($data as $item => $value) {
+            echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
+                <div class="px-3 my-3">
+                    <a class="cart-item-product" href="#">
+                        <div class="cart-item-product-info">
+                            <h4 class="cart-item-product-title"> '.$value['nomRec'].'</h4>
+                            <div class="text-lg text-body font-weight-medium pb-1">'.$value['textAvis'].' </div>
+                            <div>Note : <span class="text-success font-weight-medium">'.$value['nbEtoiles'].'</div>
+                            <div>Nombre de pouce bleu : <span class="text-success font-weight-medium">'.$value['nbPouceBleu'].'</div>
                         </div>
                     </a>
                 </div>

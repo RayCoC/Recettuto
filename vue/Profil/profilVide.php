@@ -22,7 +22,7 @@
                 <nav class="list-group list-group-flush">
                     <a class="list-group-item " href="index.php?action=profil&module=mod_Profil" >
                         <i class="fa fa-user text-muted"></i>Profile Settings</a>
-                    <a class="list-group-item active" href="index.php?action=mesRecettes&module=mod_Profil" >
+                    <a class="list-group-item  " href="index.php?action=mesRecettes&module=mod_Profil" >
                         <i class="fa fa-user text-muted"></i>Mes Recettes</a>
                     <a class="list-group-item " href="index.php?action=abonnements&module=mod_Profil" >
                         <i class="fa fa-user text-muted"></i>Abonnements</a>
@@ -35,7 +35,17 @@
         <div class="col-lg-8 pb-5">
             <!-- Item-->
 
-            <?php VueProfil::afficheRecettes($data['Recette']);?>
+            <div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
+                <div class="px-3 my-3">
+                    <a class="cart-item-product" href="#">
+
+                        <div class="cart-item-product-info">
+                            <h4 class="cart-item-product-title">Vous n'avez pas <?=$data['message']?></h4>
+
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

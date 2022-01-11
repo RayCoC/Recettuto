@@ -33,14 +33,14 @@
                             </div><span class="badge badge-secondary">3</span>
                         </div>
                     </a>
-                    <a class="list-group-item" href="index.php?action=abonnementsmesRecettes&module=mod_Profil" ">
+                    <a class="list-group-item" href="index.php?action=abonnements&module=mod_Profil" ">
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-heart mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Abonnements</div>
                             </div><span class="badge badge-secondary">3</span>
                         </div>
                     </a>
-                    <a class="list-group-item" href="index.php?action=commentairesmesRecettes&module=mod_Profil" >
+                    <a class="list-group-item" href="index.php?action=commentaires&module=mod_Profil" >
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-tag mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Commentaires</div>

@@ -26,7 +26,7 @@
                         <i class="fa fa-user text-muted"></i>Mes Recettes</a>
                     <a class="list-group-item active" href="index.php?action=abonnements&module=mod_Profil" >
                         <i class="fa fa-user text-muted"></i>Abonnements</a>
-                    <a class="list-group-item " href="index.php?action=commentairesprofil&module=mod_Profil" >
+                    <a class="list-group-item " href="index.php?action=commentaires&module=mod_Profil" >
                         <i class="fa fa-user text-muted"></i>Commentaires</a>
                 </nav>
             </div>

@@ -57,21 +57,25 @@ class ControleurProfil{
     function afficherMesRecettes(){
         $rec=$this->modele->recetteUtilisateur($_SESSION['nomUtilisateur']);
         $data= array();
+
+        $info = $this->modele->infoUtilisateur($_SESSION['nomUtilisateur']);
+
+        foreach ($info as $value) {
+            $data['utilisateur']['date'] = $value[3];
+        }
         if (!empty($rec)){
 
             foreach ($rec as $item=>$value){
                $data['Recette'][$item]= array("img"=>$value[5], "titre" => $value[2],"date"=>$value[9],"difficulte"=>$value[11]);
 
             }
-
+            $this->vue->mesRecettes($data);
         }
-        $info = $this->modele->infoUtilisateur($_SESSION['nomUtilisateur']);
-
-        foreach ($info as $value) {
-            $data['utilisateur']['date'] = $value[3];
-
+        else{
+            $data['message']="de recettes";
+            $this->vue->profilVide($data);
         }
-        $this->vue->mesRecettes($data);
+
     }
 
     function afficherAbonnements(){
@@ -91,6 +95,38 @@ class ControleurProfil{
             }
             $this->vue->abonnements($data);
         }
+        else{
+            $data['message']="d'abonnements";
+            $this->vue->profilVide($data);
+        }
     }
 
+    function afficherCommentaires(){
+        $commentaires=$this->modele->commentaireUtilisateur();
+
+        $data=array();
+
+        $info = $this->modele->infoUtilisateur($_SESSION['nomUtilisateur']);
+
+        foreach ($info as $value) {
+            $data['utilisateur']['date'] = $value[3];
+        }
+
+        if (!empty($commentaires)) {
+            foreach ($commentaires as $item => $value) {
+                $nomRecette=$this->modele->getNomRecette($value[5]);
+                foreach ($nomRecette as $item2 => $value2) {
+                    $nomRec=$value2[0];
+                }
+                $data['commentaires'][$item] = array("textAvis" => $value[1], "nbEtoiles" => $value[2], "nbPouceBleu" => $value[3], "nomRec" => $nomRec);
+            }
+            $this->vue->commentaires($data);
+        }
+        else{
+            $data['message']="de commentaires";
+            $this->vue->profilVide($data);
+        }
+
+
+    }
 }
