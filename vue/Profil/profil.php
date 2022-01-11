@@ -1,89 +1,87 @@
-
 <head>
-    <link rel="stylesheet" href="CSS/profil.css">
-    <title>Recettuto Profil</title>
+    <link rel="stylesheet" href="./CSS/profil.css">
+
 </head>
-<body>
-<div class="container">
-    <div class "main">
-    <div class="topbar">
-        <a href="">Abonnement  </a>
-        <a href="">Commentaires </a>
-        <a href="">Mes recettes  </a>
-
-    </div>
+<div class="container mt-5">
     <div class="row">
-        <div class="col-md-4 mt-1">
-            <div class="card text-center sidebar">
-                <div class="card-body">
-                    <img src="img/profil.png" class="rounded-circle" width="150">
-                    <div class="mt-3">
-                        <h3><?=$data['utilisateur']['login']?></h3>
-
-                        <p><?=$data['utilisateur']['date']?></p>
-
+        <div class="col-lg-4 pb-5">
+            <!-- Account Sidebar-->
+            <div class="author-card pb-3">
+                <div class="author-card-cover" style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);"><a class="btn btn-style-1 btn-white btn-sm" href="#" data-toggle="tooltip" title="" data-original-title="You currently have 290 Reward points to spend"><i class="fa fa-award text-md"></i>&nbsp;290 points</a></div>
+                <div class="author-card-profile">
+                    <div class="author-card-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams">
+                    </div>
+                    <div class="author-card-details">
+                        <h5 class="author-card-name text-lg"><?=$data['utilisateur']['login']?></h5><span class="author-card-position">Joined <?=$data['utilisateur']['date']?></span>
                     </div>
                 </div>
+            </div>
+            <div class="wizard">
+                <nav class="list-group list-group-flush">
+
+                    <a class="list-group-item active" href="index.php?action=profil&module=mod_Profil" >
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><i class="fe-icon-heart mr-1 text-muted"></i>
+                                <div class="d-inline-block font-weight-medium text-uppercase">Profile Settings</div>
+                            </div><span class="badge badge-secondary">3</span>
+                        </div>
+                    </a>
+                    <a class="list-group-item" href="index.php?action=mesRecettes&module=mod_Profil" >
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><i class="fe-icon-heart mr-1 text-muted"></i>
+                                <div class="d-inline-block font-weight-medium text-uppercase">Mes Recettes</div>
+                            </div><span class="badge badge-secondary">3</span>
+                        </div>
+                    </a>
+                    <a class="list-group-item" href="https://www.bootdey.com/snippets/view/bs4-wishlist-profile-page" ">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><i class="fe-icon-heart mr-1 text-muted"></i>
+                                <div class="d-inline-block font-weight-medium text-uppercase">Abonnements</div>
+                            </div><span class="badge badge-secondary">3</span>
+                        </div>
+                    </a>
+                    <a class="list-group-item" href="https://www.bootdey.com/snippets/view/bs4-account-tickets" >
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><i class="fe-icon-tag mr-1 text-muted"></i>
+                                <div class="d-inline-block font-weight-medium text-uppercase">Commentaires</div>
+                            </div><span class="badge badge-secondary">4</span>
+                        </div>
+                    </a>
+                </nav>
             </div>
         </div>
-        <div class="col-md-8 mt-1">
-            <div class="card mb-3 content">
-                <h1 class="m-3 pt-3">Mes informations</h1>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h5>Prénom</h5>
-                        </div>
-                        <div class="col-md-9 text-secondary">
-                            <p><?=$data['utilisateur']['prenom']?></p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h5>Nom</h5>
-                        </div>
-                        <div class="col-md-9 text-secondary">
-                            <p><?=$data['utilisateur']['nom']?></p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h5>Sexe</h5>
-                        </div>
-                        <div class="col-md-9 text-secondary">
-                            <p><?=$data['utilisateur']['sexe']?></p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h5>Age</h5>
-                        </div>
-                        <div class="col-md-9 text-secondary">
-                            <p><?=$data['utilisateur']['age']?></p>
-                        </div>
+        <!-- Profile Settings-->
+        <div class="col-lg-8 pb-5">
+            <form action="index.php?action=infoModifier&module=mod_Profil" method="post" class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-fn">First Name</label>
+                        <input class="form-control" type="text" id="account-fn" value="<?=$data['utilisateur']['prenom']?>"  name="prenom" >
                     </div>
                 </div>
-            </div>
-            <div class="card mb-3 content">
-                <h1 class="m-3">Gestion compte</h1>
-                <div class="card_body">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h5>Modifier informations</h5>
-                        </div>
-                        <div class="col-md-9 text-secondary">
-                            <button class="btn btn-secondary btn-lg" type="button"><a id="bouton" href="index.php?module=mod_Profil&action=modifProfil" >Cliquer ici</a></button>
-                        </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-ln">Last Name</label>
+                        <input class="form-control" type="text" id="account-ln" value="<?=$data['utilisateur']['nom']?>" name="nom">
                     </div>
                 </div>
-            </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-email">Age</label>
+                        <input class="form-control" type="number" id="account-email" value="<?=$data['utilisateur']['age']?>" name="age" >
+                    </div>
+                </div>
+
+
+
+                <div class="col-12">
+                    <hr class="mt-2 mb-3">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+
+                        <button class="btn btn-style-1 btn-primary" type="submit" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
-</html>

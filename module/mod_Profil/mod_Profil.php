@@ -24,6 +24,9 @@ class ModProfil {
             case 'infoModifier':
                 $this->controleurProfil->modifProfil();
                 break;
+            case 'mesRecettes':
+                $this->controleurProfil->afficherMesRecettes();
+                break;
 
 
         }

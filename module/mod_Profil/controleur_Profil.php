@@ -38,19 +38,36 @@ class ControleurProfil{
 
     }
     function afficherModifProfil(){
+
         $this->vue->modifProfil();
 
 
     }
     function modifProfil(){
-        $this->vue->modifProfil();
 
+        if($_POST['sexe']=="homme")
             $sexe=1;
 
 
-        $data =array('mdp' => $_POST['mdp'], 'nomUtilisateur'=>$_SESSION['nomUtilisateur'],'nom'=>$_POST['nom'],'prenom'=>$_POST['prenom'],'age'=>$_POST['age'], 'sexe'=>$sexe);
+        $data =array('mdp' => "test", 'nomUtilisateur'=>$_SESSION['nomUtilisateur'],'nom'=>$_POST['nom'],'prenom'=>$_POST['prenom'],'age'=>$_POST['age'], 'sexe'=>$sexe);
         $this->modele->modifierProfil($data);
+        $this->afficherProfil();
     }
+
+    function afficherMesRecettes(){
+        $rec=$this->modele->recetteUtilisateur($_SESSION['nomUtilisateur']);
+        $data= array();
+        if (!empty($rec)){
+
+            foreach ($rec as $item=>$value){
+               $data['Recette'][$item]= array("img"=>$value[5], "titre" => $value[2],"date"=>$value[9]);
+
+            }
+
+        }
+        $this->vue->mesRecettes($data);
+    }
+
 
 
 }

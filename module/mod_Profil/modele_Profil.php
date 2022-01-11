@@ -47,4 +47,11 @@ class ModeleProfil extends Connexion {
 
 
     }
+
+    function recetteUtilisateur($login){
+        $requete= self::$bdd->prepare("SELECT * from Recette natural join Utilisateur where login = :login");
+        $requete->bindParam('login',$login);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
 }
