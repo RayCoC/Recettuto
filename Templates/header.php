@@ -4,6 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="./CSS/header.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     </head>
 
     <body>
@@ -33,7 +34,7 @@
         <nav>
             <a href="index.php?action=Accueil&module=mod_Accueil">Accueil</a> |
             <a href="index.php?action=Recette&module=mod_Recette">Recettes</a> |
-            <a href = "index.php?action=listeEquipe&module=mod_Nutrition">Nutrition</a>
+            <a href = "index.php?action=Nutrition&module=mod_Nutrition">Nutrition</a>
         </nav>
     </body>
 </html>

@@ -12,6 +12,9 @@ class ModNutrition{
             default:
                 $this->controleurNutrition->AfficherNutrition();
                 break;
+            case 'ajoutPlat' :
+                $this->controleurNutrition->ajouterPlat();
+                break;
         }
     }
 }
