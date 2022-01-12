@@ -84,7 +84,7 @@
         $(document).ready(function(){
             $("#like").click(function(){
                 $.ajax({
-                    url: "https://localhost/index.php?action=like&module=mod_Recette",
+                    url: "https://localhost/~rhamouche/Php_Projet/index.php?action=like&module=mod_Recette",
                     /*more code*/
                 });
             });
