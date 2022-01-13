@@ -35,7 +35,6 @@ class ControleurProfil{
             $data['utilisateur']['sexe']=$sexe;
             $data['utilisateur']['age']=$value[5];
             $data['utilisateur']['login']=$value[6];
-
         }
 
         $this->vue->Profil($data);
@@ -47,12 +46,17 @@ class ControleurProfil{
 
 
     }
-    function modifProfil(){
 
-        $sexe=1;
+    function modifProfil()
+    {
+        if ($_POST['sexe'] == "homme") {
+            $sexe = 0;
+        } else {
+            $sexe = 1;
+        }
+        $mdp = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-
-        $data =array('mdp' => "test", 'nomUtilisateur'=>$_SESSION['nomUtilisateur'],'nom'=>$_POST['nom'],'prenom'=>$_POST['prenom'],'age'=>$_POST['age'], 'sexe'=>$sexe);
+        $data = array('password' => $mdp, 'nomUtilisateur' => $_SESSION['nomUtilisateur'], 'nom' => $_POST['nom'], 'prenom' => $_POST['prenom'], 'age' => $_POST['age'], 'sexe' => $sexe);
         $this->modele->modifierProfil($data);
         $this->afficherProfil();
     }
@@ -69,7 +73,7 @@ class ControleurProfil{
         if (!empty($rec)){
 
             foreach ($rec as $item=>$value){
-               $data['Recette'][$item]= array("img"=>$value[5], "titre" => $value[2],"date"=>$value[9],"difficulte"=>$value[11]);
+                $data['Recette'][$item]= array("img"=>$value[5], "titre" => $value[2],"date"=>$value[9],"difficulte"=>$value[11]);
 
             }
             $this->vue->mesRecettes($data);

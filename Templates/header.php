@@ -12,7 +12,7 @@
             <div class="container-fluid">
                 <div class="text-center">
                     <div class="topnav-centered">
-                    <a class="navbar-brand" href="index.php?module=ModAccueil" id="titre" >Recettuto</a>
+                    <a class="navbar-brand" href="index.php?action=Accueil&module=mod_Accueil" id="titre" >Recettuto</a>
                     </div>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">

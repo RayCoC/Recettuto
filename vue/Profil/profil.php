@@ -7,9 +7,9 @@
         <div class="col-lg-4 pb-5">
             <!-- Account Sidebar-->
             <div class="author-card pb-3">
-                <div class="author-card-cover" style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);"><i class="fa fa-award text-md"></i></a></div>
+                <div class="author-card-cover" style="background-image: url(./img/fruitveg.jpeg);"></div>
                 <div class="author-card-profile">
-                    <div class="author-card-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                    <div class="author-card-avatar"><img src="./img/profil.png">
                     </div>
                     <div class="author-card-details">
                         <h5 class="author-card-name text-lg"><?=$data['utilisateur']['login']?></h5><span class="author-card-position">Joined <?=$data['utilisateur']['date']?></span>
@@ -34,11 +34,11 @@
                         </div>
                     </a>
                     <a class="list-group-item" href="index.php?action=abonnements&module=mod_Profil&login=<?=$_SESSION['nomUtilisateur']?>" ">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div><i class="fe-icon-heart mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">Abonnements</div>
-                            </div><span class="badge badge-secondary">3</span>
-                        </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div><i class="fe-icon-heart mr-1 text-muted"></i>
+                            <div class="d-inline-block font-weight-medium text-uppercase">Abonnements</div>
+                        </div><span class="badge badge-secondary">3</span>
+                    </div>
                     </a>
                     <a class="list-group-item" href="index.php?action=commentaires&module=mod_Profil&login=<?=$_SESSION['nomUtilisateur']?>" >
                         <div class="d-flex justify-content-between align-items-center">
@@ -67,8 +67,25 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label for="account-password">Mot de passe</label>
+                        <input class="form-control" type="password" id="account-password" value="" name="password" >
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
                         <label for="account-email">Age</label>
                         <input class="form-control" type="number" id="account-email" value="<?=$data['utilisateur']['age']?>" name="age" >
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-email">Sexe</label>
+                        <div class="form-check form-check-inline mb-0 me-4">
+                            <input type="radio" id="homme" name="sexe" value="homme" checked>
+                            <label for="homme">Homme</label>
+                            <input type="radio" id="femme" name="sexe" value="femme">
+                            <label for="femme">Femme</label>
+                        </div>
                     </div>
                 </div>
 

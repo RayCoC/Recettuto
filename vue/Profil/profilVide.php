@@ -9,9 +9,9 @@
         <div class="col-lg-4 pb-5">
             <!-- Account Sidebar-->
             <div class="author-card pb-3">
-                <div class="author-card-cover" style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);"></div>
+                <div class="author-card-cover" style="background-image: url(./img/fruitveg.jpeg);"></div>
                 <div class="author-card-profile">
-                    <div class="author-card-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" >
+                    <div class="author-card-avatar"><img src="./img/profil.png" >
                     </div>
                     <div class="author-card-details">
                         <h5 class="author-card-name text-lg"><?= $_GET['login']?></h5><span class="author-card-position">Joined <?=$data['utilisateur']['date']?></span>

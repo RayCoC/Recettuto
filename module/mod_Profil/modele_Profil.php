@@ -9,7 +9,7 @@ class ModeleProfil extends Connexion {
     }
 
     function nbRecettes($login){
-       $info= $this->infoUtilisateur($login);
+        $info= $this->infoUtilisateur($login);
         $id=1;
 
         $requete= self::$bdd->prepare("SELECT * from recette  where idUtilisateur = :id");
@@ -23,7 +23,6 @@ class ModeleProfil extends Connexion {
     function modifierProfil($data)
     {
 
-
         if (!empty($_POST['nom'])) {
             $sql = 'UPDATE  utilisateur  SET nom=? WHERE login =? ';
             $req = self::$bdd->prepare($sql);
@@ -33,6 +32,11 @@ class ModeleProfil extends Connexion {
             $sql = 'UPDATE  utilisateur  SET prenom=? WHERE login =? ';
             $req = self::$bdd->prepare($sql);
             $req->execute(array($data['prenom'],  $data['nomUtilisateur']));
+        }
+        if (!empty($_POST['password'])) {
+            $sql = 'UPDATE  infoconfidentielles  SET password=? WHERE login =? ';
+            $req = self::$bdd->prepare($sql);
+            $req->execute(array($data['password'],  $data['nomUtilisateur']));
         }
         if (!empty($_POST['age'])) {
             $sql = 'UPDATE  utilisateur  SET age=? WHERE login =? ';
