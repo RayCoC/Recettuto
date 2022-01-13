@@ -107,6 +107,7 @@ button:focus {
 .card2 {
     width: 50%;
     background:linear-gradient(to top, #0EAF0B 5%, #77d42a 100%);
+    /*background:linear-gradient(to top, rgba(152, 11, 11, 0.96) 5%, #d42a2a 100%);*/
 }
 
 #logo {

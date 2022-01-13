@@ -43,4 +43,21 @@ class ControleurNutrition{
     function nbKcalParJour(){
         return $this->modele->getNbKcalRecommande();
     }
+
+    function afficherRecapitulatif(){
+        $rec=$this->modele->recapitulatifUtilisateur();
+        echo 1;
+        $data= array();
+        if (!empty($rec)){
+            foreach ($rec as $item=>$value){
+                $data['plat'][$item]= array("nomPlat"=>$value[2], "nbKcal" => $value[3],"date"=>$value[4]);
+            }
+            $this->vue->pageRecapitulatif($data);
+
+        }
+
+        else{
+            $this->vue->pageVide();
+        }
+    }
 }

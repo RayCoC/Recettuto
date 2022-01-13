@@ -15,6 +15,9 @@ class ModNutrition{
             case 'ajoutPlat' :
                 $this->controleurNutrition->ajouterPlat();
                 break;
+            case 'recapitulatif':
+                $this->controleurNutrition->afficherRecapitulatif();
+                break;
         }
     }
 }

@@ -62,4 +62,11 @@ class ModeleNutrition extends Connexion
         }
     }
 
+    public function recapitulatifUtilisateur(){
+        $requete= self::$bdd->prepare("SELECT * from nutrition natural join utilisateur where login = :login");
+        $requete->bindParam('login',$_SESSION['nomUtilisateur']);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+
 }

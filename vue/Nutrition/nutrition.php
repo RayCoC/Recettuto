@@ -2,23 +2,10 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./CSS/nutrition.css">
-    <title>Connexion</title>
+    <title>Nutrition</title>
 </head>
 <body>
-<!--<div id= centerDiv>
-    <aside>
-        <img src="img/connexionIMG.png">
-    </aside>
-    <article>
-        <form action="index.php?action=login&module=mod_Authentification" method="post">
-            <h1>Creer un compte</h1>
-            <input type="text"  id="nomUtilisateur" name="nomUtilisateur" placeholder="Nom d'utilisateur" class="input">
-            <input type="password" id="mdp" name="mdp" placeholder="Mot de passe" class="input">
-            <p>Vous n'avez pas de compte ? cliquez <a href = "index.php?action=inscription&module=mod_Authentification">ici</a> pour vous inscrire</p>
-            <input type="submit" id="valider" name="login" class="input" value="Valider">
-        </form>
-    </article>
-</div>-->
+
 <form action="index.php?action=ajoutPlat&module=mod_Nutrition" method="post">
     <div class="container px-4 py-5 mx-auto">
         <div class="card card0">
@@ -40,8 +27,17 @@
                 <div class="card card2">
                     <div class="my-auto mx-md-5 px-md-5 right">
                         <h3 class="text-white">Aujourd'hui</h3>
-                        <h3 class="text-white"><?=$data['nbKcal']?> calories absorbées</h3>
-                        <small class="text-white">Vous pouvez encore absorber <?=$data['nbKcalRestant']?> calories aujourd'hui</small>
+                        <?php if ($data['nbKcal']>0) :?>
+                            <h3 class="text-white"><?=$data['nbKcal']?> calories absorbées</h3>
+                        <?php else:?>
+                            <h3 class="text-white">Vous n'avez pas consommés de plat</h3>
+                        <?php endif ?>
+                        <?php if ($data['nbKcalRestant']>0) :?>
+                            <p class="text-white">Vous pouvez encore absorber <?=$data['nbKcalRestant']?> calories aujourd'hui</p>
+                        <?php else:?>
+                            <p class="text-white">Vous etes à <?=abs($data['nbKcalRestant'])?> calories en trop aujourd'hui</p>
+                        <?php endif ?>
+                        <p class="text-white">Pour acceder à votre recapitulatif cliquez <a href="index.php?action=recapitulatif&module=mod_Nutrition" class="text-white">ici</a></p>
                     </div>
                 </div>
             </div>
