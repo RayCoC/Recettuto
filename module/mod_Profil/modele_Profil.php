@@ -83,7 +83,7 @@ class ModeleProfil extends Connexion {
     function getIdUser()
     {
         $requete = self::$bdd->prepare("SELECT * from Utilisateur where login = :login");
-        $requete->bindParam('login', $_SESSION['nomUtilisateur']);
+        $requete->bindParam('login', $_GET['login']);
         $requete->execute();
         return $requete->fetchAll();
     }

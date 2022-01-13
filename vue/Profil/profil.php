@@ -19,28 +19,28 @@
             <div class="wizard">
                 <nav class="list-group list-group-flush">
 
-                    <a class="list-group-item active" href="index.php?action=profil&module=mod_Profil" >
+                    <a class="list-group-item active" href="index.php?action=profil&module=mod_Profil&login=<?=$_SESSION['nomUtilisateur']?>" >
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-heart mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Profile Settings</div>
                             </div><span class="badge badge-secondary">3</span>
                         </div>
                     </a>
-                    <a class="list-group-item" href="index.php?action=mesRecettes&module=mod_Profil" >
+                    <a class="list-group-item" href="index.php?action=mesRecettes&module=mod_Profil&login=<?=$_SESSION['nomUtilisateur']?>" >
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-heart mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Mes Recettes</div>
                             </div><span class="badge badge-secondary">3</span>
                         </div>
                     </a>
-                    <a class="list-group-item" href="index.php?action=abonnements&module=mod_Profil" ">
+                    <a class="list-group-item" href="index.php?action=abonnements&module=mod_Profil&login=<?=$_SESSION['nomUtilisateur']?>" ">
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-heart mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Abonnements</div>
                             </div><span class="badge badge-secondary">3</span>
                         </div>
                     </a>
-                    <a class="list-group-item" href="index.php?action=commentaires&module=mod_Profil" >
+                    <a class="list-group-item" href="index.php?action=commentaires&module=mod_Profil&login=<?=$_SESSION['nomUtilisateur']?>" >
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-tag mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Commentaires</div>

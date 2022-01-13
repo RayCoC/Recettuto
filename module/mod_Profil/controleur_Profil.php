@@ -13,8 +13,12 @@ class ControleurProfil{
 
     function afficherProfil(){
 
-        $info = $this->modele->infoUtilisateur($_SESSION['nomUtilisateur']);
-
+        if(!isset($_GET['login'])) {
+            $info = $this->modele->infoUtilisateur($_SESSION['nomUtilisateur']);
+        }
+        else{
+            $info = $this->modele->infoUtilisateur($_GET['login']);
+        }
 
 
         foreach ($info as $value){
@@ -55,10 +59,10 @@ class ControleurProfil{
     }
 
     function afficherMesRecettes(){
-        $rec=$this->modele->recetteUtilisateur($_SESSION['nomUtilisateur']);
+        $rec=$this->modele->recetteUtilisateur($_GET['login']);
         $data= array();
 
-        $info = $this->modele->infoUtilisateur($_SESSION['nomUtilisateur']);
+        $info = $this->modele->infoUtilisateur($_GET['login']);
 
         foreach ($info as $value) {
             $data['utilisateur']['date'] = $value[3];
@@ -83,7 +87,7 @@ class ControleurProfil{
 
         $data=array();
 
-        $info = $this->modele->infoUtilisateur($_SESSION['nomUtilisateur']);
+        $info = $this->modele->infoUtilisateur($_GET['login']);
 
         foreach ($info as $value) {
             $data['utilisateur']['date'] = $value[3];
@@ -106,7 +110,7 @@ class ControleurProfil{
 
         $data=array();
 
-        $info = $this->modele->infoUtilisateur($_SESSION['nomUtilisateur']);
+        $info = $this->modele->infoUtilisateur($_GET['login']);
 
         foreach ($info as $value) {
             $data['utilisateur']['date'] = $value[3];

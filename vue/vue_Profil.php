@@ -47,7 +47,7 @@ class VueProfil extends vue{
         foreach ($data as $item => $value) {
             echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
                 <div class="px-3 my-3">
-                    <a class="cart-item-product" href="#">
+                    <a class="cart-item-product" href="index.php?action=mesRecettes&module=mod_Profil&login='.$value['abo'].'">
                        
                         <div class="cart-item-product-info">
                             <h4 class="cart-item-product-title"> '.$value['abo'].'</h4>
