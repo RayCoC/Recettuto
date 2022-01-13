@@ -46,7 +46,7 @@
             </div>
         </div>
     </div>
-    <form action="index.php?action=ajoutCommentaire&id=<?=$_SESSION['idRecette']?>&module=mod_Recette" method="post">
+    <form method="post" action="">
         <div class="container">
             <div class="row mt-5">
                 <div class="col-md-0">
@@ -54,31 +54,20 @@
                         <div class="post-container">
                             <?php if (isset($_SESSION['nomUtilisateur'])) : ?>
                             <div class="post-comment">
-                                <input type="text" class="form-control" placeholder="Post a comment" name="avis">
-                            </div><br> <?php endif; ?>
-                            <div class="post-detail">
-                               <?php if (!empty($data['avis'])) :  ?>
-                                    <?php foreach ($data['avis'] as $item => $value) : ?>
-                                        <ul class="list-inline m-0" style="float: right">
-                                            <li class="list-inline-item">
-                                                <a id="updateComm" href="index.php?action=modifierCommentaire&id=<?=$value['idAvis']?>t&module=mod_Recette"><i class="fa fa-edit"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a id="deleteComm" class= "btn text-red"href="index.php?action=supprimerCommentaire&id=<?=$value['idAvis']?>&module=mod_Recette"><i class="fa fa-trash"></i></a>
-                                            </li>
-                                        </ul>
-                                        <h5><a href="timeline.html" class="profile-link"><?=$value['user']?></a></h5>
-                                        <p><?=$value['message']?></p>
-                                        <a class="btn text-green" id="likeCommentaire" value="<?=$_SESSION['idRecette']?>"><i class="fa fa-thumbs-up"></i></a>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
+                                <input id="postComment" type="text" class="form-control" placeholder="Post a comment" name="avis" user=<?=$_SESSION['nomUtilisateur']?>>
+                                <input type="submit" value="ajouter" id="ajouter">
+                            </div><br>
+    </form>
+                            <?php endif;?>
+                            <div id="comm">
+                                <?php VueRecette::espaceCommentaire($data)?>
+                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
     <script>
     $(document).ready(function() {
         $("#like").click(function (e) {
@@ -95,4 +84,49 @@
             });
         });
     });
-</script>
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(document).on('click','.deleteComm',function (e) {
+                $("#comm").html('');
+                e.preventDefault();
+                $.ajax ({
+                    type: "GET",
+                    url: "index.php?action=supprimerCommentaire&module=mod_Recette",
+                    data: {user : $(this).attr('data-user'), idAvis : $(this).attr('data-idAvis')},
+                    success : function (data) {
+                        $("#comm").append(data);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#ajouter").click(function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        type: "GET",
+                        url: "index.php?action=ajoutCommentaire&module=mod_Recette",
+                        data : {user : $(this).attr("user"), avis : $("#postComment").val()},
+                        success : function (data) {
+                            $("#comm").append(data);
+                        }
+                    });
+                console.log($("#postComment").val());
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#likeCommentaire").click(function (e) {
+                e.preventDefault();
+                $.ajax ({
+                    type : "GET",
+                    url: "index.php?action=likeCommentaire&module=mod_Recette",
+                    data : {idAvis : $(this).attr("value")},
+                });
+                console.log($(this).attr('value'));
+            });
+        });
+    </script>

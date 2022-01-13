@@ -160,7 +160,6 @@ class ModeleRecette extends Connexion
         foreach ($_SESSION['hashtag'] as $item => $value) {
             if ($value['nomHashtag'] == $delete) {
                 unset($_SESSION['hashtag'][$item]);
-                echo "ok";
             }
         }
     }
@@ -234,11 +233,12 @@ class ModeleRecette extends Connexion
         $requete->execute();
         return $requete->fetchAll();
     }
-    function getUserNameRecette($idRec) {
+    static function getUserNameRecette($idRec) {
         $requete = self::$bdd->prepare("SELECT login from Utilisateur natural join Recette where idRec = :idRec");
         $requete->bindParam('idRec', $idRec);
         $requete->execute();
-        return $requete->fetchAll();
+        $data = $requete->fetch();
+        return $data;
     }
     function ajoutAvis ($idRec, $avis, $etoiles, $idUser, $pouce) {
         $requete = self::$bdd->prepare("INSERT INTO Avis (textAvis,nbEtoiles, nbPouceBleu, idUtilisateur, idRec) values (:avis, :etoiles, :pouce, :idUser, :idRec)");
@@ -256,7 +256,7 @@ class ModeleRecette extends Connexion
         return $requete->fetchAll();
     }
     function likeRecette($userName, $idRec) {
-        $requete = self::$bdd->prepare("UPDATE Avis natural join Recette natural join Utilisateur set note = note+1, nbPouceBleu = 1 where idRec = :idRec and login = :userName");
+        $requete = self::$bdd->prepare("UPDATE Avis natural join Recette natural join Utilisateur set note = note+1 where idRec = :idRec and login = :userName");
         $requete->bindParam("idRec", $idRec);
         $requete->bindParam("userName", $userName);
         $requete->execute();
@@ -280,14 +280,33 @@ class ModeleRecette extends Connexion
         }
         return false;
     }
-   /* function verifieCommentaireUnique($idUtilisateur, $idRec)  {
+    function verifieCommentaireUnique($idUtilisateur, $idRec):bool  {
         $requete = self::$bdd->prepare("SELECT * from avis where idRec = :id and idUtilisateur = :idUtilisateur");
         $requete->bindParam('id', $idRec);
         $requete->bindParam('idUtilisateur', $idUtilisateur);
-        $data = $requete->execute();
+        $requete->execute();
+        $data = $requete->fetchAll();
         if (!empty($data)) {
-            return true;
+            return false;
         }
-        return false;
-    }*/
+        return true;
+    }
+    function deleteComment($idAvis) {
+        $requete = self::$bdd->prepare("DELETE from Signaler where idAvis = :idAvis");
+        $requete->bindParam("idAvis", $idAvis);
+        $requete->execute();
+        $requete = self::$bdd->prepare("DELETE from Avis where idAvis = :idAvis");
+        $requete->bindParam("idAvis", $idAvis);
+        $requete->execute();
+    }
+    function likeComment($idAvis) {
+        $requete= self::$bdd->prepare("UPDATE avis set nbPouceBleu = nbPouceBleu+1 where idAvis = :idAvis");
+        $requete->execute(array($idAvis));
+    }
+    function getNbLikeAvis($idAvis) {
+        $requete = self::$bdd->prepare("SELECT nbPouceBleu from Avis where idAvis = :idAvis");
+        $requete->execute(array($idAvis));
+        $like = $requete->fetchAll();
+        return $like[0];
+    }
 }

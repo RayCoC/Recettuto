@@ -59,11 +59,16 @@ class ModRecette {
             case 'voirRecette' :
                 $this->controleurRecette->afficheRecette();
                 break;
-            case 'ajoutCommentaire' : 
+            case 'ajoutCommentaire' :
                 $this->controleurRecette->ajouterAvis();
                 break;
             case 'like' :
                 $this->controleurRecette->like();
+                break;
+            case 'supprimerCommentaire' :
+                $this->controleurRecette->deleteAvis();
+                break;
+            case 'test' :
                 break;
         }
     }

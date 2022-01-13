@@ -8,6 +8,7 @@ class ControleurRecette extends Controleur{
     private $vue;
 
     function __construct () {
+        $data = array();
         $this->vue = new VueRecette();
         $this->modele = new ModeleRecette();
     }
@@ -37,13 +38,24 @@ class ControleurRecette extends Controleur{
         $this->vue->pageModifierHashtag($this->getToken());
         $_SESSION['hashtagURL'] = $_GET['hashtag'];
     }
+    function afficheCommentaire($id) {
+        $data = array();
+        $avis = $this->modele->avis($id);
+        if (!empty($avis)) {
+            foreach ($avis as $item => $value) {
+                $data['avis'][$item]['user'] = $value[1];
+                $data['avis'][$item]['message'] = $value[0];
+                $data['avis'][$item]['idAvis'] = $value[2];
+            }
+            VueRecette::espaceCommentaire($data);
+        }
+    }
     function afficheRecette() {
-        $_SESSION['idRecette'] = $_GET['id'];
         $id = $_GET['id'];
         $rec = $this->modele->detailsRecette($id);
         $ing = $this->modele->detailsIngreientRecette($id);
         $avis = $this->modele->avis($id);
-        $user = $this->modele->getUserNameRecette($_GET['id']);
+        $user = ModeleRecette::getUserNameRecette($_GET['id']);
         foreach ($rec  as $item => $value) {
             $data['nomRecette'] = $value[1];
             $data['note'] = $value[2];
@@ -66,10 +78,10 @@ class ControleurRecette extends Controleur{
             $data['avis'][$item]['message'] = $value[0];
             $data['avis'][$item]['idAvis'] = $value[2];
         }
-        $data['user'] = $user[0][0];
+        $data['user']=$this->getUserName();
         $this->vue->pageVoirRecette($data);
     }
-    static function FormVide() {
+    static function FormVide():bool {
         if ($_POST['titre']== "" or $_POST['desc'] == "" or $_POST['typePlat'] == "" or $_POST['calories'] == "" or $_POST['difficulte'] =="" or $_POST['cuisson'] == "") {
             return true;
         }
@@ -138,8 +150,10 @@ class ControleurRecette extends Controleur{
     }
     function ajouterAvis() {
         $idUser = $this->modele->getIdUserAvis($_SESSION['nomUtilisateur']);
-        $this->modele->ajoutAvis($_SESSION['idRecette'], $_POST['avis'], 0, $idUser[0][0], 0);
-        $this->afficheRecette();
+        if ($this->modele->verifieCommentaireUnique($idUser[0][0], $_SESSION['idRecette']) && isset($_SESSION['nomUtilisateur'])) {
+            $this->modele->ajoutAvis($_SESSION['idRecette'], $_GET['avis'], 0, $idUser[0][0], 0);
+            $this->afficheCommentaire($_SESSION['idRecette']);
+        }
     }
     function nbPouce($login) {
         $this->modele->verifieNbPouce($login, $_GET['idRec']);
@@ -151,5 +165,32 @@ class ControleurRecette extends Controleur{
              }
         }
          $this->modele->getNbLike($_GET['idRec']);
+    }
+    static function getUserName() {
+        $user = ModeleRecette::getUserNameRecette($_SESSION['idRecette']);
+        return $user[0];
+    }
+    static function checkCreateurRecette() :bool {
+        $user = self::getUserName();
+        if (isset($_SESSION['nomUtilisateur'])) {
+            if ($user == $_SESSION['nomUtilisateur']) {
+                return true;
+            }
+        }
+        return false;
+    }
+    function deleteAvis() {
+        if (isset($_SESSION['nomUtilisateur']) and isset($_GET['user'])) {
+            if (ControleurRecette::checkCreateurRecette() or $_GET['user'] == $_SESSION['nomUtilisateur']){
+               $this->modele->deleteComment($_GET['idAvis']);
+            }
+        }
+        $this->afficheCommentaire($_SESSION['idRecette']);
+    }
+    function likeComment() {
+        if (isset($_SESSION['nomUtilisateur'])) {
+            $this->modele->likeComment($_GET['idAvis']);
+        }
+        $this->modele->getNbLike($_GET['idAvis']);
     }
 }
