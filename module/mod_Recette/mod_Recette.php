@@ -63,7 +63,7 @@ class ModRecette {
                 $this->controleurRecette->ajouterAvis();
                 break;
             case 'like' :
-                echo "ok";
+                $this->controleurRecette->like();
                 break;
         }
     }

@@ -12,13 +12,7 @@ class ControleurRecette extends Controleur{
         $this->modele = new ModeleRecette();
     }
     function afficherPagePrincipalRecette($v) {
-        $data = [];
-        if ($v != null) {
-            foreach ($v as $item => $value) {
-                $data['Recette'][$item] = array('id' => $value[0], 'titre' => $value[1],'img' => $value[4]);
-            }
-        }
-        $this->vue->recettePrincipal($data);
+        $this->vue->recettePrincipal();
     }
     function afficherToutesRecettes() {
         return $this->modele->allRecette();
@@ -27,7 +21,7 @@ class ControleurRecette extends Controleur{
         $this->vue->listHashtag();
     }
     function affichePageModifIngredient() {
-        $this->vue->pageModifierIngredient();
+        $this->vue->pageModifierIngredient($this->getToken());
         $_SESSION['ingredientURL'] = $_GET['ingredient'];
     }
     function afficherPageAjout() {
@@ -37,7 +31,7 @@ class ControleurRecette extends Controleur{
         $this->vue->listeIngredient();
     }
     function affichePageAjoutIngredient() {
-        $this->vue->pageAjoutIngredient($this->getToken());
+        $this->vue->pageAjoutIngredient();
     }
     function affichePageModifHashtag() {
         $this->vue->pageModifierHashtag($this->getToken());
@@ -52,6 +46,7 @@ class ControleurRecette extends Controleur{
         $user = $this->modele->getUserNameRecette($_GET['id']);
         foreach ($rec  as $item => $value) {
             $data['nomRecette'] = $value[1];
+            $data['note'] = $value[2];
             $data ['tpsPrepa'] = $value[3];
             $data["img"] = $value[4];
             $data['calories'] = $value[5];
@@ -88,9 +83,7 @@ class ControleurRecette extends Controleur{
     }
     function ajoutIngredient() {
         $this->afficherPageAjout();
-        if ($this->checkToken()) {
-            $this->modele->ajoutIngredientTableau($_POST['nomIngredient'], $_POST['quantite'], $_POST['unite']);
-        }    
+        $this->modele->ajoutIngredientTableau($_POST['nomIngredient'], $_POST['quantite'], $_POST['unite']);
     }
     function ajouterRecette() {
         $message = $this->modele->uploadImage();
@@ -127,9 +120,13 @@ class ControleurRecette extends Controleur{
         $this->afficheListIngredient();
     }
     function filtre() {
-        $data = $this->modele->filter($_GET['value']);
-        $this->afficherPagePrincipalRecette($data);
-    }
+        $v = $this->modele->filter($_GET['value']);
+        $data = [];
+            foreach ($v as $item => $value) {
+                $data['Recette'][$item] = array('id' => $value[0], 'titre' => $value[1],'img' => $value[4]);
+            }
+            VueRecette::afficheRecettes($data);
+        }
     function afficheDetails($id) {
         return $this->modele->detailsRecette($id);
     }
@@ -148,6 +145,11 @@ class ControleurRecette extends Controleur{
         $this->modele->verifieNbPouce($login, $_GET['idRec']);
     }
      function like() {
-        if (isset($_SESSION['nomUtilisateur']));
+        if (isset($_SESSION['nomUtilisateur'])){
+             if (isset($_GET['idRec']) && $this->modele->verifieNbPouce($_SESSION['nomUtilisateur'], $_GET['idRec'])) {
+                 $this->modele->likeRecette($_SESSION['nomUtilisateur'], $_GET['idRec']);
+             }
+        }
+         $this->modele->getNbLike($_GET['idRec']);
     }
 }

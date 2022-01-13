@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./CSS/voirRecette.css">
@@ -18,7 +18,8 @@
                     <div class="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all text-center">
                         <p>Informations sur la recette </p>
                         <p class="sm-width-95 sm-margin-auto">recette ajouté le <?=$data['dateCrea']?> par <a href="#"><?=$data['user']?></a></p>
-                        <a class="btn btn-primary" style="background-color: #0EAF0B;" href="#!" role="button" id="like" data-name="<?=$_SESSION['idRecette']?>"><i class="fa fa-thumbs-up"></i></a>
+                        <a class="btn btn-primary" style="background-color: #0EAF0B;" href="" role="button" id="like" value="<?=$_SESSION['idRecette']?>"><i class="fa fa-thumbs-up"></i></a>
+                        <p id="nbLike">La recette a <?=$data['note']?> j'aime ! </p>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-7">
@@ -68,8 +69,7 @@
                                         </ul>
                                         <h5><a href="timeline.html" class="profile-link"><?=$value['user']?></a></h5>
                                         <p><?=$value['message']?></p>
-                                        <a class="btn text-green"><i class="fa fa-thumbs-up"></i> 13</a>
-                                        <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+                                        <a class="btn text-green" id="likeCommentaire" value="<?=$_SESSION['idRecette']?>"><i class="fa fa-thumbs-up"></i></a>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </div>
@@ -79,14 +79,20 @@
             </div>
         </div>
     </form>
-
     <script>
-        $(document).ready(function(){
-            $("#like").click(function(){
-                $.ajax({
-                    url: "https://localhost/~rhamouche/Php_Projet/index.php?action=like&module=mod_Recette",
-                    /*more code*/
-                });
+    $(document).ready(function() {
+        $("#like").click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "GET",
+                url: "index.php?action=like&module=mod_Recette",
+                data: {
+                    idRec: $("#like").attr('value'),
+                },
+                success : function (data) {
+                    $("#nbLike").text("La recette a "+data+" j'aime !");
+                }
             });
         });
-    </script>
+    });
+</script>

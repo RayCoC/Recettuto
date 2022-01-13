@@ -82,9 +82,8 @@ class ModeleRecette extends Connexion
     public function ajoutIngredientTableau($nomIngredient, $quantite, $unite)
     {
         if (($nomIngredient != "" or $quantite != "" or $unite != "") and self::verifieDoublon($nomIngredient, 'ingredient', 'nomIngredient')) {
-            $_SESSION['id']++;
-            $i = $_SESSION['id'];
-            $_SESSION['ingredient'][$i] = array('nomIngredient' => $nomIngredient, 'quantite' => $quantite, 'unite' => $unite);
+            echo "ntm";
+            array_push($_SESSION['ingredient'], array('nomIngredient' => $nomIngredient, 'quantite' => $quantite, 'unite' => $unite));
         }
     }
 
@@ -181,7 +180,7 @@ class ModeleRecette extends Connexion
         /*else if ($value = "Populaire") {
             $requete = self::$bdd->prepare("SELECT * FROM Recette wh")
         }*/
-        else if ($value == "recent") {
+        else if ($value == "Recent") {
             $requete= self::$bdd->prepare("SELECT * FROM Recette order by dateCreation desc");
         }
         $requete->execute();
@@ -252,21 +251,43 @@ class ModeleRecette extends Connexion
         return $requete->fetchAll();
     }
     function avis ($id) {
-        $requete = self::$bdd->prepare("SELECT textAvis, login, idAvis FROM Avis natural join Utilisateur where idRec = :id");
-        $requete->bindParam('id', $id);
-        $requete->execute();
+        $requete = self::$bdd->prepare("SELECT textAvis, login, idAvis FROM Avis natural join Utilisateur where idRec = ?");
+        $requete->execute(array($id));
         return $requete->fetchAll();
     }
-    function likeRecette($id) {
-        $requete = self::$bdd->prepare("UPDATE Recette set note = note+1 where idRec =: id");
-        $requete->execute(array($id));
+    function likeRecette($userName, $idRec) {
+        $requete = self::$bdd->prepare("UPDATE Avis natural join Recette natural join Utilisateur set note = note+1, nbPouceBleu = 1 where idRec = :idRec and login = :userName");
+        $requete->bindParam("idRec", $idRec);
+        $requete->bindParam("userName", $userName);
         $requete->execute();
     }
+    function getNbLike($idRec) {
+        $requete = self::$bdd->prepare("SELECT note from Recette where idRec = ?");
+        $requete->execute(array($idRec));
+        $requete->execute();
+        $data = $requete->fetch();
+        echo $data[0];
+    }
     function verifieNbPouce($login, $idRec) {
-        $requete = self::$bdd->prepare("SELECT nbPouceBleu from avis natural join Utilisateur where idRec := id and login := login");
+        $requete = self::$bdd->prepare("SELECT nbPouceBleu from Avis natural join Utilisateur where idRec = :id and login = :login");
         $requete->bindParam("id", $idRec);
         $requete->bindParam("login", $login);
-        $data = $requete->execute();
-        echo ($data[0][0]);
+        $requete->execute();
+        $data = $requete->fetchAll();
+        if ($data[0] == 0) {
+            return true;
+
+        }
+        return false;
     }
+   /* function verifieCommentaireUnique($idUtilisateur, $idRec)  {
+        $requete = self::$bdd->prepare("SELECT * from avis where idRec = :id and idUtilisateur = :idUtilisateur");
+        $requete->bindParam('id', $idRec);
+        $requete->bindParam('idUtilisateur', $idUtilisateur);
+        $data = $requete->execute();
+        if (!empty($data)) {
+            return true;
+        }
+        return false;
+    }*/
 }

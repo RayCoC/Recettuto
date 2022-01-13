@@ -6,19 +6,11 @@ class VueRecette extends vue {
     function __construct () {
         $this-> modeleRecette= new ModeleRecette();
     }
-    function vueSelection ($selection) {
-        $tab = $this->modeleRecette;
-        foreach ($tab as $key => $value) {
-            foreach ($value as $key2 => $v) {
-                echo $v;
-            }
-        }
-    }
     function pageModifierIngredient($token) {
         vue::render("Recette/Update/modifierIngredient.php", null, $token);
     }
-    function recettePrincipal($data) {
-        vue::render("Recette/index.php", array("Recette"=>$data));
+    function recettePrincipal() {
+        vue::render("Recette/index.php");
     }
     function pageAjout($token) {
         vue::render("Recette/ajout.php", null, $token);
@@ -35,8 +27,8 @@ class VueRecette extends vue {
     function listeIngredient() {
         vue::render("Recette/listIngredient.php");
     }
-    function  pageAjoutIngredient($token) {
-        vue::render("Recette/ajoutIngredient.php", null, $token);
+    function  pageAjoutIngredient() {
+        vue::render("Recette/ajoutIngredient.php");
     }
     function pageVoirRecette($data) {
         vue::render("Recette/voirRecette.php",$data);

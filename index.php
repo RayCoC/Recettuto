@@ -10,6 +10,9 @@ if (!isset($_SESSION['nomUtilisateur']) && isset($_GET['action'])) {
 if (!isset($_SESSION['hashtag'])) {
     $_SESSION['hashtag'] = array();
 }
+if (!isset($_SESSION['ingredient'])) {
+    $_SESSION['ingredient'] = array();
+}
 Connexion::initConnexion();
 if (!isset($_GET['module'])) {
     $module = "mod_Accueil";
