@@ -23,6 +23,12 @@
                     <?php if ($_SESSION['nomUtilisateur']==$_GET['login']):?>
                     <a class="list-group-item " href="index.php?action=profil&module=mod_Profil&login=<?=$_GET['login']?>" >
                         <i class="fa fa-user text-muted"></i>Profile Settings</a>
+                    <?php else :?>
+                        <?php if (!ModeleProfil::estAbonne()):?>
+                            <form action="index.php?action=subscribe&module=mod_Profil&login=<?=$_GET['login']?>" method="post"><input type="submit" value="s'abonner"></form>
+                        <?php else :?>
+                            <form action="index.php?action=unsubscribe&module=mod_Profil&login=<?=$_GET['login']?>" method="post"><input type="submit" value="se desabonner"></form>
+                        <?php endif;?>
                     <?php endif;?>
                     <a class="list-group-item active" href="index.php?action=mesRecettes&module=mod_Profil&login=<?=$_GET['login']?>" >
                         <i class="fa fa-user text-muted"></i>Mes Recettes</a>

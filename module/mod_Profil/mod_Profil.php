@@ -33,8 +33,12 @@ class ModProfil {
             case'commentaires':
                 $this->controleurProfil->afficherCommentaires();
                 break;
-
-
+            case'subscribe':
+                $this->controleurProfil->subscribe();
+                break;
+            case'unsubscribe':
+                $this->controleurProfil->unsubscribe();
+                break;
         }
     }
 

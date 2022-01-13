@@ -87,4 +87,60 @@ class ModeleProfil extends Connexion {
         $requete->execute();
         return $requete->fetchAll();
     }
+
+    function getIdUserSession(){
+        $requete = self::$bdd->prepare("SELECT * from Utilisateur where login = :login");
+        $requete->bindParam('login', $_SESSION['nomUtilisateur']);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+
+    function abonner(){
+        $requete = self::$bdd->prepare("INSERT INTO suivre values(:idUser, :idAbonnement)");
+
+        $idUser = $this->getIdUserSession();
+        $requete->bindParam('idUser', $idUser[0][0]);
+
+        $idAbonnement = $this->getIdUser();
+        $requete->bindParam('idAbonnement', $idAbonnement[0][0]);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+
+    function desabonner(){
+        $requete = self::$bdd->prepare("DELETE FROM suivre WHERE idUtilisateur = :idUser AND idUtilisateur_1 = :idAbonnement");
+
+        $idUser = $this->getIdUserSession();
+        $requete->bindParam('idUser', $idUser[0][0]);
+
+        $idAbonnement = $this->getIdUser();
+        $requete->bindParam('idAbonnement', $idAbonnement[0][0]);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+
+    static function estAbonne(){
+
+        $requete = self::$bdd->prepare("SELECT idUtilisateur_1 from suivre where idUtilisateur = :idUser");
+
+        $requete2 = self::$bdd->prepare("SELECT * from Utilisateur where login = :login");
+        $requete2->bindParam('login', $_SESSION['nomUtilisateur']);
+        $requete2->execute();
+        $idUser = $requete2->fetchAll();
+        $requete->bindParam('idUser', $idUser[0][0]);
+        $requete->execute();
+        $abonnes = $requete->fetchAll();
+
+        $requete3 = self::$bdd->prepare("SELECT * from Utilisateur where login = :login");
+        $requete3->bindParam('login', $_GET['login']);
+        $requete3->execute();
+        $idAbonne = $requete3->fetchAll();
+
+        foreach ($abonnes as $item => $value){
+            if($value[0]==$idAbonne[0][0]){
+                return true;
+            }
+        }
+        return false;
+    }
 }

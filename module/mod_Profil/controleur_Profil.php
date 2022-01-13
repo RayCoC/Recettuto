@@ -49,8 +49,7 @@ class ControleurProfil{
     }
     function modifProfil(){
 
-        if($_POST['sexe']=="homme")
-            $sexe=1;
+        $sexe=1;
 
 
         $data =array('mdp' => "test", 'nomUtilisateur'=>$_SESSION['nomUtilisateur'],'nom'=>$_POST['nom'],'prenom'=>$_POST['prenom'],'age'=>$_POST['age'], 'sexe'=>$sexe);
@@ -122,7 +121,7 @@ class ControleurProfil{
                 foreach ($nomRecette as $item2 => $value2) {
                     $nomRec=$value2[0];
                 }
-                $data['commentaires'][$item] = array("textAvis" => $value[1], "nbEtoiles" => $value[2], "nbPouceBleu" => $value[3], "nomRec" => $nomRec);
+                $data['commentaires'][$item] = array("textAvis" => $value[1], "nbEtoiles" => $value[2], "nbPouceBleu" => $value[3], "nomRec" => $nomRec, "idRec" => $value[5]);
             }
             $this->vue->commentaires($data);
         }
@@ -131,6 +130,15 @@ class ControleurProfil{
             $this->vue->profilVide($data);
         }
 
+    }
 
+    function subscribe(){
+        $this->modele->abonner();
+        $this->afficherAbonnements();
+    }
+
+    function unsubscribe(){
+        $this->modele->desabonner();
+        $this->afficherAbonnements();
     }
 }
