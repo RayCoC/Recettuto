@@ -47,7 +47,7 @@ class ModeleRecette extends Connexion
 
     function creerNouvelleRecette($data)
     {
-        $requete = self::$bdd->prepare("INSERT INTO Recette (titre,tpsPrepa, image, calories,tpsCuisson,textRecette,idType,nbFlammes) VALUES (:titre,:temps,:url,:calories,:cuisson,:descritpion,:typePlat,:difficulte)");
+        $requete = self::$bdd->prepare("INSERT INTO Recette (titre,tpsPrepa, image, calories,tpsCuisson,textRecette,idUtilisateur,idType,nbFlammes) VALUES (:titre,:temps,:url,:calories,:cuisson,:descritpion,:idUtilisateur,:typePlat,:difficulte)");
         $requete->bindParam('url', $data['img']);
         $requete->bindParam('titre', $data['titre']);
         $requete->bindParam('temps', $data['temps']);
@@ -55,6 +55,7 @@ class ModeleRecette extends Connexion
         $requete->bindParam('cuisson', $data['cuisson']);
         $requete->bindParam('difficulte', $data['difficulte']);
         $requete->bindParam('typePlat', $data['typePlat']);
+        $requete->bindParam('idUtilisateur', $data['utilisateur']);
         $requete->bindParam('descritpion', $data['description']);
         $requete->execute();
         return self::$bdd->lastInsertId();
@@ -227,7 +228,7 @@ class ModeleRecette extends Connexion
         $requete->execute();
         return $requete->fetchAll();
     }
-    function getIdUserAvis($name) {
+    function getIdUser($name) {
         $requete = self::$bdd->prepare("SELECT *  from Utilisateur where login = :nom");
         $requete->bindParam('nom', $name);
         $requete->execute();

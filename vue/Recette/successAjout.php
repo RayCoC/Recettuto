@@ -13,7 +13,7 @@ include_once "./check/check_auth.php" ?>
                     <br><br><h2 style="color:#0fad00">Success</h2>
                     <img src="./img/succes.png">
                     <p style="font-size:20px;color:#5C5C5C;">Merci, votre recette a bien été ajouté sur le site !</p>
-                    <a href="" class="btn btn-success">Revenir à la page d'accueil</a>
+                    <a href="index.php?action=Accueil&module=mod_Accueil" class="btn btn-success">Revenir à la page d'accueil</a>
                     <br><br>
                 </div>
 

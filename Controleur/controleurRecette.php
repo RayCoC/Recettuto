@@ -51,6 +51,7 @@ class ControleurRecette extends Controleur{
         }
     }
     function afficheRecette() {
+        $_SESSION['idRecette'] = $_GET['id'];
         $id = $_GET['id'];
         $rec = $this->modele->detailsRecette($id);
         $ing = $this->modele->detailsIngreientRecette($id);
@@ -103,7 +104,8 @@ class ControleurRecette extends Controleur{
             $this->afficherPageAjout();
         }
         else {
-            $data = array('img' => $message, 'titre' => $_POST['titre'], 'description' => $_POST['desc'], 'difficulte' => $_POST['difficulte'], 'calories' => $_POST['calories'], 'typePlat'=>$_POST['typePlat'], 'cuisson' => $_POST['tpsCuisson'], 'temps' => $_POST['cuisson']);
+            $user = $this->modele->getIdUser($_SESSION['nomUtilisateur']);
+            $data = array('img' => $message, 'titre' => $_POST['titre'], 'description' => $_POST['desc'], 'difficulte' => $_POST['difficulte'], 'calories' => $_POST['calories'], 'typePlat'=>$_POST['typePlat'], 'cuisson' => $_POST['tpsCuisson'], 'temps' => $_POST['cuisson'], 'utilisateur'=> $user[0][0]);
             $lastID = $this->modele->creerNouvelleRecette($data);
             $this->modele->ajouterIngredient($lastID);
             vue::render("Recette/successAjout.php");
@@ -149,7 +151,7 @@ class ControleurRecette extends Controleur{
         $this->afficherPagePrincipalRecette($rec);
     }
     function ajouterAvis() {
-        $idUser = $this->modele->getIdUserAvis($_SESSION['nomUtilisateur']);
+        $idUser = $this->modele->getIdUser($_SESSION['nomUtilisateur']);
         if ($this->modele->verifieCommentaireUnique($idUser[0][0], $_SESSION['idRecette']) && isset($_SESSION['nomUtilisateur'])) {
             $this->modele->ajoutAvis($_SESSION['idRecette'], $_GET['avis'], 0, $idUser[0][0], 0);
             $this->afficheCommentaire($_SESSION['idRecette']);
