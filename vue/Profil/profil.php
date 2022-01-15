@@ -47,6 +47,15 @@
                             </div><span class="badge badge-secondary">4</span>
                         </div>
                     </a>
+                    <?php if(ModeleProfil::estAdmin()) :?>
+                    <a class="list-group-item" href="index.php?action=signalements&module=mod_Profil&login=<?=$_SESSION['nomUtilisateur']?>" >
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><i class="fe-icon-heart mr-1 text-muted"></i>
+                                <div class="d-inline-block font-weight-medium text-uppercase">Signalements</div>
+                            </div><span class="badge badge-secondary">3</span>
+                        </div>
+                    </a>
+                    <?php endif;?>
                 </nav>
             </div>
         </div>

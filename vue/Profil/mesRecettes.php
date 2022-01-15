@@ -36,13 +36,16 @@
                         <i class="fa fa-user text-muted"></i>Abonnements</a>
                     <a class="list-group-item " href="index.php?action=commentaires&module=mod_Profil&login=<?=$_GET['login']?>" >
                         <i class="fa fa-user text-muted"></i>Commentaires</a>
+                    <?php if (ModeleProfil::estAdmin()):?>
+                        <a class="list-group-item " href="index.php?action=signalements&module=mod_Profil&login=<?=$_GET['login']?>" >
+                            <i class="fa fa-user text-muted"></i>Signalements</a>
+                    <?php endif;?>
                 </nav>
             </div>
         </div>
         <!-- Wishlist-->
         <div class="col-lg-8 pb-5">
             <!-- Item-->
-
             <?php VueProfil::afficheRecettes($data['Recette']);?>
         </div>
     </div>

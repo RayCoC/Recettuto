@@ -20,9 +20,11 @@
             </div>
             <div class="wizard">
                 <nav class="list-group list-group-flush">
+                    <?php echo $_SESSION['nomUtilisateur']; ?>
+                    <?php echo $_GET['login']; ?>
                     <?php if ($_SESSION['nomUtilisateur']==$_GET['login']):?>
-                    <a class="list-group-item " href="index.php?action=profil&module=mod_Profil&login=<?=$_GET['login']?>" >
-                        <i class="fa fa-user text-muted"></i>Profile Settings</a>
+                        <a class="list-group-item " href="index.php?action=profil&module=mod_Profil&login=<?=$_GET['login']?>" >
+                            <i class="fa fa-user text-muted"></i>Profile Settings</a>
                     <?php else :?>
                         <?php if (!ModeleProfil::estAbonne()):?>
                             <form action="index.php?action=subscribe&module=mod_Profil&login=<?=$_GET['login']?>" method="post"><input type="submit" value="s'abonner"></form>
@@ -30,24 +32,21 @@
                             <form action="index.php?action=unsubscribe&module=mod_Profil&login=<?=$_GET['login']?>" method="post"><input type="submit" value="se desabonner"></form>
                         <?php endif;?>
                     <?php endif;?>
-                    <a class="list-group-item  " href="index.php?action=mesRecettes&module=mod_Profil&login=<?=$_GET['login']?>" >
+                    <a class="list-group-item " href="index.php?action=mesRecettes&module=mod_Profil&login=<?=$_GET['login']?>" >
                         <i class="fa fa-user text-muted"></i>Mes Recettes</a>
                     <a class="list-group-item " href="index.php?action=abonnements&module=mod_Profil&login=<?=$_GET['login']?>" >
                         <i class="fa fa-user text-muted"></i>Abonnements</a>
-                    <a class="list-group-item active" href="index.php?action=commentaires&module=mod_Profil&login=<?=$_GET['login']?>" >
+                    <a class="list-group-item " href="index.php?action=commentaires&module=mod_Profil&login=<?=$_GET['login']?>" >
                         <i class="fa fa-user text-muted"></i>Commentaires</a>
-                    <?php if (ModeleProfil::estAdmin()):?>
-                        <a class="list-group-item " href="index.php?action=signalements&module=mod_Profil&login=<?=$_GET['login']?>" >
-                            <i class="fa fa-user text-muted"></i>Signalements</a>
-                    <?php endif;?>
+                    <a class="list-group-item active" href="index.php?action=signalements&module=mod_Profil&login=<?=$_GET['login']?>" >
+                        <i class="fa fa-user text-muted"></i>Signalements</a>
                 </nav>
             </div>
         </div>
         <!-- Wishlist-->
         <div class="col-lg-8 pb-5">
             <!-- Item-->
-
-            <?php VueProfil::afficheCommentaires($data['commentaires']);?>
+            <?php VueProfil::afficheSignalements($data['signalements']);?>
         </div>
     </div>
 </div>

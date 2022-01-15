@@ -39,6 +39,15 @@ class ModProfil {
             case'unsubscribe':
                 $this->controleurProfil->unsubscribe();
                 break;
+            case'signalements':
+                $this->controleurProfil->afficherSignalement();
+                break;
+            case'bannir':
+                $this->controleurProfil->bannir();
+                break;
+            case'annulerSignalement':
+                $this->controleurProfil->annulerSignalement();
+                break;
         }
     }
 

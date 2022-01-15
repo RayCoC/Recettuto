@@ -147,4 +147,44 @@ class ModeleProfil extends Connexion {
         }
         return false;
     }
+
+    static function estAdmin(){
+
+        $requete = self::$bdd->prepare("SELECT idRole from utilisateur where login = :login");
+
+        $requete->bindParam('login', $_SESSION['nomUtilisateur']);
+        $requete->execute();
+        $role = $requete->fetchAll();
+        if($role[0][0]==2){
+            return true;
+        }
+        return false;
+    }
+
+    public function avisSignaler(){
+        $requete = self::$bdd->prepare("SELECT textAvis, login, idAvis from avis natural join utilisateur where idAvis IN (SELECT distinct(idAvis) from signaler)");
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+
+    public function bannir($idAvis){
+        $this->enleverSignalement($idAvis);
+
+        $requete = self::$bdd->prepare("SELECT idUtilisateur from avis where idAvis = $idAvis");
+        $requete->execute();
+        $idUser = $requete->fetchAll();
+
+        $requete2 = self::$bdd->prepare("DELETE FROM avis WHERE idAvis = $idAvis");
+        $requete2->execute();
+
+        $requete3 = self::$bdd->prepare("UPDATE utilisateur SET idRole=3 WHERE idUtilisateur=:idUser");
+        $requete3->bindParam('idUser', $idUser[0][0]);
+        $requete3->execute();
+
+    }
+
+    public function enleverSignalement($idAvis){
+        $requete = self::$bdd->prepare("DELETE FROM signaler WHERE idAvis = $idAvis");
+        $requete->execute();
+    }
 }

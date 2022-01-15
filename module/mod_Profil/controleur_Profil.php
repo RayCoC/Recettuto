@@ -145,4 +145,38 @@ class ControleurProfil{
         $this->modele->desabonner();
         $this->afficherAbonnements();
     }
+
+    function afficherSignalement(){
+        $signalement=$this->modele->avisSignaler();
+
+        $data=array();
+
+        $info = $this->modele->infoUtilisateur($_GET['login']);
+        foreach ($info as $value) {
+            $data['utilisateur']['date'] = $value[3];
+        }
+
+        if (!empty($signalement)) {
+            foreach ($signalement as $item => $value) {
+                $data['signalements'][$item] = array("textAvis" => $value[0], "utilisateur" => $value[1], "idAvis" => $value[2]);
+            }
+            $this->vue->signalements($data);
+        }
+        else{
+            $data['message']="de signalement";
+            $this->vue->profilVide($data);
+        }
+    }
+
+    function bannir(){
+        $idAvis=$_POST['idAvis'];
+        $this->modele->bannir($idAvis);
+        $this->afficherSignalement();
+    }
+
+    function annulerSignalement(){
+        $idAvis=$_POST['idAvis'];
+        $this->modele->enleverSignalement($idAvis);
+        $this->afficherSignalement();
+    }
 }
