@@ -68,7 +68,8 @@ class ModRecette {
             case 'supprimerCommentaire' :
                 $this->controleurRecette->deleteAvis();
                 break;
-            case 'test' :
+            case 'likeCommentaire' :
+                $this->controleurRecette->likeComment();
                 break;
         }
     }

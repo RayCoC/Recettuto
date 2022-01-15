@@ -125,6 +125,9 @@
                     type : "GET",
                     url: "index.php?action=likeCommentaire&module=mod_Recette",
                     data : {idAvis : $(this).attr("value")},
+                    success : function (data) {
+                        $("#nbLikeComment").text(data);
+                    }
                 });
                 console.log($(this).attr('value'));
             });

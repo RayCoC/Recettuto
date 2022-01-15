@@ -241,25 +241,34 @@ class ModeleRecette extends Connexion
         $data = $requete->fetch();
         return $data;
     }
-    function ajoutAvis ($idRec, $avis, $etoiles, $idUser, $pouce) {
-        $requete = self::$bdd->prepare("INSERT INTO Avis (textAvis,nbEtoiles, nbPouceBleu, idUtilisateur, idRec) values (:avis, :etoiles, :pouce, :idUser, :idRec)");
+    function ajoutAvis ($idRec, $avis, $dejaLike, $idUser, $pouce) {
+        $requete = self::$bdd->prepare("INSERT INTO Avis (textAvis,dejaLike, nbPouceBleu, idUtilisateur, idRec) values (:avis, :dejaLike, :pouce, :idUser, :idRec)");
         $requete->bindParam('avis',$avis);
         $requete->bindParam('pouce', $pouce);
-        $requete->bindParam('etoiles', $etoiles);
+        $requete->bindParam('dejaLike', $dejaLike);
         $requete->bindParam('idUser', $idUser);
         $requete->bindParam('idRec', $idRec);
         $requete->execute();
         return $requete->fetchAll();
     }
     function avis ($id) {
-        $requete = self::$bdd->prepare("SELECT textAvis, login, idAvis FROM Avis natural join Utilisateur where idRec = ?");
+        $requete = self::$bdd->prepare("SELECT textAvis, login, idAvis, nbPouceBleu FROM Avis natural join Utilisateur where idRec = ?");
         $requete->execute(array($id));
         return $requete->fetchAll();
     }
-    function likeRecette($userName, $idRec) {
-        $requete = self::$bdd->prepare("UPDATE Avis natural join Recette natural join Utilisateur set note = note+1 where idRec = :idRec and login = :userName");
+    function likeRecette($idUser, $idRec) {
+        $requete = self::$bdd->prepare("UPDATE Recette set note = note+1 where idRec = :idRec");
         $requete->bindParam("idRec", $idRec);
-        $requete->bindParam("userName", $userName);
+        $requete->execute();
+        if ($this->verifieCommentaireUnique($idUser, $idRec)) {
+            $requete = self::$bdd->prepare ("INSERT INTO Avis(dejaLike,idUtilisateur, idRec) values (1, :idUser,:idRec )");
+            $requete->bindParam("idUser", $idUser);
+            $requete->bindParam('idRec', $idRec);
+        }
+        else {
+            $requete = self::$bdd->prepare("UPDATE Avis set dejaLike = 1 where idUtilisateur = :idUser");
+            $requete->bindParam("idUser", $idUser);
+        }
         $requete->execute();
     }
     function getNbLike($idRec) {
@@ -270,21 +279,22 @@ class ModeleRecette extends Connexion
         echo $data[0];
     }
     function verifieNbPouce($login, $idRec) {
-        $requete = self::$bdd->prepare("SELECT nbPouceBleu from Avis natural join Utilisateur where idRec = :id and login = :login");
+        $requete = self::$bdd->prepare("SELECT nbPouceBleu, dejaLike from Avis natural join Utilisateur where idRec = :id and login = :login");
         $requete->bindParam("id", $idRec);
         $requete->bindParam("login", $login);
         $requete->execute();
         $data = $requete->fetchAll();
-        if ($data[0] == 0) {
-            return true;
-
+        if (!empty($data)) {
+            if ($data[0][1] == 1) {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
-    function verifieCommentaireUnique($idUtilisateur, $idRec):bool  {
-        $requete = self::$bdd->prepare("SELECT * from avis where idRec = :id and idUtilisateur = :idUtilisateur");
+    function verifieCommentaireUnique($idUser, $idRec):bool  {
+        $requete = self::$bdd->prepare("SELECT * from Avis where idRec = :id and idUtilisateur = :idUser");
         $requete->bindParam('id', $idRec);
-        $requete->bindParam('idUtilisateur', $idUtilisateur);
+        $requete->bindParam('idUser', $idUser);
         $requete->execute();
         $data = $requete->fetchAll();
         if (!empty($data)) {
@@ -301,8 +311,7 @@ class ModeleRecette extends Connexion
         $requete->execute();
     }
     function likeComment($idAvis) {
-        $requete= self::$bdd->prepare("UPDATE avis set nbPouceBleu = nbPouceBleu+1 where idAvis = :idAvis");
-        $requete->execute(array($idAvis));
+        echo "ok";
     }
     function getNbLikeAvis($idAvis) {
         $requete = self::$bdd->prepare("SELECT nbPouceBleu from Avis where idAvis = :idAvis");

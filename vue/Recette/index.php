@@ -72,7 +72,7 @@
             }
             $("#test").html('');
             $.ajax({
-                url: "/~rhamouche/Php_Projet//index.php?action=filtre&module=mod_Recette",
+                url: "/index.php?action=filtre&module=mod_Recette",
                 type : "GET",
                 data : {"value" : filtre},
                 success : function (data) {

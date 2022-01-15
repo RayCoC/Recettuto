@@ -46,6 +46,7 @@ class ControleurRecette extends Controleur{
                 $data['avis'][$item]['user'] = $value[1];
                 $data['avis'][$item]['message'] = $value[0];
                 $data['avis'][$item]['idAvis'] = $value[2];
+                $data['avis'][$item]['like'] = $value[3];
             }
             VueRecette::espaceCommentaire($data);
         }
@@ -78,6 +79,7 @@ class ControleurRecette extends Controleur{
             $data['avis'][$item]['user'] = $value[1];
             $data['avis'][$item]['message'] = $value[0];
             $data['avis'][$item]['idAvis'] = $value[2];
+            $data['avis'][$item]['like'] = $value[3];
         }
         $data['user']=$this->getUserName();
         $this->vue->pageVoirRecette($data);
@@ -162,15 +164,16 @@ class ControleurRecette extends Controleur{
     }
      function like() {
         if (isset($_SESSION['nomUtilisateur'])){
+            $idUser = $this->modele->getIdUser($_SESSION['nomUtilisateur']);
              if (isset($_GET['idRec']) && $this->modele->verifieNbPouce($_SESSION['nomUtilisateur'], $_GET['idRec'])) {
-                 $this->modele->likeRecette($_SESSION['nomUtilisateur'], $_GET['idRec']);
+                 $this->modele->likeRecette($idUser[0][0], $_GET['idRec']);
              }
         }
          $this->modele->getNbLike($_GET['idRec']);
     }
     static function getUserName() {
         $user = ModeleRecette::getUserNameRecette($_SESSION['idRecette']);
-        return $user[0];
+       return $user[0];
     }
     static function checkCreateurRecette() :bool {
         $user = self::getUserName();
@@ -191,6 +194,7 @@ class ControleurRecette extends Controleur{
     }
     function likeComment() {
         if (isset($_SESSION['nomUtilisateur'])) {
+            echo $_GET['idAvis'];
             $this->modele->likeComment($_GET['idAvis']);
         }
         $this->modele->getNbLike($_GET['idAvis']);

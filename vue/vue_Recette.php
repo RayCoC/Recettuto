@@ -67,7 +67,8 @@ class VueRecette extends vue {
                                         }
                                         echo '<h5><a class="profile-link">'.$value['user'].'</a></h5>
                                         <p>'.$value['message'].'</p>
-                                        <a class="btn text-green" id="likeCommentaire" value='.$value['idAvis'].'><i class="fa fa-thumbs-up"></i></a>';
+                                        <a class="btn text-green" id="likeCommentaire" value='.$value['idAvis'].'><i class="fa fa-thumbs-up"></i></a>
+                                        <p id="nbLikeComment">'.$value['like'].'</p>';
                                     }
                             echo '</div>';
                                }
