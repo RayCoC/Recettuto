@@ -29,7 +29,7 @@
                             <?php
                             require_once "./Controleur/controleur_Authentification.php";
                             if(ControleurAuthentification::test_Connexion()) {
-                                echo '<li><a class="dropdown-item" href="index.php?action=MonCompte&module=mod_Authentification" style="color: black;">Mon Compte</a></li>
+                                echo '<li><a class="dropdown-item" href="index.php?action=profil&module=mod_Profil" style="color: black;">Mon Compte</a></li>
                                    <li><a class="dropdown-item" href="index.php?action=deconnexion&module=mod_Authentification" style="color: black;">Deconnexion</a></li>
                                     <li><a class ="dropdown-item" href = "index.php?action=rechercherUtilisateur&module=mod_Utilisateur" style="color: black">Utilisateurs</a></li>';
                             }
@@ -55,4 +55,4 @@
             </ul>
     </header>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</html>
+
