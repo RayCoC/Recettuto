@@ -58,16 +58,19 @@ class VueRecette extends vue {
         echo '<div class="post-detail">';
                                if (!empty($data['avis'])) {
                                     foreach ($data['avis'] as $item => $value) {
-                                        if (ControleurRecette::checkCreateurRecette() or $value['user']==$_SESSION['nomUtilisateur']) {
-                                        echo '<ul class="list-inline m-0" style="float: right">
-                                            <li class="list-inline-item">
-                                                <a id="deleteComm" data-user ='.$value['user'].' data-idAvis='.$value['idAvis'].' class= "btn text-red deleteComm" href=""><i class="fa fa-trash"></i></a>
-                                            </li>
-                                        </ul>';
+                                        if (isset($_SESSION['nomUtilisateur'])) {
+                                            if (ControleurRecette::checkCreateurRecette() or $value['user'] == $_SESSION['nomUtilisateur']) {
+                                                echo '<ul class="list-inline m-0" style="float: right">
+                                                <li class="list-inline-item">
+                                                    <a id="deleteComm" data-user =' . $value['user'] . ' data-idAvis=' . $value['idAvis'] . ' class= "btn text-red deleteComm" href=""><i class="fa fa-trash"></i></a>
+                                                </li>
+                                            </ul>';
+                                            }
                                         }
                                         echo '<h5><a class="profile-link">'.$value['user'].'</a></h5>
                                         <p>'.$value['message'].'</p>
                                         <a class="btn text-green" id="likeCommentaire" value='.$value['idAvis'].'><i class="fa fa-thumbs-up"></i></a>
+                                        <a class="btn text-yellow" id="signalement" value='.$value['idAvis'].'><i class="fas fa-exclamation-triangle"></i></a>
                                         <p id="nbLikeComment">'.$value['like'].'</p>';
                                     }
                             echo '</div>';

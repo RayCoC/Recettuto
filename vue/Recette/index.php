@@ -16,7 +16,7 @@
                         <option value="ingredient">Ingredient</option>
                     </select>
                 </div>
-                <input type="text" class="form-control" placeholder="Search Here" name="recherche" id="search">
+                <input type="text" class="form-control" placeholder="Search Here" name="recherche" id="searchRecette">
                 <button class="input-group-text shadow-none px-4 btn-success">
                     <i class="bi bi-search"></i>
                 </button>
@@ -39,45 +39,67 @@
             </div>
         </div>
         <div id="myBtnContainer">
-            <input type="submit" class="btn" onclick="filtre(this.value)" value="Recent">
-            <input type="submit" class="btn" onclick="filtre(this.value)" value="Dessert">
-            <input type="submit" class="btn" onclick="filtre(this.value)" value="Repas">
-            <input type="submit" class="btn" onclick="filtre(this.value)" value="Petit-Dejeuner">
-            <input type="submit" class="btn" onclick="filtre(this.value)" value="Diner">
-            <input type="submit" class="btn" onclick="filtre(this.value)" value="Populaire">
+            <input type="submit" class="btn" value="Recent">
+            <input type="submit" class="btn" value="Dessert">
+            <input type="submit" class="btn" value="Repas">
+            <input type="submit" class="btn" value="Petit-Dejeuner">
+            <input type="submit" class="btn" value="Diner">
+            <input type="submit" class="btn" value="Populaire">
         </div>
         <div class="container mt-5" >
             <div class="card-group">
                 <div class="row" id="test">
+
                 </div>
             </div>
         </div>
     <script>
-        function filtre(val) {
-            var filtre;
-            if (val == "Dessert") {
-                filtre = 1;
-            }
-            else if (val == "Repas") {
-                filtre = 2;
-            }
-            else if (val == "Petit-Dejeuner") {
-                filtre = 3;
-            }
-            else if (val == "Diner") {
-                filtre = 4;
-            }
-            else {
-                filtre = val;
-            }
-            $("#test").html('');
-            $.ajax({
-                url: "/index.php?action=filtre&module=mod_Recette",
-                type : "GET",
-                data : {"value" : filtre},
-                success : function (data) {
-                    $("#test").append(data);
+        $(document).ready(function () {
+            $('.btn').click(function () {
+                var val = $(this).val();
+                var filtre;
+                if (val == "Dessert") {
+                    filtre = 1;
+                } else if (val == "Repas") {
+                    filtre = 2;
+                } else if (val == "Petit-Dejeuner") {
+                    filtre = 3;
+                } else if (val == "Diner") {
+                    filtre = 4;
+                } else {
+                    filtre = val;
+                }
+                $("#test").html('');
+                $.ajax({
+                    url: "/index.php?action=filtre&module=mod_Recette",
+                    type: "GET",
+                    data: {"value": filtre},
+                    success: function (data) {
+                        $("#test").append(data);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#searchRecette").keyup(function () {
+                filtre = $("#filtre").val();
+                $('#test').html('');
+                var recette = $(this).val();
+                if (recette != "") {
+                    $.ajax ({
+                        url: "/index.php?action=rechercher&module=mod_Recette",
+                        type: "GET",
+                        data :{"filtre" : filtre, "recherche" : recette},
+                        success : function (data) {
+                            $("#test").append(data);
+                        }
+                    });
+                }
+                else {
+                    return;
                 }
             });
-        }
+        });
     </script>

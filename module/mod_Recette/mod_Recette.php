@@ -71,6 +71,9 @@ class ModRecette {
             case 'likeCommentaire' :
                 $this->controleurRecette->likeComment();
                 break;
+            case 'signalerCommentaire' :
+                $this->controleurRecette->signalerCommentaire();
+                break;
         }
     }
 }

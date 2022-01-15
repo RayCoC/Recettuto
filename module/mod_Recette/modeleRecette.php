@@ -177,26 +177,26 @@ class ModeleRecette extends Connexion
             $requete = self::$bdd->prepare("SELECT * FROM Recette where idType = :value");
             $requete->bindParam('value', $value);
         }
-        /*else if ($value = "Populaire") {
-            $requete = self::$bdd->prepare("SELECT * FROM Recette wh")
-        }*/
+        else if ($value = "Populaire") {
+            $requete = self::$bdd->prepare("SELECT * FROM Recette order by note desc");
+        }
         else if ($value == "Recent") {
-            $requete= self::$bdd->prepare("SELECT * FROM Recette order by dateCreation desc");
+            $requete= self::$bdd->prepare("SELECT * FROM Recette order by STR_TO_DATE(dateCreation, '%d-%m-%Y') ASC");
         }
         $requete->execute();
         return $requete->fetchAll();
     }
     function rechercheBy($filtre, $value) {
         if ($filtre == 'titre') {
-            $requete = self::$bdd->prepare("SELECT * FROM Recette where titre = :value");
+            $requete = self::$bdd->prepare("SELECT idRec, titre,image FROM Recette where titre LIKE :value");
         }
         else if ($filtre == 'hashtag'){
-            $requete = self::$bdd->prepare("SELECT * FROM Recette natural join Lier where nomHashtag = :value ");
+            $requete = self::$bdd->prepare("SELECT idRec, titre,image FROM Recette natural join Lier where nomHashtag LIKE :value ");
         }
         else if ($filtre == 'ingredient') {
-            $requete = self::$bdd->prepare("SELECT * FROM Recette natural join Composer natural join Ingredient where nom = :value");
+            $requete = self::$bdd->prepare("SELECT idRec, titre,image FROM Recette natural join Composer natural join Ingredient where nom LIKE :value");
         }
-        $requete->bindParam(':value', $value);
+        $requete->bindValue(':value', $value.'%');
         $requete->execute();
         return $requete->fetchAll();
     }
@@ -257,19 +257,15 @@ class ModeleRecette extends Connexion
         return $requete->fetchAll();
     }
     function likeRecette($idUser, $idRec) {
+        if ($this->verifieNbPouce($idUser, $idRec) == true) {
         $requete = self::$bdd->prepare("UPDATE Recette set note = note+1 where idRec = :idRec");
         $requete->bindParam("idRec", $idRec);
         $requete->execute();
-        if ($this->verifieCommentaireUnique($idUser, $idRec)) {
-            $requete = self::$bdd->prepare ("INSERT INTO Avis(dejaLike,idUtilisateur, idRec) values (1, :idUser,:idRec )");
-            $requete->bindParam("idUser", $idUser);
-            $requete->bindParam('idRec', $idRec);
-        }
-        else {
-            $requete = self::$bdd->prepare("UPDATE Avis set dejaLike = 1 where idUtilisateur = :idUser");
-            $requete->bindParam("idUser", $idUser);
-        }
+        $requete = self::$bdd->prepare("INSERT INTO LikeRecette values (:idUser,1,:idRec)");
+        $requete->bindParam("idUser", $idUser);
+        $requete->bindParam('idRec', $idRec);
         $requete->execute();
+        }
     }
     function getNbLike($idRec) {
         $requete = self::$bdd->prepare("SELECT note from Recette where idRec = ?");
@@ -278,45 +274,74 @@ class ModeleRecette extends Connexion
         $data = $requete->fetch();
         echo $data[0];
     }
-    function verifieNbPouce($login, $idRec) {
-        $requete = self::$bdd->prepare("SELECT nbPouceBleu, dejaLike from Avis natural join Utilisateur where idRec = :id and login = :login");
-        $requete->bindParam("id", $idRec);
-        $requete->bindParam("login", $login);
-        $requete->execute();
-        $data = $requete->fetchAll();
-        if (!empty($data)) {
-            if ($data[0][1] == 1) {
-                return false;
-            }
-        }
-        return true;
+    function getNbLikeCommentaire($idAvis) {
+        $requete = self::$bdd->prepare("SELECT nbPouceBleu from Avis where idAvis = ?");
+        $requete->execute(array($idAvis));
+        $data = $requete->fetch();
+        echo $data[0];
     }
-    function verifieCommentaireUnique($idUser, $idRec):bool  {
-        $requete = self::$bdd->prepare("SELECT * from Avis where idRec = :id and idUtilisateur = :idUser");
-        $requete->bindParam('id', $idRec);
-        $requete->bindParam('idUser', $idUser);
-        $requete->execute();
+    function verifieNbPouce($idUser, $idRec): bool {
+        $requete = self::$bdd->prepare("SELECT * from likeRecette where idRec = ? and idUtilisateur = ?");
+        $requete->execute($idRec, $idUser);
         $data = $requete->fetchAll();
         if (!empty($data)) {
             return false;
         }
         return true;
     }
-    function deleteComment($idAvis) {
-        $requete = self::$bdd->prepare("DELETE from Signaler where idAvis = :idAvis");
-        $requete->bindParam("idAvis", $idAvis);
-        $requete->execute();
-        $requete = self::$bdd->prepare("DELETE from Avis where idAvis = :idAvis");
-        $requete->bindParam("idAvis", $idAvis);
-        $requete->execute();
+    function verifieCommentaireUnique($idUser, $idRec):bool  {
+        $requete = self::$bdd->prepare("SELECT * from Avis where idRec = ? and idUtilisateur = ?");
+        $requete->execute(array($idRec, $idUser));
+        $data = $requete->fetchAll();
+        if (!empty($data)) {
+            return false;
+        }
+        return true;
     }
-    function likeComment($idAvis) {
-        echo "ok";
+    function verifieLikeCommentaireUnique($idUser, $idAvis): bool {
+        $requete = self::$bdd->prepare ("SELECT * from LikeCommentaire where idAvis = ? and idUtilisateur = ?");
+        $requete->execute(array($idAvis, $idUser));
+        $data = $requete->fetchAll();
+        if (empty($data)) {
+            return true;
+        }
+        return false;
+    }
+    function deleteComment($idAvis) {
+        $requete = self::$bdd->prepare("DELETE from Signaler where idAvis = ?");
+        $requete->execute(array($idAvis));
+        $requete = self::$bdd->prepare("DELETE from Avis where idAvis = ?");
+        $requete->execute(array($idAvis));
+    }
+    function likeComment($idUser,$idAvis) {
+        if ($this->verifieLikeCommentaireUnique($idUser, $idAvis)) {
+            $requete= self::$bdd->prepare ("UPDATE Avis set nbPouceBleu = nbPouceBleu+1 where idAvis = ?");
+            $requete->execute(array($idAvis));
+            $requete = self::$bdd->prepare("INSERT INTO LikeCommentaire values (?, 1, ?)");
+            $requete->execute(array($idUser,$idAvis));
+        }
     }
     function getNbLikeAvis($idAvis) {
-        $requete = self::$bdd->prepare("SELECT nbPouceBleu from Avis where idAvis = :idAvis");
+        $requete = self::$bdd->prepare("SELECT nbPouceBleu from Avis where idAvis = ?");
         $requete->execute(array($idAvis));
         $like = $requete->fetchAll();
         return $like[0];
+    }
+    function dejaSignale ($idAvis, $idUtilisateur) {
+        $requete = self::$bdd->prepare("SELECT * FROM Signaler where idUtilisateur = ? and idAvis = ?");
+        $requete->execute(array($idUtilisateur, $idAvis));
+        $data = $requete->fetchAll();
+        if (empty($data)) {
+            return false;
+        }
+        return true;
+    }
+    function signalerCommentaire ($idAvis, $idUtilisateur) {
+        if (!$this->dejaSignale($idAvis, $idUtilisateur)) {
+            echo "ok";
+            $requete = self::$bdd->prepare("INSERT INTO Signaler values (?, ?)");
+            $requete->execute(array($idAvis, $idUtilisateur));
+        }
+        echo "march pas";
     }
 }

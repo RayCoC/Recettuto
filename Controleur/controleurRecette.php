@@ -147,10 +147,16 @@ class ControleurRecette extends Controleur{
         return $this->modele->detailsRecette($id);
     }
     function research() {
-        $filtre = $_POST['filtre'];
-        $value = $_POST['recherche'];
-        $rec = $this->modele->rechercheBy($filtre, $value);
-        $this->afficherPagePrincipalRecette($rec);
+        if (isset($_GET['filtre']) && isset($_GET['recherche'])) {
+            $data = array();
+            $filtre = $_GET['filtre'];
+            $value = $_GET['recherche'];
+            $rec = $this->modele->rechercheBy($filtre, $value);
+            foreach ($rec as $item => $value) {
+                $data['Recette'][$item] = array('id'=>$value[0], 'titre'=>$value[1], 'img'=>$value[2]);
+            }
+            VueRecette::afficheRecettes($data);
+        }
     }
     function ajouterAvis() {
         $idUser = $this->modele->getIdUser($_SESSION['nomUtilisateur']);
@@ -194,9 +200,15 @@ class ControleurRecette extends Controleur{
     }
     function likeComment() {
         if (isset($_SESSION['nomUtilisateur'])) {
-            echo $_GET['idAvis'];
-            $this->modele->likeComment($_GET['idAvis']);
+            $user = $this->modele->getIdUser($_SESSION['nomUtilisateur']);
+            $this->modele->likeComment($user[0][0],$_GET['idAvis']);
         }
-        $this->modele->getNbLike($_GET['idAvis']);
+        $this->modele->getNbLikeCommentaire($_GET['idAvis']);
+    }
+    function signalerCommentaire() {
+        if (isset($_SESSION['nomUtilisateur'])) {
+            $user = $this->modele->getIdUser($_SESSION['nomUtilisateur']);
+            $this->modele->signalerCommentaire($_GET['idAvis'], $user[0][0]);
+        }
     }
 }

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./CSS/voirRecette.css">
@@ -129,7 +128,21 @@
                         $("#nbLikeComment").text(data);
                     }
                 });
-                console.log($(this).attr('value'));
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#signalement").click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type : "GET",
+                    url: "index.php?action=signalerCommentaire&module=mod_Recette",
+                    data : {idAvis : $(this).attr('value')},
+                    success : function (data) {
+                        $("#signalement").html('Signalé');
+                    }
+                });
             });
         });
     </script>
