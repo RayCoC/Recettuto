@@ -26,10 +26,6 @@ class VueProfil extends vue{
         vue::render("Profil/signalements.php", $data);
     }
 
-    function profilVide($data){
-        vue::render("Profil/profilVide.php", $data);
-    }
-
     static function afficheRecettes($data){
         foreach ($data as $item => $value) {
             echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
@@ -97,5 +93,25 @@ class VueProfil extends vue{
                 </div>
             </div>';
         }
+    }
+    static function profilVide($message) {
+        echo '<div class="container mb-4">
+                <div class="row">
+                    <div class="col-lg-8 pb-5">
+                    <!-- Item-->
+        
+                        <div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
+                            <div class="px-3 my-3">
+                                <a class="cart-item-product" href="#">
+            
+                                    <div class="cart-item-product-info">
+                                        <h4 class="cart-item-product-title">Vous n\'avez pas '.$message.'</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                </div>
+             </div>';
+
     }
 }

@@ -100,11 +100,10 @@ class ControleurProfil{
             foreach ($abo as $item => $value) {
                 $data['abonnements'][$item] = array("abo" => $value[0]);
             }
-            $this->vue->abonnements($data);
+            VueProfil::afficheAbonnements($data['abonnements']);
         }
         else{
-            $data['message']="d'abonnements";
-            $this->vue->profilVide($data);
+            $this->vue->profilVide("d'abonnements");
         }
     }
 
@@ -127,7 +126,7 @@ class ControleurProfil{
                 }
                 $data['commentaires'][$item] = array("textAvis" => $value[1], "nbEtoiles" => $value[2], "nbPouceBleu" => $value[3], "nomRec" => $nomRec, "idRec" => $value[5]);
             }
-            $this->vue->commentaires($data);
+            VueProfil::afficheCommentaires($data['commentaires']);
         }
         else{
             $data['message']="de commentaires";

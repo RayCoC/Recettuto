@@ -147,20 +147,6 @@ class ModeleProfil extends Connexion {
         }
         return false;
     }
-
-    static function estAdmin(){
-
-        $requete = self::$bdd->prepare("SELECT idRole from utilisateur where login = :login");
-
-        $requete->bindParam('login', $_SESSION['nomUtilisateur']);
-        $requete->execute();
-        $role = $requete->fetchAll();
-        if($role[0][0]==2){
-            return true;
-        }
-        return false;
-    }
-
     public function avisSignaler(){
         $requete = self::$bdd->prepare("SELECT textAvis, login, idAvis from avis natural join utilisateur where idAvis IN (SELECT distinct(idAvis) from signaler)");
         $requete->execute();
@@ -185,4 +171,5 @@ class ModeleProfil extends Connexion {
         $requete = self::$bdd->prepare("DELETE FROM signaler WHERE idAvis = $idAvis");
         $requete->execute();
     }
+
 }

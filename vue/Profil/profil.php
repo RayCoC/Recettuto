@@ -1,5 +1,6 @@
 <head>
     <link rel="stylesheet" href="./CSS/profil.css">
+    <link rel="stylesheet" href="./CSS/mesRecettes.css">
 
 </head>
 <div class="container mt-5">
@@ -33,21 +34,21 @@
                             </div><span class="badge badge-secondary">3</span>
                         </div>
                     </a>
-                    <a class="list-group-item" href="index.php?action=abonnements&module=mod_Profil&login=<?=$_SESSION['nomUtilisateur']?>" ">
+                    <a class="list-group-item" id="abonnements" href="" login="<?=$_SESSION['nomUtilisateur']?>">
                     <div class="d-flex justify-content-between align-items-center">
                         <div><i class="fe-icon-heart mr-1 text-muted"></i>
                             <div class="d-inline-block font-weight-medium text-uppercase">Abonnements</div>
                         </div><span class="badge badge-secondary">3</span>
                     </div>
                     </a>
-                    <a class="list-group-item" href="index.php?action=commentaires&module=mod_Profil&login=<?=$_SESSION['nomUtilisateur']?>" >
+                    <a id="commentaires" class="list-group-item" href="" login="<?=$_SESSION['nomUtilisateur']?>" >
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-tag mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Commentaires</div>
                             </div><span class="badge badge-secondary">4</span>
                         </div>
                     </a>
-                    <?php if(ModeleProfil::estAdmin()) :?>
+                    <?php if($_SESSION['role']==3) :?>
                         <a class="list-group-item" href="index.php?action=signalements&module=mod_Profil&login=<?=$_SESSION['nomUtilisateur']?>" >
                             <div class="d-flex justify-content-between align-items-center">
                                 <div><i class="fe-icon-heart mr-1 text-muted"></i>
@@ -61,6 +62,9 @@
         </div>
         <!-- Profile Settings-->
         <div class="col-lg-8 pb-5">
+            <div id="result">
+
+            </div>
             <form action="index.php?action=infoModifier&module=mod_Profil" method="post" class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -111,3 +115,39 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("#commentaires").click(function (e) {
+            e.preventDefault();
+            $("#result").html("");
+            $("form").html("");
+            $.ajax ({
+                type : "GET",
+                url : "index.php?action=commentaires&module=mod_Profil",
+                data : {login : $(this).attr("login")},
+                success : function (data) {
+                    $("#result").append(data);
+                }
+
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#abonnements").click(function (e) {
+            e.preventDefault();
+            $("result").html("");
+            $("form").html("");
+            $.ajax({
+            type: "GET",
+            url: "index.php?action=abonnements&module=mod_Profil",
+            data: {login : $(this).attr("login")},
+             success : function (data) {
+                $("#result").append(data);
+             }
+            });
+        });
+    });
+</script>

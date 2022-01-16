@@ -43,7 +43,6 @@ class ControleurAuthentification extends Controleur{
                         }
                         $_SESSION['nomUtilisateur'] = $login;
                         $_SESSION['role'] = $role;
-                        echo $_SESSION['role'];
                         vue::render("Accueil/index.php");
                     } else {
                         $this->afficherConnexion("Mot de passe incorrect");

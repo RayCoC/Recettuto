@@ -34,9 +34,9 @@
                         <i class="fa fa-user text-muted"></i>Mes Recettes</a>
                     <a class="list-group-item " href="index.php?action=abonnements&module=mod_Profil&login=<?=$_GET['login']?>" >
                         <i class="fa fa-user text-muted"></i>Abonnements</a>
-                    <a class="list-group-item active" href="index.php?action=commentaires&module=mod_Profil&login=<?=$_GET['login']?>" >
+                    <a class="list-group-item active" href="index.php?action=commentaires&module=mod_Profil" login="<?=$_GET['login']?>">
                         <i class="fa fa-user text-muted"></i>Commentaires</a>
-                    <?php if (ModeleProfil::estAdmin()):?>
+                    <?php if ($_SESSION['role']==3):?>
                         <a class="list-group-item " href="index.php?action=signalements&module=mod_Profil&login=<?=$_GET['login']?>" >
                             <i class="fa fa-user text-muted"></i>Signalements</a>
                     <?php endif;?>

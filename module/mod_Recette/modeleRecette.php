@@ -282,7 +282,7 @@ class ModeleRecette extends Connexion
     }
     function verifieNbPouce($idUser, $idRec): bool {
         $requete = self::$bdd->prepare("SELECT * from likeRecette where idRec = ? and idUtilisateur = ?");
-        $requete->execute($idRec, $idUser);
+        $requete->execute(array($idRec, $idUser));
         $data = $requete->fetchAll();
         if (!empty($data)) {
             return false;
