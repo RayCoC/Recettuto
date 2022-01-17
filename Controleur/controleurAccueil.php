@@ -23,6 +23,16 @@ class ControleurAccueil extends Controleur{
             $data['Recent'][$item]= array("idRec"=>$value[0], "titre"=>$value[1],"img"=>$value[2]);
         }
 
+        $alea=$this->modele->recetteAleatoire();
+        foreach ($alea as $item=>$value){
+            $data['Aleatoire'][$item]= array("idRec"=>$value[0], "titre"=>$value[1],"img"=>$value[2]);
+        }
+
+        $type=$this->modele->typePlat();
+        foreach ($type as $item=>$value){
+            $data['Plat'][$item]= array("idType"=>$value[0], "nomType"=>$value[1]);
+        }
+
         $this->vue_Accueil->pageAccueil($data);
     }
 }

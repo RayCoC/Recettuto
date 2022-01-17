@@ -4,7 +4,6 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="./CSS/accueil.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
         <!--<link rel="stylesheet" href="./CSS/accueil.css">-->
     </head>
 
@@ -108,54 +107,33 @@
                <!--end of col-->
            </div>
        </div>
+
        <div class="container">
            <div class="row">
-               <div class="boxlogo col-md-4 block">
-                   <img src = "./img/italie.png" class="firstIMG first">
-               </div>
-               <div class="col-xs-6 col-sm-8 ">
-                   <div class="row">
-                       <div class="block">
-                           <img src = "./img/gateau.png" class="firstIMG">
-                       </div>
-                       <div class="col-sm-6 boxa">
-                       </div>
-                   </div>
-                   <!--nested .row-->
-               </div>
-           </div>
-           <div class="row">
-               <div class="boxlogo col-md-4 block">
-                   <img src = "./img/Nouille.png" class="firstIMG first">
-               </div>
-               <div class="col-xs-6 col-sm-8 ">
-                   <div class="row">
-                       <div class="block">
-                           <img src = "./img/gateau.png" class="firstIMG">
-                       </div>
-                       <div class="col-sm-6 boxa">
-                       </div>
-                   </div>
-                   <!--nested .row-->
-               </div>
+               <?php VueAccueil::recettePopulaire($data);?>
+               <?php VueAccueil::recetteAleatoire($data);?>
            </div>
        </div>
+
        <div class ="CatégorieRecette">
            <h1 class="TitreCatégorie"> Recettes les plus récentes</h1>
-           <?php VueAccueil::recetteRecent($data);?>
+            <div class="container">
+               <ul class="row portfolio list-unstyled mb-0 boxed-portfolio">
+                    <?php VueAccueil::recetteRecent($data);?>
+               </ul>
+            </div>
        </div>
-       <div class= "CatégorieRecette">
-           <h1 class="TitreCatégorie"> Recettes saisonnières</h1>
-           <img src = "./img/Nouille.png">
-           <img src = "./img/cake.png">
-           <img src="./img/salade.png">
-       </div>
+
        <div id = "ThemeRecette">
-           <h1 class="TitreCatégorie">Thémes de Recettes </h1>
-           <ul id="listeChoix">
-               <li>Gateaux</li>
-               <li>Patate</li>
-               <li>Italie</li>
-               <li>Genre</li>
-           </ul>
+           <section id="footer">
+               <div class="container">
+                   <div class="row text-center text-xs-center text-sm-left text-md-left">
+                       <div class="col-xs-12 col-sm-4 col-md-4">
+                           <h2>Type Plat</h2>
+                           <ul class="list-unstyled quick-links">
+                            <?php VueAccueil::typePlat($data);?></ul>
+                       </div>
+                   </div>
+               </div>
+           </section>
        </div>
