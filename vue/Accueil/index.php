@@ -141,10 +141,8 @@
            </div>
        </div>
        <div class ="CatégorieRecette">
-           <h1 class = "TitreCatégorie"> Dernières recettes </h1>
-           <img src="./img/Crepe.png">
-           <img src ="./img/italiaDelRepas.png">
-           <img src = "./img/Lasagne.png">
+           <h1 class="TitreCatégorie"> Recettes les plus récentes</h1>
+           <?php VueAccueil::recetteRecent($data);?>
        </div>
        <div class= "CatégorieRecette">
            <h1 class="TitreCatégorie"> Recettes saisonnières</h1>
