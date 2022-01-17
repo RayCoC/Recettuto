@@ -20,7 +20,7 @@
             <div class="wizard">
                 <nav class="list-group list-group-flush">
 
-                    <a class="list-group-item active" href="index.php?action=profil&module=mod_Profil&login=<?=$_SESSION['nomUtilisateur']?>" >
+                    <a class="list-group-item " href="index.php?action=profil&module=mod_Profil&login=<?=$_SESSION['nomUtilisateur']?>" >
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-heart mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Profile Settings</div>
@@ -63,15 +63,19 @@
         <div class="col-lg-8 pb-5">
             <div id="result">
             </div>
+
             <form action="" method="post" class="row">
                 <?php VueProfil::profilSettings($data);?>
                 <div class="col-12">
                     <hr class="mt-2 mb-3">
+                    <?php if ($_SESSION['nomUtilisateur']==$data['utilisateur']['login']):?>
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                         <button class="btn btn-style-1 btn-primary" id="update" type="submit" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
                     </div>
+                    <?php endif?>
                 </div>
             </form>
+
         </div>
     </div>
 </div>

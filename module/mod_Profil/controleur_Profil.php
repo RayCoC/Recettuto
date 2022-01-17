@@ -62,7 +62,7 @@ class ControleurProfil{
         $data= array();
         if (!empty($rec)){
             foreach ($rec as $item=>$value){
-                $data['Recette'][$item]= array("img"=>$value[5], "titre" => $value[2],"date"=>$value[9],"difficulte"=>$value[11]);
+                $data['Recette'][$item]= array("idRec"=>$value[1],"img"=>$value[5], "titre" => $value[2],"date"=>$value[9],"difficulte"=>$value[11]);
             }
             VueProfil::afficheRecettes($data['Recette']);
         }
@@ -99,8 +99,7 @@ class ControleurProfil{
             VueProfil::afficheCommentaires($data['commentaires']);
         }
         else{
-            $data['message']="de commentaires";
-            $this->vue->profilVide($data);
+            $this->vue->profilVide("de commentaires");
         }
 
     }

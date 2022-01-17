@@ -60,6 +60,7 @@ class ModeleAuthentification extends Connexion {
         $requete->bindParam('login', $login);
         $requete->execute();
         $role = $requete->fetch();
-        return $role[0][0];
+        return $role[0];
+
     }
 }

@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
     <title>Formulaire modification ingrédient</title>
 </head>
-<body>
     <div class="container mt-5">
         <div class="team-single">
             <div class="row">
@@ -16,7 +15,7 @@
                     </div>
                     <div class="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all text-center">
                         <p>Informations sur la recette </p>
-                        <p class="sm-width-95 sm-margin-auto">recette ajouté le <?=$data['dateCrea']?> par <a href="#"><?=$data['user']?></a></p>
+                        <p class="sm-width-95 sm-margin-auto">recette ajouté le <?=$data['dateCrea']?> par <a href="index.php?action=profil&module=mod_Profil&login=<?=$data['user']?>"><?=$data['user']?></a></p>
                         <a class="btn btn-primary" style="background-color: #0EAF0B;" href="" role="button" id="like" value="<?=$_SESSION['idRecette']?>"><i class="fa fa-thumbs-up"></i></a>
                         <p id="nbLike">La recette a <?=$data['note']?> j'aime ! </p>
                     </div>

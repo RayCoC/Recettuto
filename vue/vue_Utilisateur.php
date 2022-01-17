@@ -30,7 +30,7 @@ class VueUtilisateur extends Vue{
                                                 <td>
                                                     <ul class="list-inline m-0">
                                                         <li class="list-inline-item">
-                                                            <a href="index.php?action=voirProfil&id='.$value[0].'&module=mod_Profil">Voir profil</a>
+                                                            <a href="index.php?action=profil&module=mod_Profil&login='.$value['6'].'">Voir profil</a>
                                                         </li>';
                                                         if ($_SESSION['role'] == 3 && $value[7] == 2) { echo '
                                                         <li class="list-inline-item">
