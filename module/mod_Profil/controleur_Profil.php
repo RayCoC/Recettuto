@@ -41,10 +41,7 @@ class ControleurProfil{
 
     }
     function afficherModifProfil(){
-
         $this->vue->modifProfil();
-
-
     }
 
     function modifProfil()
@@ -58,44 +55,25 @@ class ControleurProfil{
 
         $data = array('password' => $mdp, 'nomUtilisateur' => $_SESSION['nomUtilisateur'], 'nom' => $_POST['nom'], 'prenom' => $_POST['prenom'], 'age' => $_POST['age'], 'sexe' => $sexe);
         $this->modele->modifierProfil($data);
-        $this->afficherProfil();
     }
 
     function afficherMesRecettes(){
         $rec=$this->modele->recetteUtilisateur($_GET['login']);
         $data= array();
-
-        $info = $this->modele->infoUtilisateur($_GET['login']);
-
-        foreach ($info as $value) {
-            $data['utilisateur']['date'] = $value[3];
-        }
         if (!empty($rec)){
-
             foreach ($rec as $item=>$value){
                 $data['Recette'][$item]= array("img"=>$value[5], "titre" => $value[2],"date"=>$value[9],"difficulte"=>$value[11]);
-
             }
-            $this->vue->mesRecettes($data);
+            VueProfil::afficheRecettes($data['Recette']);
         }
         else{
-            $data['message']="de recettes";
-            $this->vue->profilVide($data);
+            $this->vue->profilVide("de recettes");
         }
-
     }
 
     function afficherAbonnements(){
         $abo=$this->modele->abonnementUtilisateur();
-
         $data=array();
-
-        $info = $this->modele->infoUtilisateur($_GET['login']);
-
-        foreach ($info as $value) {
-            $data['utilisateur']['date'] = $value[3];
-
-        }
         if (!empty($abo)) {
             foreach ($abo as $item => $value) {
                 $data['abonnements'][$item] = array("abo" => $value[0]);
@@ -109,15 +87,7 @@ class ControleurProfil{
 
     function afficherCommentaires(){
         $commentaires=$this->modele->commentaireUtilisateur();
-
         $data=array();
-
-        $info = $this->modele->infoUtilisateur($_GET['login']);
-
-        foreach ($info as $value) {
-            $data['utilisateur']['date'] = $value[3];
-        }
-
         if (!empty($commentaires)) {
             foreach ($commentaires as $item => $value) {
                 $nomRecette=$this->modele->getNomRecette($value[5]);
@@ -149,33 +119,34 @@ class ControleurProfil{
         $signalement=$this->modele->avisSignaler();
 
         $data=array();
-
-        $info = $this->modele->infoUtilisateur($_GET['login']);
-        foreach ($info as $value) {
-            $data['utilisateur']['date'] = $value[3];
-        }
-
         if (!empty($signalement)) {
             foreach ($signalement as $item => $value) {
                 $data['signalements'][$item] = array("textAvis" => $value[0], "utilisateur" => $value[1], "idAvis" => $value[2]);
             }
-            $this->vue->signalements($data);
+            VueProfil::afficheSignalements($data['signalements']);
         }
         else{
-            $data['message']="de signalement";
-            $this->vue->profilVide($data);
+            $this->vue->profilVide("de signalement");
         }
     }
 
     function bannir(){
-        $idAvis=$_POST['idAvis'];
-        $this->modele->bannir($idAvis);
-        $this->afficherSignalement();
+        if (isset($_SESSION['nomUtilisateur'])) {
+            if ($_SESSION['role']==3) {
+                $idAvis=$_POST['idAvis'];
+                $this->modele->bannir($idAvis);
+                $this->afficherSignalement();
+            }
+        }
     }
 
     function annulerSignalement(){
-        $idAvis=$_POST['idAvis'];
-        $this->modele->enleverSignalement($idAvis);
-        $this->afficherSignalement();
+        if (isset($_SESSION['nomUtilisateur'])) {
+            if ($_SESSION['role'] == 3) {
+                $idAvis = $_POST['idAvis'];
+                $this->modele->enleverSignalement($idAvis);
+                $this->afficherSignalement();
+            }
+        }
     }
 }

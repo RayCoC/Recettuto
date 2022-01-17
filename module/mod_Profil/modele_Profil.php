@@ -162,7 +162,7 @@ class ModeleProfil extends Connexion {
         $requete2 = self::$bdd->prepare("DELETE FROM avis WHERE idAvis = $idAvis");
         $requete2->execute();
 
-        $requete3 = self::$bdd->prepare("UPDATE utilisateur SET idRole=3 WHERE idUtilisateur=:idUser");
+        $requete3 = self::$bdd->prepare("UPDATE utilisateur SET idRole=1 WHERE idUtilisateur=:idUser");
         $requete3->bindParam('idUser', $idUser[0][0]);
         $requete3->execute();
 

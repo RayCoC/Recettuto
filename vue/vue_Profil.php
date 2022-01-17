@@ -10,22 +10,6 @@ class VueProfil extends vue{
         vue::render("Profil/modifierProfil.php");
     }
 
-    function mesRecettes($data){
-        vue::render("Profil/mesRecettes.php", $data);
-    }
-
-    function abonnements($data){
-        vue::render("Profil/abonnements.php", $data);
-    }
-
-    function commentaires($data){
-        vue::render("Profil/commentaires.php", $data);
-    }
-
-    function signalements($data){
-        vue::render("Profil/signalements.php", $data);
-    }
-
     static function afficheRecettes($data){
         foreach ($data as $item => $value) {
             echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
@@ -83,8 +67,8 @@ class VueProfil extends vue{
             echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
                 <div class="px-3 my-3">
                     <a class="cart-item-product" href="#">
-                    <form action="index.php?action=bannir&module=mod_Profil&login='.$_GET['login'].'" method="post"><input type="submit" name="pipi" value="Bannir" ><input type="hidden" value="'.$value['idAvis'].'" name="idAvis"></form>
-                    <form action="index.php?action=annulerSignalement&module=mod_Profil&login='.$_GET['login'].'" method="post"><input type="submit" name="caca" value="Enlever" ><input type="hidden" value="'.$value['idAvis'].'"  name="idAvis"></form>
+                        <button id="ban" name="bannir" onclick="bannir('.$value['idAvis'].')">Bannir</button>
+                        <button id="annulerBan" name="annuler" onclick="annuler('.$value['idAvis'].')">Annuler </button>
                         <div class="cart-item-product-thumb"><p>'.$value['utilisateur'].'</p></div>
                         <div class="cart-item-product-info">
                             <h4 class="cart-item-product-title"> '.$value['textAvis'].'</h4>
@@ -112,6 +96,42 @@ class VueProfil extends vue{
                         </div>
                 </div>
              </div>';
-
+    }
+    static function profilSettings($data) {
+        echo '<div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-fn">Prénom</label>
+                        <input class="form-control" type="text" id="account-fn" value="'.$data['utilisateur']['prenom'].'"  name="prenom" >
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-ln">Nom</label>
+                        <input class="form-control" type="text" id="account-ln" value="'.$data['utilisateur']['nom'].'" name="nom">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-password">Mot de passe</label>
+                        <input class="form-control" type="password" id="account-password" value="" name="password" >
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-email">Age</label>
+                        <input class="form-control" type="number" id="account-age" value="'.$data['utilisateur']['age'].'" name="age" >
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-email">Sexe</label>
+                        <div class="form-check form-check-inline mb-0 me-4">
+                            <input type="radio" id="homme" name="sexe" value="homme" checked>
+                            <label for="homme">Homme</label>
+                            <input type="radio" id="femme" name="sexe" value="femme">
+                            <label for="femme">Femme</label>
+                        </div>
+                    </div>
+                </div>';
     }
 }
