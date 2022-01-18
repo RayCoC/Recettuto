@@ -43,7 +43,7 @@ class ControleurAuthentification extends Controleur{
                         }
                         $_SESSION['nomUtilisateur'] = $login;
                         $_SESSION['role'] = $role;
-                        vue::render("Accueil/index.php");
+                        header("Location: http://localhost/index.php?action=Accueil&module=mod_Accueil");
                     } else {
                         $this->afficherConnexion("Mot de passe incorrect");
                     }
@@ -75,6 +75,7 @@ class ControleurAuthentification extends Controleur{
                 $sexe=1;
             $data =array('mdp' => $_POST['mdp'], 'nomUtilisateur'=>$_POST['nomUtilisateur'],'nom'=>$_POST['nom'],'prenom'=>$_POST['prenom'],'age'=>$_POST['age'], 'sexe'=>$sexe);
             $this->modele->ajoutUtilisateur($data);
+            header("Location: http://localhost/index.php?action=Accueil&module=mod_Accueil");
         }
     }
 

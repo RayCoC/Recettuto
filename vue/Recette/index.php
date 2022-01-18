@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
+
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="./CSS/RecettePrincipal.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
-    <body>
         <form action="index.php?action=rechercher&module=mod_Recette" method="post">
             <div class="input-group mb-3 mt-10">
                 <div class="input-group-text p-0">
@@ -39,12 +37,12 @@
             </div>
         </div>
         <div id="myBtnContainer">
-            <input type="submit" class="btn" value="Recent">
-            <input type="submit" class="btn" value="Dessert">
-            <input type="submit" class="btn" value="Repas">
-            <input type="submit" class="btn" value="Petit-Dejeuner">
-            <input type="submit" class="btn" value="Diner">
-            <input type="submit" class="btn" value="Populaire">
+            <input type="submit" class="bt" value="Recent">
+            <input type="submit" class="bt" value="Dessert">
+            <input type="submit" class="bt" value="Repas">
+            <input type="submit" class="bt" value="Petit-Dejeuner">
+            <input type="submit" class="bt" value="Diner">
+            <input type="submit" class="bt" value="Populaire">
         </div>
         <div class="container mt-5" >
             <div class="card-group">
@@ -55,7 +53,7 @@
         </div>
     <script>
         $(document).ready(function () {
-            $('.btn').click(function () {
+            $('.bt').click(function () {
                 var val = $(this).val();
                 var filtre;
                 if (val == "Dessert") {

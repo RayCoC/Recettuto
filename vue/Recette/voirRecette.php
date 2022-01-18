@@ -111,13 +111,13 @@
                             $("#comm").append(data);
                         }
                     });
-                console.log($("#postComment").val());
             });
         });
     </script>
     <script>
         $(document).ready(function () {
             $("#likeCommentaire").click(function (e) {
+                console.log("ok");
                 e.preventDefault();
                 $.ajax ({
                     type : "GET",

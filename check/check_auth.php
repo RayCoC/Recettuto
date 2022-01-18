@@ -2,7 +2,7 @@
 class checkAuth {
     static function can ($action, $rule = 0) {
         if ($rule == 0) {
-            $actions = array('pageAjout', 'form', 'ajoutCommentaire', 'profil', 'likeCommentaire', 'ajoutCommentaire', 'supprimerCommentaire','like', 'mesRecettes', 'historique','infoModifier', 'abonnements', 'commentaires');
+            $actions = array('pageAjout', 'form', 'ajoutCommentaire', 'profil', 'mesRecettes', 'historique','infoModifier', 'abonnements', 'commentaires');
             if (in_array($action, $actions)) {
                 self::redirectConnexion();
             }

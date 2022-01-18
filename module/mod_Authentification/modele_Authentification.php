@@ -24,7 +24,7 @@ class ModeleAuthentification extends Connexion {
             $req2->bindParam('password', $mdp);
             $res2 = $req2->execute();
 
-            $req = self::$bdd->prepare("insert into Utilisateur (nom,prenom,dateInscription,sexe,age,login,idrole) values (:nom,:prenom,CURRENT_DATE,:sexe,:age,:login,1);");
+            $req = self::$bdd->prepare("insert into Utilisateur (nom,prenom,dateInscription,sexe,age,login,idrole) values (:nom,:prenom,CURRENT_DATE,:sexe,:age,:login,2);");
             $req->bindParam('nom', $data['nom']);
             $req->bindParam('prenom', $data['prenom']);
             $req->bindParam('age', $data['age']);

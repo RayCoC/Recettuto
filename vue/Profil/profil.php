@@ -32,35 +32,35 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-heart mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Profile Settings</div>
-                            </div><span class="badge badge-secondary">3</span>
+                            </div>
                         </div>
                     </a>
                     <a class="list-group-item" id="mesRecettes" href="" login="<?=$_GET['login']?>" >
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-heart mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Mes Recettes</div>
-                            </div><span class="badge badge-secondary">3</span>
+                            </div>
                         </div>
                     </a>
                     <a class="list-group-item" id="abonnements" href="" login="<?=$_GET['login']?>">
                     <div class="d-flex justify-content-between align-items-center">
                         <div><i class="fe-icon-heart mr-1 text-muted"></i>
                             <div class="d-inline-block font-weight-medium text-uppercase">Abonnements</div>
-                        </div><span class="badge badge-secondary">3</span>
+                        </div>
                     </div>
                     </a>
                     <a id="commentaires" class="list-group-item" href="" login="<?=$_GET['login']?>" >
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-tag mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Commentaires</div>
-                            </div><span class="badge badge-secondary">4</span>
+                            </div>
                         </div>
                     </a>
                     <a id="historique" class="list-group-item" href="" login="<?=$_GET['login']?>" >
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-tag mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Historique</div>
-                            </div><span class="badge badge-secondary">4</span>
+                            </div>
                         </div>
                     </a>
                     <?php if($_SESSION['role']==3 && $_SESSION['nomUtilisateur']==$_GET['login']) :?>
@@ -68,7 +68,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div><i class="fe-icon-heart mr-1 text-muted"></i>
                                     <div class="d-inline-block font-weight-medium text-uppercase">Signalements</div>
-                                </div><span class="badge badge-secondary">3</span>
+                                </div>
                             </div>
                         </a>
                     <?php endif;?>
