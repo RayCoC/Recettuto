@@ -19,37 +19,52 @@
             </div>
             <div class="wizard">
                 <nav class="list-group list-group-flush">
-
-                    <a class="list-group-item " href="index.php?action=profil&module=mod_Profil&login=<?=$_SESSION['nomUtilisateur']?>" >
+                    <?php if (isset($_SESSION['nomUtilisateur'])) : ?>
+                        <?php if ($_GET['login'] != $_SESSION['nomUtilisateur']) : ?>
+                    <?php if (!ModeleProfil::estAbonne()):?>
+                        <form action="index.php?action=subscribe&module=mod_Profil&login=<?=$_GET['login']?>" method="post"><input type="submit" value="S'abonner" class="btn btn-secondary"></form>
+                    <?php else :?>
+                        <form action="index.php?action=unsubscribe&module=mod_Profil&login=<?=$_GET['login']?>" method="post"><input type="submit" value="Se desabonner" class="btn btn-secondary"></form>
+                    <?php endif;?>
+                        <?php endif;?>
+                    <?php endif;?>
+                    <a class="list-group-item " href="index.php?action=profil&module=mod_Profil&login=<?=$_GET['login']?>" >
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-heart mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Profile Settings</div>
                             </div><span class="badge badge-secondary">3</span>
                         </div>
                     </a>
-                    <a class="list-group-item" id="mesRecettes" href="" login="<?=$_SESSION['nomUtilisateur']?>" >
+                    <a class="list-group-item" id="mesRecettes" href="" login="<?=$_GET['login']?>" >
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-heart mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Mes Recettes</div>
                             </div><span class="badge badge-secondary">3</span>
                         </div>
                     </a>
-                    <a class="list-group-item" id="abonnements" href="" login="<?=$_SESSION['nomUtilisateur']?>">
+                    <a class="list-group-item" id="abonnements" href="" login="<?=$_GET['login']?>">
                     <div class="d-flex justify-content-between align-items-center">
                         <div><i class="fe-icon-heart mr-1 text-muted"></i>
                             <div class="d-inline-block font-weight-medium text-uppercase">Abonnements</div>
                         </div><span class="badge badge-secondary">3</span>
                     </div>
                     </a>
-                    <a id="commentaires" class="list-group-item" href="" login="<?=$_SESSION['nomUtilisateur']?>" >
+                    <a id="commentaires" class="list-group-item" href="" login="<?=$_GET['login']?>" >
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-tag mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">Commentaires</div>
                             </div><span class="badge badge-secondary">4</span>
                         </div>
                     </a>
-                    <?php if($_SESSION['role']==3) :?>
-                        <a class="list-group-item" id="signalements" href="" login="<?=$_SESSION['nomUtilisateur']?>" >
+                    <a id="historique" class="list-group-item" href="" login="<?=$_GET['login']?>" >
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><i class="fe-icon-tag mr-1 text-muted"></i>
+                                <div class="d-inline-block font-weight-medium text-uppercase">Historique</div>
+                            </div><span class="badge badge-secondary">4</span>
+                        </div>
+                    </a>
+                    <?php if($_SESSION['role']==3 && $_SESSION['nomUtilisateur']==$_GET['login']) :?>
+                        <a class="list-group-item" id="signalements" href="" login="<?=$_GET['login']?>" >
                             <div class="d-flex justify-content-between align-items-center">
                                 <div><i class="fe-icon-heart mr-1 text-muted"></i>
                                     <div class="d-inline-block font-weight-medium text-uppercase">Signalements</div>
@@ -68,14 +83,13 @@
                 <?php VueProfil::profilSettings($data);?>
                 <div class="col-12">
                     <hr class="mt-2 mb-3">
-                    <?php if ($_SESSION['nomUtilisateur']==$data['utilisateur']['login']):?>
+                    <?php if ($_SESSION['nomUtilisateur']==$_GET['login']):?>
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                         <button class="btn btn-style-1 btn-primary" id="update" type="submit" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
                     </div>
                     <?php endif?>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
@@ -89,7 +103,7 @@
             $.ajax ({
                 type : "GET",
                 url : "index.php?action=commentaires&module=mod_Profil",
-                data : {login : $(this).attr("login")},
+                data : {'login' : $(this).attr("login")},
                 success : function (data) {
                     $("#result").append(data);
                 }
@@ -107,7 +121,7 @@
             $.ajax({
             type: "GET",
             url: "index.php?action=abonnements&module=mod_Profil",
-            data: {login : $(this).attr("login")},
+            data: {'login' : $(this).attr("login")},
              success : function (data) {
                 $("#result").append(data);
              }
@@ -124,7 +138,7 @@
             $.ajax({
                 type: "GET",
                 url: "index.php?action=mesRecettes&module=mod_Profil",
-                data: {login : $(this).attr("login")},
+                data: {'login' : $(this).attr("login")},
                 success : function (data) {
                     $("#result").append(data);
                 }
@@ -141,7 +155,7 @@
             $.ajax({
                 type: "GET",
                 url: "index.php?action=signalements&module=mod_Profil",
-                data: {login : $(this).attr("login")},
+                data: {'login' : $(this).attr("login")},
                 success : function (data) {
                     $("#result").append(data);
                 }
@@ -159,7 +173,7 @@
         $.ajax({
             type: "POST",
             url: "index.php?action=bannir&module=mod_Profil",
-            data: {idAvis : e},
+            data: {'idAvis' : e},
             success : function (data) {
                 $("#result").append(data);
             }
@@ -173,7 +187,7 @@
         $.ajax({
             type: "POST",
             url: "index.php?action=annulerSignalement&module=mod_Profil",
-            data: {idAvis : e},
+            data: {'idAvis' : e},
             success : function (data) {
                 $("#result").append(data);
             }
@@ -191,6 +205,47 @@
         });
 </script>
 <script>
-    $(document).ready
+    $(document).ready(function () {
+        $("#historique").click(function (e) {
+            e.preventDefault();
+            $("#result").html("");
+            $("form").html("");
+            $.ajax ({
+                type: 'GET',
+                url : "index.php?action=historique&module=mod_Profil",
+                data : {'login' :$(this).attr("login")},
+                success : function (data) {
+                    $("#result").append(data);
+                }
+            });
+        });
+    });
+</script>
 
+<script>
+    /*$(document).ready(function () {
+        $("#sub").click(function (e) {
+            e.preventDefault();
+            if ($(this).val() == "Subscribe") {
+                $.ajax({
+                    type: 'GET',
+                    url: 'index.php?action=subscribe&module=mod_Profil',
+                    data: {'login' : $(this).attr("login")},
+                    success : function () {
+                        $(this).val("Se désabonner");
+                    }
+                });
+            }
+            else {
+                $.ajax ({
+                   type: "GET",
+                    url: 'index.php?action=unsubscribe&module=mod_Profil',
+                    data: {'login': $(this).attr("login")},
+                    success : function () {
+                        $(this).val("Subscribe");
+                    }
+                });
+                }
+        });
+    });*/
 </script>

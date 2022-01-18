@@ -48,6 +48,9 @@ class ModProfil {
             case'annulerSignalement':
                 $this->controleurProfil->annulerSignalement();
                 break;
+            case 'historique' :
+                $this->controleurProfil->afficherHistorique();
+                break;
         }
     }
 

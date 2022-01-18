@@ -12,15 +12,12 @@ class ControleurProfil{
     }
 
     function afficherProfil(){
-
         if(!isset($_GET['login'])) {
             $info = $this->modele->infoUtilisateur($_SESSION['nomUtilisateur']);
         }
         else{
             $info = $this->modele->infoUtilisateur($_GET['login']);
         }
-
-
         foreach ($info as $value){
 
             $data['utilisateur']['id']=$value[0];
@@ -36,14 +33,8 @@ class ControleurProfil{
             $data['utilisateur']['age']=$value[5];
             $data['utilisateur']['login']=$value[6];
         }
-
         $this->vue->Profil($data);
-
     }
-    function afficherModifProfil(){
-        $this->vue->modifProfil();
-    }
-
     function modifProfil()
     {
         if ($_POST['sexe'] == "homme") {
@@ -106,12 +97,12 @@ class ControleurProfil{
 
     function subscribe(){
         $this->modele->abonner();
-        $this->afficherAbonnements();
+        $this->afficherProfil();
     }
 
     function unsubscribe(){
         $this->modele->desabonner();
-        $this->afficherAbonnements();
+        $this->afficherProfil();
     }
 
     function afficherSignalement(){
@@ -146,6 +137,19 @@ class ControleurProfil{
                 $this->modele->enleverSignalement($idAvis);
                 $this->afficherSignalement();
             }
+        }
+    }
+    function afficherHistorique() {
+        $historique = $this->modele->afficheHistorique($_GET['login']);
+        $data = array();
+        if (!empty($historique)) {
+            foreach ($historique as $item => $value) {
+                $data['historique'][$item] = array("idRec" => $value[0], "titre" => $value[1], "img" => $value[2], "dateVisionnement" => $value[3], "difficulte" => $value[4]);
+            }
+            VueProfil::historique($data['historique']);
+        }
+        else {
+            VueProfil::profilVide("d'historique");
         }
     }
 }

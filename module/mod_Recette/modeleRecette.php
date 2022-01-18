@@ -28,18 +28,16 @@ class ModeleRecette extends Connexion
         return $requete->rowCount();
     }
 
-    function ajoutHashtag()
+    function ajoutHashtag($lastID)
     {
         if (!empty($_SESSION['hashtag'])) {
             foreach ($_SESSION['hashtag'] as $item => $result) {
                 if ($this->verifHashtagDejaExistant($result['nomHashtag']) == 0) {
-                    $requete = self::$bdd->prepare("INSERT INTO Hashtag values (:nom)");
-                    $requete->bindParam('nom', $result['nomHashtag']);
-                    $requete->execute();
+                    $requete = self::$bdd->prepare("INSERT INTO Hashtag values (?)");
+                    $requete->execute(array($result['nomHashtag']));
                 }
-                $requete = self::$bdd->prepare("INSERT INTO Lier values (:nomHashtag, :idRecette)");
-                $requete->bindParam('nomHashtag', $result['nomHashtag']);
-                $requete->execute();
+                $requete = self::$bdd->prepare("INSERT INTO Lier values (?, ?)");
+                $requete->execute(array($result['nomHashtag'], $lastID));
             }
         }
         unset($_SESSION['hashtag']);
@@ -338,10 +336,18 @@ class ModeleRecette extends Connexion
     }
     function signalerCommentaire ($idAvis, $idUtilisateur) {
         if (!$this->dejaSignale($idAvis, $idUtilisateur)) {
-            echo "ok";
             $requete = self::$bdd->prepare("INSERT INTO Signaler values (?, ?)");
             $requete->execute(array($idAvis, $idUtilisateur));
         }
-        echo "march pas";
     }
+    function ajoutHistorique($idUser, $idRec) {
+        $requete = self::$bdd->prepare("SELECT * FROM HistoriqueRecette where idRec = ? and idUtilisateur = ?");
+        if (! empty($requete->execute(array($idRec, $idUser)))) {
+            $requete = self::$bdd->prepare("DELETE FROM HistoriqueRecette where idRec = ? and idUtilisateur = ?");
+            $requete->execute(array($idRec, $idUser));
+        }
+        $requete = self::$bdd->prepare("INSERT INTO HistoriqueRecette(idRec, idUtilisateur) values (?, ?)");
+        $requete->execute(array($idRec,$idUser));
+    }
+
 }

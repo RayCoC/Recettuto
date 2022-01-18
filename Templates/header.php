@@ -29,7 +29,7 @@
                             <?php
                             require_once "./Controleur/controleur_Authentification.php";
                             if(ControleurAuthentification::test_Connexion()) {
-                                echo '<li><a class="dropdown-item" href="index.php?action=profil&module=mod_Profil" style="color: black;">Mon Compte</a></li>
+                                echo '<li><a class="dropdown-item" href="index.php?action=profil&login='.$_SESSION['nomUtilisateur'].'&module=mod_Profil" style="color: black;">Mon Compte</a></li>
                                    <li><a class="dropdown-item" href="index.php?action=deconnexion&module=mod_Authentification" style="color: black;">Deconnexion</a></li>
                                     <li><a class ="dropdown-item" href = "index.php?action=rechercherUtilisateur&module=mod_Utilisateur" style="color: black">Utilisateurs</a></li>';
                             }

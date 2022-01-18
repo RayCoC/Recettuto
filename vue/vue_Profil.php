@@ -5,11 +5,6 @@ class VueProfil extends vue{
     function Profil($data) {
         vue::render("Profil/profil.php", $data);
     }
-
-    function modifProfil() {
-        vue::render("Profil/modifierProfil.php");
-    }
-
     static function afficheRecettes($data){
         foreach ($data as $item => $value) {
             echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
@@ -23,7 +18,6 @@ class VueProfil extends vue{
                     </a>
                 </div>
             </div>';
-
         }
     }
 
@@ -67,8 +61,8 @@ class VueProfil extends vue{
             echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
                 <div class="px-3 my-3">
                     <a class="cart-item-product" href="#">
-                        <button id="ban" name="bannir" onclick="bannir('.$value['idAvis'].')">Bannir</button>
-                        <button id="annulerBan" name="annuler" onclick="annuler('.$value['idAvis'].')">Annuler </button>
+                        <button class="btn btn-danger" id="ban" type="button" name="bannir" onclick="bannir('.$value['idAvis'].')" color="danger" rounded="true" mdbWavesEffect>Bannir</button>
+                        <button class="btn btn-info" style="color: white" id="annulerBan" name="annuler" onclick="annuler('.$value['idAvis'].')">Annuler </button>
                         <div class="cart-item-product-thumb"><p>'.$value['utilisateur'].'</p></div>
                         <div class="cart-item-product-info">
                             <h4 class="cart-item-product-title"> '.$value['textAvis'].'</h4>
@@ -133,5 +127,20 @@ class VueProfil extends vue{
                         </div>
                     </div>
                 </div>';
+    }
+    static function historique($data) {
+        foreach ($data as $item => $value) {
+            echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
+                <div class="px-3 my-3">
+                    <a class="cart-item-product" href="index.php?action=voirRecette&id='.$value['idRec'].'&module=mod_Recette">
+                        <div class="cart-item-product-thumb"><img src=' . $value['img'] . ' alt="Product"></div>
+                        <div class="cart-item-product-info">
+                            <h4 class="cart-item-product-title"> '.$value['titre'].'</h4>
+                            <div class="text-lg text-body font-weight-medium pb-1">Date de visonnement de la recette : '.$value['dateVisionnement'].' </div><div></div>Difficulté: <span class="text-success font-weight-medium">'.$value['difficulte'].'</div>
+                        </div>
+                    </a>
+                </div>
+            </div>';
+        }
     }
 }

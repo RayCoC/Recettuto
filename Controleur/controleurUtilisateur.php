@@ -12,9 +12,6 @@
         function affichePageRecherche() {
             $this->vue->PageAccueilUtilisateur();
         }
-        function afficheOk() {
-            echo "ok";
-        }
         function searchUser() {
             if (isset($_POST['user'])) {
                 $data = $this->modele->searchUser($_POST['user']);

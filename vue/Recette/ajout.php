@@ -78,10 +78,10 @@
                         <p>Informations supp</p>
                         <label>Type de plat</label>
                         <select name="typePlat">
-                            <option value="0">Petit-Déjeuner</option>
-                            <option value="1">Repas</option>
-                            <option value="2">Diner</option>
-                            <option value="3">Dessert</option>
+                            <option value="2">Petit-Déjeuner</option>
+                            <option value="3">Repas</option>
+                            <option value="4">Diner</option>
+                            <option value="1">Dessert</option>
                         </select><br><br>
                         <label>Temps cuisson</label>
                         <input type = "time" name = "tpsCuisson" class = "hauteur"><br><br>

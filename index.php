@@ -2,9 +2,12 @@
 include_once "Connexion.php";
 include_once "./check/check_auth.php";
 session_start();
-if (!isset($_SESSION['nomUtilisateur']) && isset($_GET['action'])) {
-    if (!checkAuth::can($_GET['action'])) {
-        checkAuth::redirect();
+if (isset($_GET['action'])) {
+    if (isset($_SESSION['nomUtilisateur'])) {
+        checkAuth::can($_GET['action'], $_SESSION['role']);
+    }
+    else {
+        checkAuth::can($_GET['action']);
     }
 }
 if (!isset($_SESSION['hashtag'])) {

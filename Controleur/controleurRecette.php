@@ -57,7 +57,6 @@ class ControleurRecette extends Controleur{
         $rec = $this->modele->detailsRecette($id);
         $ing = $this->modele->detailsIngreientRecette($id);
         $avis = $this->modele->avis($id);
-        $user = ModeleRecette::getUserNameRecette($_GET['id']);
         foreach ($rec  as $item => $value) {
             $data['nomRecette'] = $value[1];
             $data['note'] = $value[2];
@@ -82,6 +81,7 @@ class ControleurRecette extends Controleur{
             $data['avis'][$item]['like'] = $value[3];
         }
         $data['user']=$this->getUserName();
+        $this->ajoutHistorique();
         $this->vue->pageVoirRecette($data);
     }
     static function FormVide():bool {
@@ -89,6 +89,12 @@ class ControleurRecette extends Controleur{
             return true;
         }
         return false;
+    }
+    function ajoutHistorique() {
+        if (isset($_SESSION['nomUtilisateur'])) {
+            $userID = $this->modele->getIdUser($_SESSION['nomUtilisateur']);
+            $this->modele->ajoutHistorique($userID[0][0], $_SESSION['idRecette']);
+        }
     }
     function ajoutHashtag() {
         if($this->checkToken()) {
@@ -110,6 +116,7 @@ class ControleurRecette extends Controleur{
             $data = array('img' => $message, 'titre' => $_POST['titre'], 'description' => $_POST['desc'], 'difficulte' => $_POST['difficulte'], 'calories' => $_POST['calories'], 'typePlat'=>$_POST['typePlat'], 'cuisson' => $_POST['tpsCuisson'], 'temps' => $_POST['cuisson'], 'utilisateur'=> $user[0][0]);
             $lastID = $this->modele->creerNouvelleRecette($data);
             $this->modele->ajouterIngredient($lastID);
+            $this->modele->ajoutHashtag($lastID);
             vue::render("Recette/successAjout.php");
         }
     }
