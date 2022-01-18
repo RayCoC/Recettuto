@@ -1,5 +1,6 @@
 <?php
 include_once "Connexion.php";
+include_once "./vue.php";
 include_once "./check/check_auth.php";
 session_start();
 if (isset($_GET['action'])) {
@@ -45,7 +46,7 @@ switch ($module) {
         new ModUtilisateur();
         break;
     default :
-        die ("interdiction d'acces à ce module");
+            Vue::render("/ErrorPage/404.php");
         break;
 }
 ?>
