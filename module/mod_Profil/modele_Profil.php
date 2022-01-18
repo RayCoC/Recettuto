@@ -69,6 +69,14 @@ class ModeleProfil extends Connexion {
         return $listeAbonnement;
     }
 
+    function recetteFavoris(){
+        $requete= self::$bdd->prepare("SELECT * from Recette where idRec IN (SELECT idRec from likerecette where idUtilisateur = :idUser);");
+        $idUser = $this->getIdUser();
+        $requete->bindParam('idUser', $idUser[0][0]);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+
     function commentaireUtilisateur(){
         $requete = self::$bdd->prepare("SELECT * from avis where idUtilisateur = :idUser;");
         $idUser = $this->getIdUser();

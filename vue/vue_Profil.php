@@ -38,6 +38,22 @@ class VueProfil extends vue{
         }
     }
 
+    static function afficheFavoris($data){
+        foreach ($data as $item => $value) {
+            echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
+                <div class="px-3 my-3">
+                    <a class="cart-item-product" href="index.php?action=voirRecette&id='.$value['idRec'].'&module=mod_Recette">
+                        <div class="cart-item-product-thumb"><img src=' . $value['img'] . ' alt="Product"></div>
+                        <div class="cart-item-product-info">
+                            <h4 class="cart-item-product-title"> '.$value['titre'].'</h4>
+                            <div class="text-lg text-body font-weight-medium pb-1">'.$value['date'].' </div><div></div>Difficulté: <span class="text-success font-weight-medium">'.$value['difficulte'].'</div>
+                        </div>
+                    </a>
+                </div>
+            </div>';
+        }
+    }
+
     static function afficheCommentaires($data){
         foreach ($data as $item => $value) {
             echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
