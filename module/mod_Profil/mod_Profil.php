@@ -30,6 +30,9 @@ class ModProfil {
             case 'abonnements':
                 $this->controleurProfil->afficherAbonnements();
                 break;
+            case 'notifications':
+                $this->controleurProfil->afficherNotifications();
+                break;
             case 'favoris':
                 $this->controleurProfil->afficherFavoris();
                 break;
@@ -53,6 +56,9 @@ class ModProfil {
                 break;
             case 'historique' :
                 $this->controleurProfil->afficherHistorique();
+                break;
+            case 'enlever' :
+                $this->controleurProfil->enleverNotification();
                 break;
         }
     }

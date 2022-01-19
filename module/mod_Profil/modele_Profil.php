@@ -69,6 +69,14 @@ class ModeleProfil extends Connexion {
         return $listeAbonnement;
     }
 
+    function notificationUtilisateur(){
+        $requete= self::$bdd->prepare("SELECT * from Recette where idRec IN (SELECT idRec from notification where idUtilisateur = :idUser) order by STR_TO_DATE(dateCreation, '%Y-%m-%d') DESC;");
+        $idUser = $this->getIdUser();
+        $requete->bindParam('idUser', $idUser[0][0]);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+
     function recetteFavoris(){
         $requete= self::$bdd->prepare("SELECT * from Recette where idRec IN (SELECT idRec from likerecette where idUtilisateur = :idUser);");
         $idUser = $this->getIdUser();
@@ -183,5 +191,13 @@ class ModeleProfil extends Connexion {
         $requete = self::$bdd->prepare ("SELECT r.idRec, titre, image, dateVisionnement, nbFlammes FROM recette r LEFT JOIN historiquerecette h on r.idRec = h.idRec LEFT JOIN utilisateur u ON u.idUtilisateur = h.idUtilisateur WHERE u.login=?");
         $requete->execute(array($userName));
         return $requete->fetchAll();
+    }
+
+    public function enleverNotification(mixed $idRec)
+    {
+        $requete = self::$bdd->prepare("DELETE FROM notification WHERE idRec = $idRec and idUtilisateur=:idUser");
+        $idUser = $this->getIdUserSession();
+        $requete->bindParam('idUser', $idUser[0][0]);
+        $requete->execute();
     }
 }

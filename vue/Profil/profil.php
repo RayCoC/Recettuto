@@ -43,12 +43,21 @@
                         </div>
                     </a>
                     <a class="list-group-item" id="abonnements" href="" login="<?=$_GET['login']?>">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div><i class="fe-icon-heart mr-1 text-muted"></i>
-                            <div class="d-inline-block font-weight-medium text-uppercase">Abonnements</div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><i class="fe-icon-heart mr-1 text-muted"></i>
+                                <div class="d-inline-block font-weight-medium text-uppercase">Abonnements</div>
+                            </div>
                         </div>
-                    </div>
                     </a>
+                    <?php if ($_GET['login'] == $_SESSION['nomUtilisateur']) : ?>
+                    <a class="list-group-item" id="notifications" href="" login="<?=$_GET['login']?>">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><i class="fe-icon-heart mr-1 text-muted"></i>
+                                <div class="d-inline-block font-weight-medium text-uppercase">Notifications</div>
+                            </div>
+                        </div>
+                    </a>
+                    <?php endif; ?>
                     <a class="list-group-item" id="favoris" href="" login="<?=$_GET['login']?>">
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-heart mr-1 text-muted"></i>
@@ -138,6 +147,23 @@
 </script>
 <script>
     $(document).ready(function () {
+        $("#notifications").click(function (e) {
+            e.preventDefault();
+            $("#result").html("");
+            $("form").html("");
+            $.ajax({
+                type: "GET",
+                url: "index.php?action=notifications&module=mod_Profil",
+                data: {'login' : $(this).attr("login")},
+                success : function (data) {
+                    $("#result").append(data);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
         $("#favoris").click(function (e) {
             e.preventDefault();
             $("#result").html("");
@@ -212,6 +238,20 @@
             type: "POST",
             url: "index.php?action=annulerSignalement&module=mod_Profil",
             data: {'idAvis' : e},
+            success : function (data) {
+                $("#result").append(data);
+            }
+        });
+    }
+</script>
+<script>
+    function enlever(e) {
+        $("#result").html("");
+        $("form").html("");
+        $.ajax({
+            type: "POST",
+            url: "index.php?action=enlever&module=mod_Profil",
+            data: {'idRec' : e},
             success : function (data) {
                 $("#result").append(data);
             }

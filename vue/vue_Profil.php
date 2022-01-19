@@ -38,6 +38,23 @@ class VueProfil extends vue{
         }
     }
 
+    static function afficheNotifications($data){
+        foreach ($data as $item => $value) {
+            echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
+                <div class="px-3 my-3">
+                    <a class="cart-item-product" href="index.php?action=voirRecette&id='.$value['idRec'].'&module=mod_Recette">
+                        <div class="cart-item-product-thumb"><img src='.$value['img'].' alt="Product"></div>
+                        <div class="cart-item-product-info">
+                            <h4 class="cart-item-product-title"> '.$value['titre'].'</h4>
+                            <div class="text-lg text-body font-weight-medium pb-1">'.$value['date'].' </div><div></div>Difficulté: <span class="text-success font-weight-medium">'.$value['difficulte'].'</div>
+                        <button class="btn btn-info" style="color: white" id="enlever" name="enlever" onclick="enlever('.$value['idRec'].')">Voir la recette</button>
+                        </div>
+                    </a>
+                </div>
+            </div>';
+        }
+    }
+
     static function afficheFavoris($data){
         foreach ($data as $item => $value) {
             echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
@@ -78,7 +95,7 @@ class VueProfil extends vue{
                 <div class="px-3 my-3">
                     <a class="cart-item-product" href="#">
                         <button class="btn btn-danger" id="ban" type="button" name="bannir" onclick="bannir('.$value['idAvis'].')" color="danger" rounded="true" mdbWavesEffect>Bannir</button>
-                        <button class="btn btn-info" style="color: white" id="annulerBan" name="annuler" onclick="annuler('.$value['idAvis'].')">Annuler </button>
+                        <button class="btn btn-info" style="color: white" id="annulerBan" name="annuler" onclick="annuler('.$value['idAvis'].')">Annuler</button>
                         <div class="cart-item-product-thumb"><p>'.$value['utilisateur'].'</p></div>
                         <div class="cart-item-product-info">
                             <h4 class="cart-item-product-title"> '.$value['textAvis'].'</h4>
