@@ -215,4 +215,12 @@ class ModeleProfil extends Connexion
         return $requete->fetchAll();
     }
 
+    public function enleverNotification(mixed $idRec)
+    {
+        $requete = self::$bdd->prepare("DELETE FROM notification WHERE idRec = $idRec and idUtilisateur=:idUser");
+        $idUser = $this->getIdUserSession();
+        $requete->bindParam('idUser', $idUser[0][0]);
+        $requete->execute();
+    }
+
 }

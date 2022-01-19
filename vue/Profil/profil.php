@@ -229,6 +229,20 @@ if (!defined("CHECK_URL_INCLUDE")) {
     }
 </script>
 <script>
+    function enlever(e) {
+        $("#result").html("");
+        $("form").html("");
+        $.ajax({
+            type: "POST",
+            url: "index.php?action=enlever&module=mod_Profil",
+            data: {'idRec' : e},
+            success : function (data) {
+                $("#result").append(data);
+            }
+        });
+    }
+</script>
+<script>
     function annuler(e) {
         $("#result").html("");
         $("form").html("");
@@ -290,32 +304,4 @@ if (!defined("CHECK_URL_INCLUDE")) {
             });
         });
     });
-</script>
-
-<script>
-    /*$(document).ready(function () {
-        $("#sub").click(function (e) {
-            e.preventDefault();
-            if ($(this).val() == "Subscribe") {
-                $.ajax({
-                    type: 'GET',
-                    url: 'index.php?action=subscribe&module=mod_Profil',
-                    data: {'login' : $(this).attr("login")},
-                    success : function () {
-                        $(this).val("Se désabonner");
-                    }
-                });
-            }
-            else {
-                $.ajax ({
-                   type: "GET",
-                    url: 'index.php?action=unsubscribe&module=mod_Profil',
-                    data: {'login': $(this).attr("login")},
-                    success : function () {
-                        $(this).val("Subscribe");
-                    }
-                });
-                }
-        });
-    });*/
 </script>

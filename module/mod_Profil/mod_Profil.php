@@ -57,6 +57,9 @@ class ModProfil
             case 'notifications':
                 $this->controleurProfil->afficherNotifications();
                 break;
+            case 'enlever' :
+                $this->controleurProfil->enleverNotification();
+                break;
         }
     }
 

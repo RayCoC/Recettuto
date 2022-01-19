@@ -84,7 +84,7 @@ if (!defined("CHECK_URL_INCLUDE")) {
                     $("#test").append(data);
                 }
             });
-        });
+        });console.log(filtre);
     });
 </script>
 <script>

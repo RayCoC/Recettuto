@@ -57,7 +57,9 @@ class ModeleRecette extends Connexion
         $requete->bindParam('idUtilisateur', $data['utilisateur']);
         $requete->bindParam('descritpion', $data['description']);
         $requete->execute();
-        return self::$bdd->lastInsertId();
+        $id=self::$bdd->lastInsertId();
+        $this->ajouterNotification($id);
+        return $id;
     }
 
     function ajouterIngredient($lastIDRecette)
@@ -185,7 +187,7 @@ class ModeleRecette extends Connexion
         } else if ($value = "Populaire") {
             $requete = self::$bdd->prepare("SELECT * FROM Recette order by note desc");
         } else if ($value == "Recent") {
-            $requete = self::$bdd->prepare("SELECT * FROM Recette order by STR_TO_DATE(dateCreation, '%d-%m-%Y') ASC");
+            $requete = self::$bdd->prepare("SELECT * FROM Recette order by STR_TO_DATE(dateCreation, '%Y-%m-%d') desc ");
         }
         $requete->execute();
         return $requete->fetchAll();

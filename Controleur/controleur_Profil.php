@@ -188,4 +188,14 @@ class ControleurProfil extends Controleur
             }
         }
     }
+
+    public function enleverNotification()
+    {
+        if (isset($_SESSION['nomUtilisateur'])) {
+            $idRec = $_POST['idRec'];
+            $this->modele->enleverNotification($idRec);
+            $this->afficherNotifications();
+
+        }
+    }
 }
