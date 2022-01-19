@@ -1,4 +1,5 @@
 <?php
+
 class ModeleAcceuil extends Connexion
 {
     function __construct()
@@ -7,7 +8,7 @@ class ModeleAcceuil extends Connexion
 
     function recetteRecent()
     {
-        $requete= self::$bdd->prepare("SELECT idRec ,titre, image FROM Recette order by STR_TO_DATE(dateCreation, '%Y-%m-%d') DESC limit 3");
+        $requete = self::$bdd->prepare("SELECT idRec ,titre, image FROM Recette order by STR_TO_DATE(dateCreation, '%Y-%m-%d') DESC limit 3");
         $requete->execute();
         return $requete->fetchAll();
     }
@@ -28,7 +29,7 @@ class ModeleAcceuil extends Connexion
 
     function typePlat()
     {
-        $requete= self::$bdd->prepare("SELECT idType, nomType FROM typePlat");
+        $requete = self::$bdd->prepare("SELECT idType, nomType FROM typePlat");
         $requete->execute();
         return $requete->fetchAll();
     }

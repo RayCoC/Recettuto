@@ -1,6 +1,8 @@
 <?php
 require_once "./Controleur/controleur_Profil.php";
-class ModProfil {
+
+class ModProfil
+{
     private $controleurProfil;
 
     function __construct()
@@ -9,9 +11,8 @@ class ModProfil {
         $action = "";
         if (isset($_GET['action'])) {
             $action = $_GET['action'];
-        }
-        else{
-            $action="profil";
+        } else {
+            $action = "profil";
         }
         switch ($action) {
             case 'profil' :

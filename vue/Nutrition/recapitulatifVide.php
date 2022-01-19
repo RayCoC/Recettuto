@@ -2,7 +2,7 @@
 if (!defined("CHECK_URL_INCLUDE")) {
     die("Interdit d'accès");
 
-}?>
+} ?>
 <head>
     <meta charset="UTF-8">
     <title>Recapitulatif</title>

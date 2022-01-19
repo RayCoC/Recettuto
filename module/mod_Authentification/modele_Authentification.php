@@ -1,22 +1,25 @@
-
 <?php
-class ModeleAuthentification extends Connexion {
 
-    public function connexion($login) {
-        $requete= self::$bdd->prepare("SELECT * from InfoConfidentielles where login = :login");
-        $requete->bindParam('login',$login);
+class ModeleAuthentification extends Connexion
+{
+
+    public function connexion($login)
+    {
+        $requete = self::$bdd->prepare("SELECT * from InfoConfidentielles where login = :login");
+        $requete->bindParam('login', $login);
         $requete->execute();
         return $requete->fetch();
     }
 
-    public function ajoutUtilisateur($data){
+    public function ajoutUtilisateur($data)
+    {
 
-        $chercheLogin =self::$bdd->prepare("SELECT * from Utilisateur where login = :login ");
-        $chercheLogin ->bindParam('login',$data['nomUtilisateur']);
+        $chercheLogin = self::$bdd->prepare("SELECT * from Utilisateur where login = :login ");
+        $chercheLogin->bindParam('login', $data['nomUtilisateur']);
         $chercheLogin->execute();
-        $user=$chercheLogin->rowCount();
+        $user = $chercheLogin->rowCount();
 
-        if($user==0) {
+        if ($user == 0) {
 
             $req2 = self::$bdd->prepare("insert into InfoConfidentielles (login,password) values (:login,:password);");
             $req2->bindParam('login', $data['nomUtilisateur']);
@@ -38,24 +41,26 @@ class ModeleAuthentification extends Connexion {
             $lastIdUtil = self::$bdd->lastInsertId();
             $req4->bindParam('idutilisateur', $lastIdUtil);
             $res4 = $req4->execute();
-        }
-        else {
+        } else {
             echo "login deja existant ";
         }
     }
-    static function verifieEntree($post, $value = null) {
+
+    static function verifieEntree($post, $value = null)
+    {
 
         if (isset($_POST['valider'])) {
             if ($_POST[$post] == "" && $value != 'age') {
                 return false;
-            }
-            else if ($value == "sexe" && ! isset($_POST['sexe'])) {
+            } else if ($value == "sexe" && !isset($_POST['sexe'])) {
                 return false;
             }
         }
         return true;
     }
-    static function getRole($login) {
+
+    static function getRole($login)
+    {
         $requete = self::$bdd->prepare("SELECT idRole from Role natural join Utilisateur where login = :login");
         $requete->bindParam('login', $login);
         $requete->execute();

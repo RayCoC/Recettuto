@@ -1,19 +1,24 @@
 <?php
 include_once "./vue.php";
-class VueProfil extends vue{
 
-    function Profil($data) {
+class VueProfil extends vue
+{
+
+    function Profil($data)
+    {
         vue::render("Profil/profil.php", $data);
     }
-    static function afficheRecettes($data){
+
+    static function afficheRecettes($data)
+    {
         foreach ($data as $item => $value) {
-            echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
+            echo '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
                 <div class="px-3 my-3">
-                    <a class="cart-item-product" href="index.php?action=voirRecette&id='.$value['idRec'].'&module=mod_Recette">
+                    <a class="cart-item-product" href="index.php?action=voirRecette&id=' . $value['idRec'] . '&module=mod_Recette">
                         <div class="cart-item-product-thumb"><img src=' . $value['img'] . ' alt="Product"></div>
                         <div class="cart-item-product-info">
-                            <h4 class="cart-item-product-title"> '.$value['titre'].'</h4>
-                            <div class="text-lg text-body font-weight-medium pb-1">'.$value['date'].' </div><div></div>Difficulté: <span class="text-success font-weight-medium">'.$value['difficulte'].'</div>
+                            <h4 class="cart-item-product-title"> ' . $value['titre'] . '</h4>
+                            <div class="text-lg text-body font-weight-medium pb-1">' . $value['date'] . ' </div><div></div>Difficulté: <span class="text-success font-weight-medium">' . $value['difficulte'] . '</div>
                         </div>
                     </a>
                 </div>
@@ -21,14 +26,15 @@ class VueProfil extends vue{
         }
     }
 
-    static function afficheAbonnements($data){
+    static function afficheAbonnements($data)
+    {
         foreach ($data as $item => $value) {
-            echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
+            echo '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
                 <div class="px-3 my-3">
-                    <a class="cart-item-product" href="index.php?action=profil&module=mod_Profil&login='.$value['abo'].'">
+                    <a class="cart-item-product" href="index.php?action=profil&module=mod_Profil&login=' . $value['abo'] . '">
                        
                         <div class="cart-item-product-info">
-                            <h4 class="cart-item-product-title"> '.$value['abo'].'</h4>
+                            <h4 class="cart-item-product-title"> ' . $value['abo'] . '</h4>
                             
                         </div>
                     </a>
@@ -38,16 +44,17 @@ class VueProfil extends vue{
         }
     }
 
-    static function afficheCommentaires($data){
+    static function afficheCommentaires($data)
+    {
         foreach ($data as $item => $value) {
-            echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
+            echo '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
                 <div class="px-3 my-3">
-                    <a class="cart-item-product" href="index.php?action=voirRecette&id='.$value['idRec'].'&module=mod_Recette">
+                    <a class="cart-item-product" href="index.php?action=voirRecette&id=' . $value['idRec'] . '&module=mod_Recette">
                         <div class="cart-item-product-info">
-                            <h4 class="cart-item-product-title"> '.$value['nomRec'].'</h4>
-                            <div class="text-lg text-body font-weight-medium pb-1">'.$value['textAvis'].' </div>
-                            <div>Note : <span class="text-success font-weight-medium">'.$value['nbEtoiles'].'</div>
-                            <div>Nombre de pouce bleu : <span class="text-success font-weight-medium">'.$value['nbPouceBleu'].'</div>
+                            <h4 class="cart-item-product-title"> ' . $value['nomRec'] . '</h4>
+                            <div class="text-lg text-body font-weight-medium pb-1">' . $value['textAvis'] . ' </div>
+                            <div>Note : <span class="text-success font-weight-medium">' . $value['nbEtoiles'] . '</div>
+                            <div>Nombre de pouce bleu : <span class="text-success font-weight-medium">' . $value['nbPouceBleu'] . '</div>
                         </div>
                     </a>
                 </div>
@@ -56,23 +63,26 @@ class VueProfil extends vue{
         }
     }
 
-    static function afficheSignalements($data){
+    static function afficheSignalements($data)
+    {
         foreach ($data as $item => $value) {
-            echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
+            echo '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
                 <div class="px-3 my-3">
                     <a class="cart-item-product" href="#">
-                        <button class="btn btn-danger" id="ban" type="button" name="bannir" onclick="bannir('.$value['idAvis'].')" color="danger" rounded="true" mdbWavesEffect>Bannir</button>
-                        <button class="btn btn-info" style="color: white" id="annulerBan" name="annuler" onclick="annuler('.$value['idAvis'].')">Annuler </button>
-                        <div class="cart-item-product-thumb"><p>'.$value['utilisateur'].'</p></div>
+                        <button class="btn btn-danger" id="ban" type="button" name="bannir" onclick="bannir(' . $value['idAvis'] . ')" color="danger" rounded="true" mdbWavesEffect>Bannir</button>
+                        <button class="btn btn-info" style="color: white" id="annulerBan" name="annuler" onclick="annuler(' . $value['idAvis'] . ')">Annuler </button>
+                        <div class="cart-item-product-thumb"><p>' . $value['utilisateur'] . '</p></div>
                         <div class="cart-item-product-info">
-                            <h4 class="cart-item-product-title"> '.$value['textAvis'].'</h4>
+                            <h4 class="cart-item-product-title"> ' . $value['textAvis'] . '</h4>
                         </div>
                     </a>
                 </div>
             </div>';
         }
     }
-    static function profilVide($message) {
+
+    static function profilVide($message)
+    {
         echo '<div class="container mb-4">
                 <div class="row">
                     <div class="col-lg-8 pb-5">
@@ -83,7 +93,7 @@ class VueProfil extends vue{
                                 <a class="cart-item-product" href="#">
             
                                     <div class="cart-item-product-info">
-                                        <h4 class="cart-item-product-title">Vous n\'avez pas '.$message.'</h4>
+                                        <h4 class="cart-item-product-title">Vous n\'avez pas ' . $message . '</h4>
                                     </div>
                                 </a>
                             </div>
@@ -91,17 +101,19 @@ class VueProfil extends vue{
                 </div>
              </div>';
     }
-    static function profilSettings($data) {
+
+    static function profilSettings($data)
+    {
         echo '<div class="col-md-6">
                     <div class="form-group">
                         <label for="account-fn">Prénom</label>
-                        <input class="form-control" type="text" id="account-fn" value="'.$data['utilisateur']['prenom'].'"  name="prenom" >
+                        <input class="form-control" type="text" id="account-fn" value="' . $data['utilisateur']['prenom'] . '"  name="prenom" >
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-ln">Nom</label>
-                        <input class="form-control" type="text" id="account-ln" value="'.$data['utilisateur']['nom'].'" name="nom">
+                        <input class="form-control" type="text" id="account-ln" value="' . $data['utilisateur']['nom'] . '" name="nom">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -113,7 +125,7 @@ class VueProfil extends vue{
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-email">Age</label>
-                        <input class="form-control" type="number" id="account-age" value="'.$data['utilisateur']['age'].'" name="age" >
+                        <input class="form-control" type="number" id="account-age" value="' . $data['utilisateur']['age'] . '" name="age" >
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -128,46 +140,52 @@ class VueProfil extends vue{
                     </div>
                 </div>';
     }
-    static function historique($data) {
+
+    static function historique($data)
+    {
         foreach ($data as $item => $value) {
-            echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
+            echo '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
                 <div class="px-3 my-3">
-                    <a class="cart-item-product" href="index.php?action=voirRecette&id='.$value['idRec'].'&module=mod_Recette">
+                    <a class="cart-item-product" href="index.php?action=voirRecette&id=' . $value['idRec'] . '&module=mod_Recette">
                         <div class="cart-item-product-thumb"><img src=' . $value['img'] . ' alt="Product"></div>
                         <div class="cart-item-product-info">
-                            <h4 class="cart-item-product-title"> '.$value['titre'].'</h4>
-                            <div class="text-lg text-body font-weight-medium pb-1">Date de visonnement de la recette : '.$value['dateVisionnement'].' </div><div></div>Difficulté: <span class="text-success font-weight-medium">'.$value['difficulte'].'</div>
+                            <h4 class="cart-item-product-title"> ' . $value['titre'] . '</h4>
+                            <div class="text-lg text-body font-weight-medium pb-1">Date de visonnement de la recette : ' . $value['dateVisionnement'] . ' </div><div></div>Difficulté: <span class="text-success font-weight-medium">' . $value['difficulte'] . '</div>
                         </div>
                     </a>
                 </div>
             </div>';
         }
     }
-    static function afficheFavoris($data){
+
+    static function afficheFavoris($data)
+    {
         foreach ($data as $item => $value) {
-            echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
+            echo '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
                 <div class="px-3 my-3">
-                    <a class="cart-item-product" href="index.php?action=voirRecette&id='.$value['idRec'].'&module=mod_Recette">
+                    <a class="cart-item-product" href="index.php?action=voirRecette&id=' . $value['idRec'] . '&module=mod_Recette">
                         <div class="cart-item-product-thumb"><img src=' . $value['img'] . ' alt="Product"></div>
                         <div class="cart-item-product-info">
-                            <h4 class="cart-item-product-title"> '.$value['titre'].'</h4>
-                            <div class="text-lg text-body font-weight-medium pb-1">'.$value['date'].' </div><div></div>Difficulté: <span class="text-success font-weight-medium">'.$value['difficulte'].'</div>
+                            <h4 class="cart-item-product-title"> ' . $value['titre'] . '</h4>
+                            <div class="text-lg text-body font-weight-medium pb-1">' . $value['date'] . ' </div><div></div>Difficulté: <span class="text-success font-weight-medium">' . $value['difficulte'] . '</div>
                         </div>
                     </a>
                 </div>
             </div>';
         }
     }
-    static function afficheNotifications($data){
+
+    static function afficheNotifications($data)
+    {
         foreach ($data as $item => $value) {
-            echo  '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
+            echo '<div class="cart-item d-md-flex justify-content-between"><i class="fa fa-times"></i></span>
                 <div class="px-3 my-3">
-                    <a class="cart-item-product" href="index.php?action=voirRecette&id='.$value['idRec'].'&module=mod_Recette">
-                        <div class="cart-item-product-thumb"><img src='.$value['img'].' alt="Product"></div>
+                    <a class="cart-item-product" href="index.php?action=voirRecette&id=' . $value['idRec'] . '&module=mod_Recette">
+                        <div class="cart-item-product-thumb"><img src=' . $value['img'] . ' alt="Product"></div>
                         <div class="cart-item-product-info">
-                            <h4 class="cart-item-product-title"> '.$value['titre'].'</h4>
-                            <div class="text-lg text-body font-weight-medium pb-1">'.$value['date'].' </div><div></div>Difficulté: <span class="text-success font-weight-medium">'.$value['difficulte'].'</div>
-                        <button class="btn btn-info" style="color: white" id="enlever" name="enlever" onclick="enlever('.$value['idRec'].')">Voir la recette</button>
+                            <h4 class="cart-item-product-title"> ' . $value['titre'] . '</h4>
+                            <div class="text-lg text-body font-weight-medium pb-1">' . $value['date'] . ' </div><div></div>Difficulté: <span class="text-success font-weight-medium">' . $value['difficulte'] . '</div>
+                        <button class="btn btn-info" style="color: white" id="enlever" name="enlever" onclick="enlever(' . $value['idRec'] . ')">Voir la recette</button>
                         </div>
                     </a>
                 </div>

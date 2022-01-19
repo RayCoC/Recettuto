@@ -1,21 +1,25 @@
 <?php
-class ModeleProfil extends Connexion {
 
-    function infoUtilisateur($login){
-        $requete= self::$bdd->prepare("SELECT * from Utilisateur where login = :login");
-        $requete->bindParam('login',$login);
+class ModeleProfil extends Connexion
+{
+
+    function infoUtilisateur($login)
+    {
+        $requete = self::$bdd->prepare("SELECT * from Utilisateur where login = :login");
+        $requete->bindParam('login', $login);
         $requete->execute();
         return $requete->fetchAll();
     }
 
-    function nbRecettes($login){
-        $info= $this->infoUtilisateur($login);
-        $id=1;
+    function nbRecettes($login)
+    {
+        $info = $this->infoUtilisateur($login);
+        $id = 1;
 
-        $requete= self::$bdd->prepare("SELECT * from recette  where idUtilisateur = :id");
-        $requete->bindParam('id',$id);
+        $requete = self::$bdd->prepare("SELECT * from recette  where idUtilisateur = :id");
+        $requete->bindParam('id', $id);
         $requete->execute();
-        $res=$requete->rowCount();
+        $res = $requete->rowCount();
 
         echo $res;
     }
@@ -31,45 +35,48 @@ class ModeleProfil extends Connexion {
         if (!empty($_POST['prenom'])) {
             $sql = 'UPDATE  utilisateur  SET prenom=? WHERE login =? ';
             $req = self::$bdd->prepare($sql);
-            $req->execute(array($data['prenom'],  $data['nomUtilisateur']));
+            $req->execute(array($data['prenom'], $data['nomUtilisateur']));
         }
         if (!empty($_POST['password'])) {
             $sql = 'UPDATE  infoconfidentielles  SET password=? WHERE login =? ';
             $req = self::$bdd->prepare($sql);
-            $req->execute(array($data['password'],  $data['nomUtilisateur']));
+            $req->execute(array($data['password'], $data['nomUtilisateur']));
         }
         if (!empty($_POST['age'])) {
             $sql = 'UPDATE  utilisateur  SET age=? WHERE login =? ';
             $req = self::$bdd->prepare($sql);
-            $req->execute(array($data['age'],  $data['nomUtilisateur']));
+            $req->execute(array($data['age'], $data['nomUtilisateur']));
         }
         if (!empty($_POST['sexe'])) {
             $sql = 'UPDATE  utilisateur  SET sexe=? WHERE login =? ';
             $req = self::$bdd->prepare($sql);
-            $req->execute(array($data['sexe'],  $data['nomUtilisateur']));
+            $req->execute(array($data['sexe'], $data['nomUtilisateur']));
         }
 
 
     }
 
-    function recetteUtilisateur($login){
-        $requete= self::$bdd->prepare("SELECT * from Recette natural join Utilisateur where login = :login");
-        $requete->bindParam('login',$login);
+    function recetteUtilisateur($login)
+    {
+        $requete = self::$bdd->prepare("SELECT * from Recette natural join Utilisateur where login = :login");
+        $requete->bindParam('login', $login);
         $requete->execute();
         return $requete->fetchAll();
     }
 
-    function abonnementUtilisateur(){
+    function abonnementUtilisateur()
+    {
         $requete = self::$bdd->prepare("SELECT login from utilisateur where idUtilisateur IN (SELECT idUtilisateur_1 from suivre where idUtilisateur = :idUser);");
         $idUser = $this->getIdUser();
         $requete->bindParam('idUser', $idUser[0][0]);
         $requete->execute();
-        $listeAbonnement=$requete->fetchAll();
+        $listeAbonnement = $requete->fetchAll();
 
         return $listeAbonnement;
     }
 
-    function commentaireUtilisateur(){
+    function commentaireUtilisateur()
+    {
         $requete = self::$bdd->prepare("SELECT * from avis where idUtilisateur = :idUser;");
         $idUser = $this->getIdUser();
         $requete->bindParam('idUser', $idUser[0][0]);
@@ -77,7 +84,8 @@ class ModeleProfil extends Connexion {
         return $requete->fetchAll();
     }
 
-    function getNomRecette($idRec){
+    function getNomRecette($idRec)
+    {
         $requete = self::$bdd->prepare("SELECT titre from recette where idRec = :idRec;");
         $requete->bindParam('idRec', $idRec);
         $requete->execute();
@@ -92,14 +100,16 @@ class ModeleProfil extends Connexion {
         return $requete->fetchAll();
     }
 
-    function getIdUserSession(){
+    function getIdUserSession()
+    {
         $requete = self::$bdd->prepare("SELECT * from Utilisateur where login = :login");
         $requete->bindParam('login', $_SESSION['nomUtilisateur']);
         $requete->execute();
         return $requete->fetchAll();
     }
 
-    function abonner(){
+    function abonner()
+    {
         $requete = self::$bdd->prepare("INSERT INTO suivre values(:idUser, :idAbonnement)");
 
         $idUser = $this->getIdUserSession();
@@ -111,7 +121,8 @@ class ModeleProfil extends Connexion {
         return $requete->fetchAll();
     }
 
-    function desabonner(){
+    function desabonner()
+    {
         $requete = self::$bdd->prepare("DELETE FROM suivre WHERE idUtilisateur = :idUser AND idUtilisateur_1 = :idAbonnement");
 
         $idUser = $this->getIdUserSession();
@@ -123,7 +134,8 @@ class ModeleProfil extends Connexion {
         return $requete->fetchAll();
     }
 
-    static function estAbonne(){
+    static function estAbonne()
+    {
 
         $requete = self::$bdd->prepare("SELECT idUtilisateur_1 from suivre where idUtilisateur = :idUser");
 
@@ -140,19 +152,23 @@ class ModeleProfil extends Connexion {
         $requete3->execute();
         $idAbonne = $requete3->fetchAll();
 
-        foreach ($abonnes as $item => $value){
-            if($value[0]==$idAbonne[0][0]){
+        foreach ($abonnes as $item => $value) {
+            if ($value[0] == $idAbonne[0][0]) {
                 return true;
             }
         }
         return false;
     }
-    public function avisSignaler(){
+
+    public function avisSignaler()
+    {
         $requete = self::$bdd->prepare("SELECT textAvis, login, idAvis from avis natural join utilisateur where idAvis IN (SELECT distinct(idAvis) from signaler)");
         $requete->execute();
         return $requete->fetchAll();
     }
-    public function bannir($idAvis){
+
+    public function bannir($idAvis)
+    {
         $this->enleverSignalement($idAvis);
 
         $requete = self::$bdd->prepare("SELECT idUtilisateur from avis where idAvis = $idAvis");
@@ -167,24 +183,32 @@ class ModeleProfil extends Connexion {
         $requete3->execute();
 
     }
-    public function enleverSignalement($idAvis){
+
+    public function enleverSignalement($idAvis)
+    {
         $requete = self::$bdd->prepare("DELETE FROM signaler WHERE idAvis = $idAvis");
         $requete->execute();
     }
-    public function afficheHistorique ($userName) {
-        $requete = self::$bdd->prepare ("SELECT r.idRec, titre, image, dateVisionnement, nbFlammes FROM recette r LEFT JOIN historiquerecette h on r.idRec = h.idRec LEFT JOIN utilisateur u ON u.idUtilisateur = h.idUtilisateur WHERE u.login=?");
+
+    public function afficheHistorique($userName)
+    {
+        $requete = self::$bdd->prepare("SELECT r.idRec, titre, image, dateVisionnement, nbFlammes FROM recette r LEFT JOIN historiquerecette h on r.idRec = h.idRec LEFT JOIN utilisateur u ON u.idUtilisateur = h.idUtilisateur WHERE u.login=?");
         $requete->execute(array($userName));
         return $requete->fetchAll();
     }
-    function recetteFavoris(){
-        $requete= self::$bdd->prepare("SELECT * from Recette where idRec IN (SELECT idRec from likerecette where idUtilisateur = :idUser);");
+
+    function recetteFavoris()
+    {
+        $requete = self::$bdd->prepare("SELECT * from Recette where idRec IN (SELECT idRec from likerecette where idUtilisateur = :idUser);");
         $idUser = $this->getIdUser();
         $requete->bindParam('idUser', $idUser[0][0]);
         $requete->execute();
         return $requete->fetchAll();
     }
-    function notificationUtilisateur(){
-        $requete= self::$bdd->prepare("SELECT * from Recette where idRec IN (SELECT idRec from notification where idUtilisateur = :idUser) order by STR_TO_DATE(dateCreation, '%Y-%m-%d') DESC;");
+
+    function notificationUtilisateur()
+    {
+        $requete = self::$bdd->prepare("SELECT * from Recette where idRec IN (SELECT idRec from notification where idUtilisateur = :idUser) order by STR_TO_DATE(dateCreation, '%Y-%m-%d') DESC;");
         $idUser = $this->getIdUser();
         $requete->bindParam('idUser', $idUser[0][0]);
         $requete->execute();

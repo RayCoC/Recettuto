@@ -1,9 +1,12 @@
 <?php
 require_once "./Controleur/controleurRecette.php";
-class ModRecette {
+
+class ModRecette
+{
     private $controleurRecette;
 
-    function __construct() {
+    function __construct()
+    {
         $this->controleurRecette = new ControleurRecette();
         if (isset($_GET['action'])) {
             $action = $_GET['action'];
@@ -18,17 +21,13 @@ class ModRecette {
             case 'form' :
                 if (isset($_POST['submit'])) {
                     $this->controleurRecette->ajouterRecette();
-                }
-                else if (isset($_POST['add'])) {
+                } else if (isset($_POST['add'])) {
                     $this->controleurRecette->ajoutIngredient();
-                }
-                else if (isset($_POST['voirListe'])) {
+                } else if (isset($_POST['voirListe'])) {
                     $this->controleurRecette->afficheListIngredient();
-                }
-                else if (isset($_POST['addHashtag'])) {
+                } else if (isset($_POST['addHashtag'])) {
                     $this->controleurRecette->ajoutHashtag();
-                }
-                else if (isset($_POST['voirHashtag'])) {
+                } else if (isset($_POST['voirHashtag'])) {
                     $this->controleurRecette->afficheListeHashtag();
                 }
                 break;

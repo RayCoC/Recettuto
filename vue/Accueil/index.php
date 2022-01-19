@@ -1,9 +1,9 @@
 <?php include_once "./vue/vue_Accueil.php"; ?>
 <?php
-    if (!defined("CHECK_URL_INCLUDE")) {
-        die("Interdit d'accès");
+if (!defined("CHECK_URL_INCLUDE")) {
+    die("Interdit d'accès");
 
-    }?>
+} ?>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./CSS/accueil.css">
@@ -19,7 +19,8 @@
                     </div>
                     <!--end of col-->
                     <div class="col">
-                        <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Hashtag, Ingredient ...">
+                        <input class="form-control form-control-lg form-control-borderless" type="search"
+                               placeholder="Hashtag, Ingredient ...">
                     </div>
                     <!--end of col-->
                     <div class="col-auto">
@@ -35,28 +36,28 @@
 
 <div class="container">
     <div class="row">
-        <?php VueAccueil::recettePopulaire($data);?>
-        <?php VueAccueil::recetteAleatoire($data);?>
+        <?php VueAccueil::recettePopulaire($data); ?>
+        <?php VueAccueil::recetteAleatoire($data); ?>
     </div>
 </div>
 
-<div class ="CatégorieRecette">
+<div class="CatégorieRecette">
     <h1 class="TitreCatégorie"> Recettes les plus récentes</h1>
     <div class="container">
         <ul class="row portfolio list-unstyled mb-0 boxed-portfolio">
-            <?php VueAccueil::recetteRecent($data);?>
+            <?php VueAccueil::recetteRecent($data); ?>
         </ul>
     </div>
 </div>
 
-<div id = "ThemeRecette">
+<div id="ThemeRecette">
     <section id="footer">
         <div class="container">
             <div class="row text-center text-xs-center text-sm-left text-md-left">
                 <div class="col-xs-12 col-sm-4 col-md-4">
                     <h2>Type Plat</h2>
                     <ul class="list-unstyled quick-links">
-                        <?php VueAccueil::typePlat($data);?></ul>
+                        <?php VueAccueil::typePlat($data); ?></ul>
                 </div>
             </div>
         </div>

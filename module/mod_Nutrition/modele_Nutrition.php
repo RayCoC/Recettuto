@@ -1,4 +1,5 @@
 <?php
+
 class ModeleNutrition extends Connexion
 {
 
@@ -29,7 +30,8 @@ class ModeleNutrition extends Connexion
         return $requete->fetchAll();
     }
 
-    function getNbKcalRecommande(){
+    function getNbKcalRecommande()
+    {
 
         $requete = self::$bdd->prepare("SELECT sexe, age from Utilisateur where login = :login");
         $requete->bindParam('login', $_SESSION['nomUtilisateur']);
@@ -42,19 +44,17 @@ class ModeleNutrition extends Connexion
                 $sexe = $value[0];
                 $age = $value[1];
             }
-            $nbKcalRecommande=2300;
+            $nbKcalRecommande = 2300;
             if ($sexe == 0) {
                 if ($age >= 20 or $age <= 40) {
                     $nbKcalRecommande = 2700;
-                }
-                elseif($age >= 41) {
-                    $nbKcalRecommande = 2500 ;
+                } elseif ($age >= 41) {
+                    $nbKcalRecommande = 2500;
                 }
             } else {
                 if ($age >= 20 or $age <= 40) {
                     $nbKcalRecommande = 2200;
-                }
-                elseif($age >= 41) {
+                } elseif ($age >= 41) {
                     $nbKcalRecommande = 2000;
                 }
             }
@@ -62,9 +62,10 @@ class ModeleNutrition extends Connexion
         }
     }
 
-    public function recapitulatifUtilisateur(){
-        $requete= self::$bdd->prepare("SELECT * from nutrition natural join utilisateur where login = :login order by STR_TO_DATE(dateConsomme, '%Y-%m-%d') DESC ");
-        $requete->bindParam('login',$_SESSION['nomUtilisateur']);
+    public function recapitulatifUtilisateur()
+    {
+        $requete = self::$bdd->prepare("SELECT * from nutrition natural join utilisateur where login = :login order by STR_TO_DATE(dateConsomme, '%Y-%m-%d') DESC ");
+        $requete->bindParam('login', $_SESSION['nomUtilisateur']);
         $requete->execute();
         return $requete->fetchAll();
     }

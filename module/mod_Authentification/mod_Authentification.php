@@ -1,6 +1,8 @@
 <?php
 require_once "./Controleur/controleur_Authentification.php";
-class ModAuthentification {
+
+class ModAuthentification
+{
     private $controleurAuthentification;
 
     function __construct()
@@ -16,16 +18,18 @@ class ModAuthentification {
             case 'login' :
                 $this->controleurAuthentification->login(htmlspecialchars($_POST['nomUtilisateur']), htmlspecialchars($_POST['mdp']));
                 break;
-            case 'inscription' ;
+            case 'inscription';
                 $this->controleurAuthentification->test_Inscription();
                 break;
-            case 'inscriptionBD' ;
+            case 'inscriptionBD';
                 $this->controleurAuthentification->inscription();
 
 
         }
     }
-    function getAction() {
+
+    function getAction()
+    {
         if (!isset($_GET['action'])) {
             return "Authentification";
         }

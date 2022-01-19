@@ -1,10 +1,15 @@
 <?php
 include_once "vue.php";
-class VueUtilisateur extends Vue{
-    function PageAccueilUtilisateur() {
+
+class VueUtilisateur extends Vue
+{
+    function PageAccueilUtilisateur()
+    {
         vue::render("Utilisateur/index.php");
     }
-    function afficheUtilisateur($data) {
+
+    function afficheUtilisateur($data)
+    {
         if (!empty($data)) {
             foreach ($data as $item => $value) {
                 echo '
@@ -24,26 +29,26 @@ class VueUtilisateur extends Vue{
                                 </thead>
                                     <tbody>
                                         <tr>
-                                            <th scope="row">'.$value[1].'</th>
-                                            <th scope="row">'.$value[2].'</th>
-                                            <th scope="row">'.$value[6].'</th>
+                                            <th scope="row">' . $value[1] . '</th>
+                                            <th scope="row">' . $value[2] . '</th>
+                                            <th scope="row">' . $value[6] . '</th>
                                                 <td>
                                                     <ul class="list-inline m-0">
                                                         <li class="list-inline-item">
-                                                            <a href="index.php?action=profil&module=mod_Profil&login='.$value['6'].'">Voir profil</a>
+                                                            <a href="index.php?action=profil&module=mod_Profil&login=' . $value['6'] . '">Voir profil</a>
                                                         </li>';
-                                                        if ($_SESSION['role'] == 3 && $value[7] == 2) { echo '
+                if ($_SESSION['role'] == 3 && $value[7] == 2) {
+                    echo '
                                                         <li class="list-inline-item">
-                                                              <!--<button value='.$value[0].' id="ban" onclick="ban()">Bannir</button> Pour ajax--> 
-                                                              <a href="index.php?action=bannir&idUser='.$value[0].'&module=mod_Utilisateur">Bannir</a>
+                                                              <!--<button value=' . $value[0] . ' id="ban" onclick="ban()">Bannir</button> Pour ajax--> 
+                                                              <a href="index.php?action=bannir&idUser=' . $value[0] . '&module=mod_Utilisateur">Bannir</a>
                                                         </li>';
-                                                        }
-                                                        else if ($value[7] == 1) {
-                                                            echo '<li class="list-inline-item">
+                } else if ($value[7] == 1) {
+                    echo '<li class="list-inline-item">
                                                               <a>Utilisateur banni</a>
                                                         </li>';
-                                                        }
-                                                    echo '</ul>
+                }
+                echo '</ul>
                                                  </td>
                                             </tr>
                                     </tbody>

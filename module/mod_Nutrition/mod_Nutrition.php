@@ -1,8 +1,12 @@
 <?php
 include_once "controleurNutrition.php";
-class ModNutrition{
+
+class ModNutrition
+{
     private $controleurNutrition;
-    function __construct(){
+
+    function __construct()
+    {
         $this->controleurNutrition = new ControleurNutrition();
         $action = "";
         if (isset($_GET['action'])) {

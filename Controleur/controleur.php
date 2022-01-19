@@ -1,17 +1,23 @@
 <?php
-class Controleur {
+
+class Controleur
+{
     protected $vue;
     protected $modele;
 
-    protected function __construct($modele, $vue) {
+    protected function __construct($modele, $vue)
+    {
         $this->modele = $modele;
         $this->vue = $vue;
     }
-    public function getToken():array {
-        $token = ["token"=>bin2hex(random_bytes(32)),"expireAt"=>time()+3600];
+
+    public function getToken(): array
+    {
+        $token = ["token" => bin2hex(random_bytes(32)), "expireAt" => time() + 3600];
         $_SESSION['token'] = $token;
         return $token;
     }
+
     public function checkToken()
     {
         $token = $_SESSION['token'];
