@@ -19,6 +19,7 @@ class VueNutrition{
                     <h6 class="m-b-20">'.$value['nomPlat'].'</h6>
                     <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>'.$value['nbKcal'].' Kcal</span></h2>
                     <p class="m-b-0">'.$value['date'].'<span class="f-right"></span></p>
+                    <button class="btn btn-danger" id="retirer" type="button" name="retirer" onclick="retirer('.$value['idNutrition'].')" color="danger" rounded="true" mdbWavesEffect>Retirer</button>
                 </div>
             </div>
         </div>';

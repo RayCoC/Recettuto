@@ -69,4 +69,10 @@ class ModeleNutrition extends Connexion
         return $requete->fetchAll();
     }
 
+    public function enleverPlat($idNutrition)
+    {
+        $requete = self::$bdd->prepare("DELETE FROM nutrition WHERE idNutrition = $idNutrition");
+        $requete->execute();
+    }
+
 }

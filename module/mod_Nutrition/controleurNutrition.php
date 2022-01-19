@@ -49,14 +49,20 @@ class ControleurNutrition{
         $data= array();
         if (!empty($rec)){
             foreach ($rec as $item=>$value){
-                $data['plat'][$item]= array("nomPlat"=>$value[2], "nbKcal" => $value[3],"date"=>$value[4]);
+                $data['plat'][$item]= array("idNutrition"=>$value[1], "nomPlat"=>$value[2], "nbKcal" => $value[3],"date"=>$value[4]);
             }
             $this->vue->pageRecapitulatif($data);
-
         }
 
         else{
             $this->vue->pageVide();
         }
+    }
+
+    public function retirerPlat()
+    {
+        $idNutrition = $_POST['idNutrition'];
+        $this->modele->enleverPlat($idNutrition);
+        $this->afficherRecapitulatif();
     }
 }

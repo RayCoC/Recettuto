@@ -18,6 +18,9 @@ class ModNutrition{
             case 'recapitulatif':
                 $this->controleurNutrition->afficherRecapitulatif();
                 break;
+            case 'retirer':
+                $this->controleurNutrition->retirerPlat();
+                break;
         }
     }
 }
