@@ -1,5 +1,5 @@
 <?php
-include_once "controleurNutrition.php";
+include_once "./Controleur/controleurNutrition.php";
 
 class ModNutrition
 {

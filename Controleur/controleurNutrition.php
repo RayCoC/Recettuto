@@ -1,16 +1,12 @@
 <?php
 include_once "./vue/vue_Nutrition.php";
-require_once "modele_Nutrition.php";
+require_once "./module/mod_Nutrition/modele_Nutrition.php";
 
-class ControleurNutrition
+class ControleurNutrition extends Controleur
 {
-    private $vue;
-    private $modele;
-
     function __construct()
     {
-        $this->vue = new VueNutrition();
-        $this->modele = new ModeleNutrition();
+        parent::__construct(new ModeleNutrition(), new VueNutrition());
     }
 
     function AfficherNutrition()

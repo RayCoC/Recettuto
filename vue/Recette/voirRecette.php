@@ -90,8 +90,8 @@
     <script>
         $(document).ready(function () {
             $(document).on('click','.deleteComm',function (e) {
-                $("#comm").html('');
                 e.preventDefault();
+                $("#comm").html('');
                 $.ajax ({
                     type: "GET",
                     url: "index.php?action=supprimerCommentaire&module=mod_Recette",
@@ -107,6 +107,7 @@
         $(document).ready(function () {
             $("#ajouter").click(function (e) {
                     e.preventDefault();
+                    $("#comm").html('');
                     $.ajax({
                         type: "GET",
                         url: "index.php?action=ajoutCommentaire&module=mod_Recette",
@@ -120,15 +121,16 @@
     </script>
     <script>
         $(document).ready(function () {
-            $("#likeCommentaire").click(function (e) {
-                console.log("ok");
+            $(document).on('click','.likeCommentaire',function (e) {
                 e.preventDefault();
+                var a = $(this).attr("value");
+                $("#nbLikeComment"+a).html("");
                 $.ajax ({
                     type : "GET",
                     url: "index.php?action=likeCommentaire&module=mod_Recette",
-                    data : {idAvis : $(this).attr("value")},
+                    data : {idAvis : a},
                     success : function (data) {
-                        $("#nbLikeComment").text(data);
+                        $("#nbLikeComment"+a).append(data);
                     }
                 });
             });
@@ -136,14 +138,15 @@
     </script>
     <script>
         $(document).ready(function () {
-            $("#signalement").click(function (e) {
+            $(document).on('click','.signaler',function (e) {
                 e.preventDefault();
+                var a = $(this).attr("value");
                 $.ajax({
                     type : "GET",
                     url: "index.php?action=signalerCommentaire&module=mod_Recette",
                     data : {idAvis : $(this).attr('value')},
                     success : function (data) {
-                        $("#signalement").html('Signalé');
+                        $("#signalement"+a).html('Signalé');
                     }
                 });
             });

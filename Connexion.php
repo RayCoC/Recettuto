@@ -12,7 +12,7 @@ class Connexion
     {
         //$dns="mysql:host=database-etudiants.iut.univ-paris8.fr;dbname=dutinfopw201641";
         //$user = 'dutinfopw201641';
-        $dns = "mysql:host=localhost;dbname=dutinfopw201643";
+        $dns = "mysql:host=localhost;dbname=dutinfopw201643_1";
         $user = "root";
         //$password="teraqagu";
         $password = '';

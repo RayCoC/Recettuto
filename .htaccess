@@ -4,4 +4,4 @@ Options -Indexes
     deny from all
 </Files>
 #Redirection erreur
- ErrorDocument 404 /Recettuto/vue/ErrorPage/404.php
+ ErrorDocument 404 /recettuto/vue/ErrorPage/404.php

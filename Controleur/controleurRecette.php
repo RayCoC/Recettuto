@@ -213,8 +213,7 @@ class ControleurRecette extends Controleur
         $idUser = $this->modele->getIdUser($_SESSION['nomUtilisateur']);
         if ($this->modele->verifieCommentaireUnique($idUser[0][0], $_SESSION['idRecette']) && isset($_SESSION['nomUtilisateur'])) {
             $this->modele->ajoutAvis($_SESSION['idRecette'], $_GET['avis'], 0, $idUser[0][0], 0);
-            $this->afficheCommentaire($_SESSION['idRecette']);
-        }
+        }$this->afficheCommentaire($_SESSION['idRecette']);
     }
 
     function nbPouce($login)
@@ -231,7 +230,6 @@ class ControleurRecette extends Controleur
             }
         }
         $this->modele->getNbLike($_GET['idRec']);
-
     }
 
     static function getUserName()

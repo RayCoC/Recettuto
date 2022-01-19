@@ -304,7 +304,6 @@ class ModeleRecette extends Connexion
         $data = $requete->fetch();
         echo $data[0];
     }
-
     function verifieNbPouce($idUser, $idRec): bool
     {
         $requete = self::$bdd->prepare("SELECT * from likeRecette where idRec = ? and idUtilisateur = ?");
