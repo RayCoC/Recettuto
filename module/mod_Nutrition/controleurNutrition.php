@@ -53,16 +53,27 @@ class ControleurNutrition{
             }
             $this->vue->pageRecapitulatif($data);
         }
-
+        else{
+            $this->vue->recapVide();
+        }
+    }
+    function afficherPlat(){
+        $rec=$this->modele->recapitulatifUtilisateur();
+        $data= array();
+        if (!empty($rec)){
+            foreach ($rec as $item=>$value){
+                $data['plat'][$item]= array("idNutrition"=>$value[1], "nomPlat"=>$value[2], "nbKcal" => $value[3],"date"=>$value[4]);
+            }
+            VueNutrition::affichePlat($data['plat']);
+        }
         else{
             $this->vue->pageVide();
         }
     }
-
     public function retirerPlat()
     {
         $idNutrition = $_POST['idNutrition'];
         $this->modele->enleverPlat($idNutrition);
-        $this->afficherRecapitulatif();
+        $this->afficherPlat();
     }
 }

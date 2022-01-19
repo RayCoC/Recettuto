@@ -23,7 +23,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card card2">
+                <div class="card card2" id="result">
                     <div class="my-auto mx-md-5 px-md-5 right">
                         <?php if (isset($_SESSION['nomUtilisateur'])) :?>
                             <h3 class="text-white">Aujourd'hui</h3>
@@ -41,7 +41,7 @@
                             <?php else:?>
                                 <p class="text-white">Vous etes à <?=abs($data['nbKcalRestant'])?> calories en trop aujourd'hui</p>
                             <?php endif ?>
-                            <p class="text-white">Pour acceder à votre recapitulatif cliquez <a href="index.php?action=recapitulatif&module=mod_Nutrition" class="text-white">ici</a></p>
+                            <p class="text-white">Pour acceder à votre recapitulatif cliquez <a id="recap" href="index.php?action=recapitulatif&module=mod_Nutrition" class="text-white">ici</a></p>
                         <?php else:?>
                             <p class="text-white">Il vous faut un compte pour utiliser la page nutrition ! cliquez <a href="index.php?action=inscription&module=mod_Authentification" class="text-white">ici</a> pour vous inscrire</p>
                         <?php endif ?>

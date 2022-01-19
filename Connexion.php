@@ -8,7 +8,7 @@ class Connexion {
     public static function initConnexion() {
         //$dns="mysql:host=database-etudiants.iut.univ-paris8.fr;dbname=dutinfopw201641";
         //$user = 'dutinfopw201641';
-        $dns="mysql:host=localhost;dbname=dutinfopw201643";
+        $dns="mysql:host=localhost;dbname=dutinfopw201641";
         $user="root";
         //$password="teraqagu";
         $password = '';
