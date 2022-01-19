@@ -50,7 +50,7 @@
             <a class="nav-link" href="index.php?action=Recette&module=mod_Recette">Recettes |</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="index.php?action=listeEquipe&module=mod_Nutrition">Nutrition</a>
+            <a class="nav-link" href="index.php?action=Nutrition&module=mod_Nutrition">Nutrition</a>
         </li>
     </ul>
 </header>

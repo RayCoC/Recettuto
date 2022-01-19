@@ -47,6 +47,10 @@ switch ($module) {
         include_once 'module/'."$module".'/'.$module.".php";
         new ModUtilisateur();
         break;
+    case "mod_Nutrition" :
+        include_once 'module/'."$module".'/'.$module.".php";
+        new ModNutrition();
+        break;
     default :
             Vue::render("/ErrorPage/404.php");
         break;
