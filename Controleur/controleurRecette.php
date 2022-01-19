@@ -1,16 +1,12 @@
 <?php
-require_once "./check/check_auth.php";
 require_once "./vue/vue_Recette.php";
 require_once "./module/mod_Recette/modeleRecette.php";
 require_once "controleur.php";
 class ControleurRecette extends Controleur{
-    private $modele;
-    private $vue;
 
     function __construct () {
         $data = array();
-        $this->vue = new VueRecette();
-        $this->modele = new ModeleRecette();
+        parent::__construct(new ModeleRecette(), new VueRecette());
     }
     function afficherPagePrincipalRecette($v) {
         $this->vue->recettePrincipal();
@@ -180,10 +176,9 @@ class ControleurRecette extends Controleur{
             $idUser = $this->modele->getIdUser($_SESSION['nomUtilisateur']);
              if (isset($_GET['idRec']) && $this->modele->verifieNbPouce($_SESSION['nomUtilisateur'], $_GET['idRec'])) {
                  $this->modele->likeRecette($idUser[0][0], $_GET['idRec']);
-                 $this->modele->getNbLike($_GET['idRec']);
              }
         }
-        $this->modele->getNbLike($_GET['idRec']);
+         $this->modele->getNbLike($_GET['idRec']);
 
     }
     static function getUserName() {

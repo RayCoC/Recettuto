@@ -1,4 +1,5 @@
 <?php
+require_once "./check/check_Include.php";
 require_once "./Controleur/controleurRecette.php";
 class ModRecette {
     private $controleurRecette;

@@ -15,10 +15,10 @@ class checkAuth {
         }
     }
     static function redirectConnexion () {
-        header("Location: http://localhost/index.php?action=connexion&module=mod_Authentification");
+        header("Location: index.php?action=connexion&module=mod_Authentification");
     }
     static function redirectHome() {
-        header("Location: http://localhost/index.php?action=Accueil&module=mod_Accueil");
+        header("Location: index.php?action=Accueil&module=mod_Accueil");
     }
 }
 ?>

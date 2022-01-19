@@ -1,14 +1,12 @@
 <?php
 
 require_once "./vue/vue_Profil.php";
-require_once "modele_Profil.php";
-class ControleurProfil{
-    private $modele;
-    private $vue;
+require_once "./module/mod_Profil/modele_Profil.php";
+require_once "controleur.php";
+class ControleurProfil extends Controleur {
 
     function __construct () {
-        $this->vue = new VueProfil();
-        $this->modele = new ModeleProfil();
+        parent::__construct(new ModeleProfil(), new VueProfil());
     }
 
     function afficherProfil(){

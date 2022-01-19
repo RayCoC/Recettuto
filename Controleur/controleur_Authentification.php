@@ -4,12 +4,9 @@ require_once "./vue/vue_Authentification.php";
 require_once "./module/mod_Authentification/modele_Authentification.php";
 require_once 'controleur.php';
 class ControleurAuthentification extends Controleur{
-    private $modele;
-    private $vue;
 
     function __construct () {
-        $this->vue = new VueAuthentification();
-        $this->modele = new ModeleAuthentification();
+        parent::__construct(new ModeleAuthentification(), new VueAuthentification());
     }
 
     static function test_Connexion() {
@@ -43,7 +40,7 @@ class ControleurAuthentification extends Controleur{
                         }
                         $_SESSION['nomUtilisateur'] = $login;
                         $_SESSION['role'] = $role;
-                        header("Location: http://localhost/index.php?action=Accueil&module=mod_Accueil");
+                        header("Location: index.php?action=Accueil&module=mod_Accueil");
                     } else {
                         $this->afficherConnexion("Mot de passe incorrect");
                     }
@@ -75,7 +72,7 @@ class ControleurAuthentification extends Controleur{
                 $sexe=1;
             $data =array('mdp' => $_POST['mdp'], 'nomUtilisateur'=>$_POST['nomUtilisateur'],'nom'=>$_POST['nom'],'prenom'=>$_POST['prenom'],'age'=>$_POST['age'], 'sexe'=>$sexe);
             $this->modele->ajoutUtilisateur($data);
-            header("Location: http://localhost/index.php?action=Accueil&module=mod_Accueil");
+            header("Location: index.php?action=Accueil&module=mod_Accueil");
         }
     }
 

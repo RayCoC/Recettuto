@@ -1,6 +1,6 @@
 <?php
-require_once "./module/mod_Profil/controleur_Profil.php";
-
+require_once "./check/check_Include.php";
+require_once "./Controleur/controleur_Profil.php";
 class ModProfil {
     private $controleurProfil;
 

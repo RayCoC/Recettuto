@@ -3,11 +3,8 @@
     include_once "controleur.php";
     include_once "./module/mod_Utilisateur/modele_Utilisateur.php";
     class ControleurUtilisateur extends Controleur {
-        private $vue;
-        private $modele;
         function __construct() {
-            $this->modele = new ModeleUtilisateur();
-            $this->vue = new VueUtilisateur();
+            parent::__construct(new ModeleUtilisateur(), new VueUtilisateur());
         }
         function affichePageRecherche() {
             $this->vue->PageAccueilUtilisateur();

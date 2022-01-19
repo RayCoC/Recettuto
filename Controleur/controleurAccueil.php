@@ -3,13 +3,10 @@ include_once "./vue/vue_Accueil.php";
 require_once "./module/mod_Accueil/modele_Accueil.php";
 include_once "controleur.php";
 class ControleurAccueil extends Controleur{
-    private $vue_Accueil;
-    private $modele;
 
     function __construct()
     {
-        $this->vue_Accueil = new VueAccueil();
-        $this->modele = new ModeleAcceuil();
+        parent::__construct(new ModeleAcceuil(), new VueAccueil());
     }
     function AfficherAccueil () {
         $data= array();
@@ -33,7 +30,7 @@ class ControleurAccueil extends Controleur{
             $data['Plat'][$item]= array("idType"=>$value[0], "nomType"=>$value[1]);
         }
 
-        $this->vue_Accueil->pageAccueil($data);
+        $this->vue->pageAccueil($data);
     }
 }
 ?>

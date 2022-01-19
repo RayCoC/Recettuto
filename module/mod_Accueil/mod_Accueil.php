@@ -1,4 +1,5 @@
 <?php
+require_once "./check/check_Include.php";
 include_once "./Controleur/controleurAccueil.php";
     class ModAccueil {
         private $controleurAcceuil;

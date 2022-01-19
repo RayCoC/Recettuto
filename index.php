@@ -2,6 +2,8 @@
 include_once "Connexion.php";
 include_once "./vue.php";
 include_once "./check/check_auth.php";
+
+define("CHECK_URL_INCLUDE", NULL);
 session_start();
 if (isset($_GET['action'])) {
     if (isset($_SESSION['nomUtilisateur'])) {
