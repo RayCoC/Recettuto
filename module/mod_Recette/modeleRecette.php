@@ -203,7 +203,7 @@ class ModeleRecette extends Connexion
         $requete->execute();
         return $requete->fetchAll();
     }
-    static function messsageError()
+    static function vide()
     {
         if (isset($_POST['add'])) {
             if (($_POST['nomIngredient']) == "" or ($_POST['quantite']) == "" or ($_POST['unite']) == "") {
