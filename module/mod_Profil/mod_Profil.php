@@ -53,6 +53,9 @@ class ModProfil {
             case 'historique' :
                 $this->controleurProfil->afficherHistorique();
                 break;
+            case 'notifications':
+                $this->controleurProfil->afficherNotifications();
+                break;
         }
     }
 

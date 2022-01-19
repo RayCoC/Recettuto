@@ -349,4 +349,20 @@ class ModeleRecette extends Connexion
         $requete = self::$bdd->prepare("INSERT INTO HistoriqueRecette(idRec, idUtilisateur) values (?, ?)");
         $requete->execute(array($idRec,$idUser));
     }
+
+    function ajouterNotification($idRec){
+        $requete = self::$bdd->prepare("SELECT idUtilisateur FROM suivre where idUtilisateur_1 = :idUser");
+        $idUser=$this->getIdUser($_SESSION['nomUtilisateur']);
+        $requete->bindParam('idUser', $idUser[0][0]);
+        $requete->execute();
+        $idAbonnes=$requete->fetchAll();
+
+        if(!empty($idAbonnes)){
+            foreach ($idAbonnes as $item => $value){
+                $requete2 = self::$bdd->prepare("INSERT INTO notification(idRec, idUtilisateur) values (?, ?)");
+                $requete2->execute(array($idRec,$value[0]));
+            }
+        }
+
+    }
 }

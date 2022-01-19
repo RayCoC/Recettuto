@@ -163,4 +163,19 @@ class ControleurProfil extends Controleur {
             $this->vue->profilVide("de recettes favorites");
         }
     }
+    function afficherNotifications(){
+        if ($_GET['login'] == $_SESSION['nomUtilisateur']){
+            $rec=$this->modele->notificationUtilisateur();
+            $data= array();
+            if (!empty($rec)){
+                foreach ($rec as $item=>$value){
+                    $data['Notification'][$item]= array("idRec"=>$value[0],"img"=>$value[4], "titre" => $value[1],"date"=>$value[8],"difficulte"=>$value[10]);
+                }
+                VueProfil::afficheNotifications($data['Notification']);
+            }
+            else{
+                $this->vue->profilVide("de nouvelles recettes à consulter");
+            }
+        }
+    }
 }

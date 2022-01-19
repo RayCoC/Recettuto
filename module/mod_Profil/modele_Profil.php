@@ -183,4 +183,12 @@ class ModeleProfil extends Connexion {
         $requete->execute();
         return $requete->fetchAll();
     }
+    function notificationUtilisateur(){
+        $requete= self::$bdd->prepare("SELECT * from Recette where idRec IN (SELECT idRec from notification where idUtilisateur = :idUser) order by STR_TO_DATE(dateCreation, '%Y-%m-%d') DESC;");
+        $idUser = $this->getIdUser();
+        $requete->bindParam('idUser', $idUser[0][0]);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+
 }
