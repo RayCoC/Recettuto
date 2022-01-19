@@ -36,7 +36,7 @@ if (!defined("CHECK_URL_INCLUDE")) {
                         <a href="index.php?action=pageAjout&module=mod_Recette" class="btn btn-green mx-1 green center">
                             Ajouter une recette !</a>
                     <?php else: ?>
-                        <a href="index.php?action=connexion&module=mod_Authentification"
+                        <a href="index.php?action=inscription&module=mod_Authentification"
                            class="btn btn-green mx-1 green center"> Me creer un compte !</a>
                     <?php endif; ?>
                 </div>
