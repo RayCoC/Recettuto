@@ -150,4 +150,17 @@ class ControleurProfil extends Controleur {
             VueProfil::profilVide("d'historique");
         }
     }
+    function afficherFavoris(){
+        $rec=$this->modele->recetteFavoris();
+        $data= array();
+        if (!empty($rec)){
+            foreach ($rec as $item=>$value){
+                $data['Favoris'][$item]= array("idRec"=>$value[0],"img"=>$value[4], "titre" => $value[1],"date"=>$value[8],"difficulte"=>$value[10]);
+            }
+            VueProfil::afficheFavoris($data['Favoris']);
+        }
+        else{
+            $this->vue->profilVide("de recettes favorites");
+        }
+    }
 }

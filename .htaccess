@@ -1,3 +1,4 @@
+# Protection des images avec htaccess et fichier avec un define
 Options -Indexes
     Deny from all
     Allow from All *index.php*

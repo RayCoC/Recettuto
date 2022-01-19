@@ -349,5 +349,4 @@ class ModeleRecette extends Connexion
         $requete = self::$bdd->prepare("INSERT INTO HistoriqueRecette(idRec, idUtilisateur) values (?, ?)");
         $requete->execute(array($idRec,$idUser));
     }
-
 }

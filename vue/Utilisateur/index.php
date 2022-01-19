@@ -11,7 +11,7 @@
                 var user = $(this).val();
                 if (user != "") {
                     $.ajax({
-                        url : "/index.php?action=search&user="+encodeURIComponent()+"&module=mod_Utilisateur",//"http://localhost/~rhamouche/Php_Projet/index.php?action=search&user="+encodeURIComponent()+"&module=mod_Utilisateur",
+                        url : "index.php?action=search&user="+encodeURIComponent()+"&module=mod_Utilisateur",//"http://localhost/~rhamouche/Php_Projet/index.php?action=search&user="+encodeURIComponent()+"&module=mod_Utilisateur",
                         type : 'POST',
                         data : {"user" : encodeURIComponent(user)},
                         success : function (data) {

@@ -69,7 +69,7 @@
                 }
                 $("#test").html('');
                 $.ajax({
-                    url: "/index.php?action=filtre&module=mod_Recette",
+                    url: "index.php?action=filtre&module=mod_Recette",
                     type: "GET",
                     data: {"value": filtre},
                     success: function (data) {
@@ -87,7 +87,7 @@
                 var recette = $(this).val();
                 if (recette != "") {
                     $.ajax ({
-                        url: "/index.php?action=rechercher&module=mod_Recette",
+                        url: "index.php?action=rechercher&module=mod_Recette",
                         type: "GET",
                         data :{"filtre" : filtre, "recherche" : recette},
                         success : function (data) {

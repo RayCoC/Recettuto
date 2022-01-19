@@ -176,4 +176,11 @@ class ModeleProfil extends Connexion {
         $requete->execute(array($userName));
         return $requete->fetchAll();
     }
+    function recetteFavoris(){
+        $requete= self::$bdd->prepare("SELECT * from Recette where idRec IN (SELECT idRec from likerecette where idUtilisateur = :idUser);");
+        $idUser = $this->getIdUser();
+        $requete->bindParam('idUser', $idUser[0][0]);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
 }
