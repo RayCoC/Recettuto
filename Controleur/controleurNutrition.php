@@ -1,6 +1,7 @@
 <?php
 include_once "./vue/vue_Nutrition.php";
 require_once "./module/mod_Nutrition/modele_Nutrition.php";
+require_once "controleur.php";
 
 class ControleurNutrition extends Controleur
 {
