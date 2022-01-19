@@ -14,6 +14,6 @@ switch ($module) {
     default :
         die ("interdiction d'acces à ce module");
         break;
-}
+}// Test
 require_once "Templates/footer.php";
 ?>
