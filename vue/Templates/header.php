@@ -1,6 +1,8 @@
-<!DOCTYPE html>
+<?php
+    if (!defined("CHECK_URL_INCLUDE")) {
+        die("Interdit d'accès");
 
-<html lang="fr">
+    }?>
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

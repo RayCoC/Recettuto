@@ -1,6 +1,5 @@
 <?php
-require_once "./check/check_Include.php";
-    require_once "./Controleur/controleurUtilisateur.php";
+require_once "./Controleur/controleurUtilisateur.php";
     class ModUtilisateur {
         private $controleurUtilisateur;
         function __construct() {

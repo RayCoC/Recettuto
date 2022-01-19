@@ -1,3 +1,8 @@
+<?php
+    if (!defined("CHECK_URL_INCLUDE")) {
+        die("Interdit d'accès");
+
+    }?>
 <head>
     <link rel="stylesheet" href="./CSS/profil.css">
     <link rel="stylesheet" href="./CSS/mesRecettes.css">

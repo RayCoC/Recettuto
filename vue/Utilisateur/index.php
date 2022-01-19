@@ -1,5 +1,8 @@
-<!DOCTYPE html>
-<html>
+<?php
+if (!defined("CHECK_URL_INCLUDE")) {
+    die("Interdit d'accès");
+
+}?>
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">

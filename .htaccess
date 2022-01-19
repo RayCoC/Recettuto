@@ -1,4 +1,7 @@
-# Protection des images avec htaccess et fichier avec un define
+# Protection racine
 Options -Indexes
-    Deny from all
-    Allow from All *index.php*
+<Files .htaccess>
+    deny from all
+</Files>
+#Redirection erreur
+ ErrorDocument 404 /Recettuto/vue/ErrorPage/404.php

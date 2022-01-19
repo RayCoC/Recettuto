@@ -1,5 +1,4 @@
 <?php
-require_once "./check/check_Include.php";
 require_once "./Controleur/controleur_Authentification.php";
 class ModAuthentification {
     private $controleurAuthentification;

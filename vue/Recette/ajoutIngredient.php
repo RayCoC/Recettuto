@@ -1,7 +1,8 @@
 <?php
-include_once "./check/check_auth.php" ?>
-<!DOCTYPE html>
-<html>
+if (!defined("CHECK_URL_INCLUDE")) {
+    die("Interdit d'accès");
+
+}?>
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="./CSS/ajoutIngredient.css">

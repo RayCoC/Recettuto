@@ -1,3 +1,8 @@
+<?php
+    if (!defined("CHECK_URL_INCLUDE")) {
+        die("Interdit d'accès");
+
+    }?>
 <head>
     <link href="./CSS/footer.css" rel="stylesheet">
 </head>

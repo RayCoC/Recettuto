@@ -1,3 +1,8 @@
+<?php
+    if (!defined("CHECK_URL_INCLUDE")) {
+        die("Interdit d'accès");
+
+    }?>
 <?php include_once "./vue/vue_Nutrition.php";?>
 <html lang="fr">
 <head>

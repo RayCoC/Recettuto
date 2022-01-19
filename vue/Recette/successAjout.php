@@ -1,5 +1,8 @@
 <?php
-include_once "./check/check_auth.php" ?>
+if (!defined("CHECK_URL_INCLUDE")) {
+    die("Interdit d'accès");
+
+}?>
 <!DOCTYPE html>
 <html>
 

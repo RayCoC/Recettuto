@@ -1,7 +1,10 @@
 <?php
+    if (!defined("CHECK_URL_INCLUDE")) {
+        die("Interdit d'accès");
+
+    }?>
+<?php
     if (!ControleurAuthentification::test_Connexion()) :  ?>
-<!DOCTYPE html>
-<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./CSS/inscription.css">
