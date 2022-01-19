@@ -192,7 +192,7 @@ class ModeleProfil extends Connexion
 
     public function afficheHistorique($userName)
     {
-        $requete = self::$bdd->prepare("SELECT r.idRec, titre, image, dateVisionnement, nbFlammes FROM recette r LEFT JOIN historiquerecette h on r.idRec = h.idRec LEFT JOIN utilisateur u ON u.idUtilisateur = h.idUtilisateur WHERE u.login=?");
+        $requete = self::$bdd->prepare("SELECT r.idRec, titre, image, dateVisionnement, nbFlammes FROM recette r LEFT JOIN historiquerecette h on r.idRec = h.idRec LEFT JOIN utilisateur u ON u.idUtilisateur = h.idUtilisateur WHERE u.login=? order by dateVisionnement desc");
         $requete->execute(array($userName));
         return $requete->fetchAll();
     }

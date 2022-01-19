@@ -184,7 +184,7 @@ class ModeleRecette extends Connexion
         if ($value == "1" or $value == "2" or $value == "3" or $value == "4") {
             $requete = self::$bdd->prepare("SELECT * FROM Recette where idType = :value");
             $requete->bindParam('value', $value);
-        } else if ($value = "Populaire") {
+        } else if ($value == "Populaire") {
             $requete = self::$bdd->prepare("SELECT * FROM Recette order by note desc");
         } else if ($value == "Recent") {
             $requete = self::$bdd->prepare("SELECT * FROM Recette order by STR_TO_DATE(dateCreation, '%Y-%m-%d') desc ");
